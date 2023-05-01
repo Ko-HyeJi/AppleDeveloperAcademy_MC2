@@ -7,38 +7,38 @@
 
 import SwiftUI
 
-//struct BottomSheetView: View {
-//    @Binding var isBottomSheetOn: Bool
-//    var body: some View {
-//        HStack {
-//            Button(action: {
-//                isBottomSheetOn.toggle()
-//            }) {
-//                Image(systemName: "photo")
-//                    .resizable()
-//                    .frame(width: 30, height: 25)
-//                    .padding(50)
-//            }
-//                .sheet(isPresented: $isBottomSheetOn) {
-//                GridView()
-//                    .presentationDetents([.fraction(0.5), .large])
-//            }
-//            Spacer()
-//        }
-//    }
-//}
-
 struct BottomSheetView: View {
     @Binding var isBottomSheetOn: Bool
     var body: some View {
-        Text("")
-            .onAppear { isBottomSheetOn.toggle() }
-            .sheet(isPresented: $isBottomSheetOn) {
+        HStack {
+            Button(action: {
+                isBottomSheetOn.toggle()
+            }) {
+                Image(systemName: "photo")
+                    .resizable()
+                    .frame(width: 30, height: 25)
+                    .padding(50)
+            }
+                .sheet(isPresented: $isBottomSheetOn) {
                 GridView()
-                .presentationDetents([.fraction(0.2), .large])
+                    .presentationDetents([.fraction(0.5), .large])
+            }
+            Spacer()
         }
     }
 }
+
+//struct BottomSheetView: View {
+//    @Binding var isBottomSheetOn: Bool
+//    var body: some View {
+//        Text("")
+//            .onAppear { isBottomSheetOn.toggle() }
+//            .sheet(isPresented: $isBottomSheetOn) {
+//                GridView()
+//                .presentationDetents([.fraction(0.2), .large])
+//        }
+//    }
+//}
 
 struct GridView: View {
     let columnLayout = Array(repeating: GridItem(), count: 3)

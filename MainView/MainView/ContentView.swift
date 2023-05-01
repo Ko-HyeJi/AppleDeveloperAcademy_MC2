@@ -9,8 +9,10 @@ import SwiftUI
 
 struct ContentView: View {
     @State var isBottomSheetOn = false
+    
     var body: some View {
         NavigationStack {
+            Spacer()
             RotatingMessagesView()
                 .padding()
             
@@ -25,26 +27,31 @@ struct ContentView: View {
                     .frame(width: 80, height: 60)
             }
             
+            Spacer()
             BottomSheetView(isBottomSheetOn: $isBottomSheetOn)
         }
     }
 }
 
-
 struct RotatingMessagesView: View {
-    let msgArr = ["Message 1", "Message 2", "Message 3", "Message 4", "Message 5",]
+    let msgArr = ["Message 1", "Message 2", "Message 3", "Message 4", "Message 5"]
     @State var currentMsgIdx = 0
+    @State var timer: Timer?
     
     var body: some View {
         Text(msgArr[currentMsgIdx])
             .font(.body)
             .onAppear {
-            // 타이머 시작
-            Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                // 현재 메세지 인덱스를 업데이트하고 뷰를 다시 그림
-                currentMsgIdx = (currentMsgIdx + 1) % msgArr.count
+                // `Timer`를 시작
+                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                    self.currentMsgIdx = (self.currentMsgIdx + 1) % self.msgArr.count
+                }
             }
-        }
+            .onDisappear {
+                // `Timer`를 종료
+                self.timer?.invalidate()
+                self.timer = nil
+            }
     }
 }
 
