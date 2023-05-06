@@ -244,16 +244,16 @@ struct CameraView: View {
                             dataModel.isDone = true
                         }
                         presentationMode.wrappedValue.dismiss() // CameraView 닫기
-                        
+
 //                        viewModel.stopRunning() //수정 필요!
-                        
+
                     }) {
                         ZStack {
                             Image(systemName: "paperplane")
                                 .resizable()
                                 .frame(width: 75, height: 75)
                                 .padding()
-                            
+
                             if (dataModel.beforeImage == nil) {
                                 Text("Save Before").foregroundColor(.blue).bold()
                             } else if (dataModel.afterImage == nil) {
@@ -261,7 +261,10 @@ struct CameraView: View {
                             }
                         }
                     }
-
+                    
+                    
+                    
+                    
                 }
             }
             .foregroundColor(.white)

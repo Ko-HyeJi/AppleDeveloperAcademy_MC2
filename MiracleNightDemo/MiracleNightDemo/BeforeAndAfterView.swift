@@ -39,6 +39,9 @@ struct BeforeAndAfterView: View {
                     .bold()
             }
         }
+        .onTapGesture {
+            dataModel.isDone = false
+        }
     }
 }
 

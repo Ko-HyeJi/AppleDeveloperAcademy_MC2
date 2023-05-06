@@ -15,7 +15,7 @@ struct ContentView: View {
         NavigationStack {
             Spacer()
             
-            if (dataModel.isUnregistered == false && dataModel.username != nil) { //두번째 이후
+            if (dataModel.username != nil) { //두번째 이후
                 VStack {
                     Text("Hello, " + dataModel.username!).font(.title)
                     let msg:String = String(dataModel.visited + 1) + "번째 방문입니다."
@@ -57,6 +57,21 @@ struct ContentView: View {
             
             Spacer()
             BottomSheetView(isBottomSheetOn: $isBottomSheetOn)
+        }
+        .onAppear{
+            if (dataModel.username == nil) {
+                dataModel.isUnregistered = true
+            }
+            defaults.set(dataModel.visited + 1, forKey: "visited")
+        }
+        .fullScreenCover(isPresented: $dataModel.isUnregistered) {
+            GetNameView()
+        }
+        .fullScreenCover(isPresented: $dataModel.isTimerOn) {
+            DoNotDisturbView()
+        }
+        .fullScreenCover(isPresented: $dataModel.isDone) {
+            BeforeAndAfterView()
         }
     }
 }

@@ -12,7 +12,7 @@ let defaults = UserDefaults.standard
 //let username = defaults.string(forKey: "username")
 //let visited = defaults.integer(forKey: "visited")
 
-class DataModel: ObservableObject { 
+class DataModel: ObservableObject {
     @Published var username = defaults.string(forKey: "username")
     @Published var visited = defaults.integer(forKey: "visited")
     
