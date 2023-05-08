@@ -242,6 +242,20 @@ struct CameraView: View {
                             print("After Image Taken")
                             dataModel.afterImage = viewModel.recentImage
                             dataModel.isDone = true
+                            
+//                            dataModel.imgDict[dataModel.count] = [dataModel.beforeImage!, dataModel.afterImage!]
+                            
+                            
+                            let beforeData = dataModel.beforeImage?.pngData()
+                            let aftereData = dataModel.afterImage?.pngData()
+                            let data = DailyData(date: Date(), before: beforeData!, after: aftereData!)
+//                            var dataArr: [DailyData] = []
+                            var dataArr = dataModel.loadData()
+                            dataArr.append(data)
+                            dataModel.saveData(dataArr)
+                            
+                            
+                            
                         }
                         presentationMode.wrappedValue.dismiss() // CameraView 닫기
 

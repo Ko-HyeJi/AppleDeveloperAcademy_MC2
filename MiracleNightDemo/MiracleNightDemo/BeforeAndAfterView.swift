@@ -13,8 +13,8 @@ struct BeforeAndAfterView: View {
     var body: some View {
         VStack {
             ZStack {
-                if let bfImage = dataModel.beforeImage {
-                    Image(uiImage: bfImage)
+                if let lastData = dataModel.loadData().last, let beforeImage = dataModel.convertToUIImage(from: lastData.before) {
+                    Image(uiImage: beforeImage)
                         .resizable()
                         .rotationEffect(Angle(degrees: 270))
                         .frame(width: 300, height: 400)
@@ -26,8 +26,8 @@ struct BeforeAndAfterView: View {
                     .bold()
             }
             ZStack {
-                if let afImage = dataModel.afterImage {
-                    Image(uiImage: afImage)
+                if let lastData = dataModel.loadData().last, let afterImage = dataModel.convertToUIImage(from: lastData.after) {
+                    Image(uiImage: afterImage)
                         .resizable()
                         .rotationEffect(Angle(degrees: 270))
                         .frame(width: 300, height: 400)
@@ -41,6 +41,7 @@ struct BeforeAndAfterView: View {
         }
         .onTapGesture {
             dataModel.isDone = false
+            defaults.set(dataModel.count + 1, forKey: "count")
         }
     }
 }

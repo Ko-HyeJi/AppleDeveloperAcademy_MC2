@@ -82,7 +82,7 @@ class CameraViewModel: ObservableObject {
     func stopRunning() {
         session.stopRunning()
     }
-    
+
     init() {
         model = Camera()
         session = model.session
