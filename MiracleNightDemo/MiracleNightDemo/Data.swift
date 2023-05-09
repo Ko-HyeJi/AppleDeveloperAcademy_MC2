@@ -90,6 +90,7 @@ class DataManager {
     }
 }
 
+//색 Hex코드로 전환시켜줌
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
