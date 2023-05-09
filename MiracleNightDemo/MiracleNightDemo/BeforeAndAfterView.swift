@@ -10,6 +10,7 @@ import SwiftUI
 struct BeforeAndAfterView: View {
     @EnvironmentObject var dataModel: DataModel
     
+    
     var body: some View {
         VStack {
             ZStack {

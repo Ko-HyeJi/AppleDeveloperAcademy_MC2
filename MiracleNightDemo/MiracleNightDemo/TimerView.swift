@@ -11,28 +11,6 @@ let timer = Timer
     .publish(every: 1, on: .main, in: .common)
     .autoconnect()
 
-struct Clock: View {
-    var counter: Int
-    var countTo: Int
-    
-    var body: some View {
-        VStack {
-            Text(counterToMinutes())
-                .font(.custom("Avenir Next", size: 60))
-                .fontWeight(.black)
-        }
-    }
-    
-    func counterToMinutes() -> String {
-        let currentTime = countTo - counter
-        let seconds = currentTime % 60
-        let minutes = Int(currentTime / 60)
-        
-        return "\(minutes):\(seconds < 10 ? "0" : "")\(seconds)"
-    }
-    
-}
-
 struct ProgressTrack: View {
     var body: some View {
         Circle()
@@ -79,19 +57,27 @@ struct ProgressBar: View {
 }
 
 struct CountdownView: View {
+    @EnvironmentObject var dataModel: DataModel
     @State var counter: Int = 0
-    var countTo: Int = 300
+    
+//    var countTo: Int = 5
     
     var body: some View {
         VStack{
             ZStack{
                 ProgressTrack()
-                ProgressBar(counter: counter, countTo: countTo)
-//                Clock(counter: counter, countTo: countTo)
+                ProgressBar(counter: counter, countTo: dataModel.countTo)
             }
-        }.onReceive(timer) { time in
-            if (self.counter < self.countTo) {
+        }
+        .onAppear {
+            counter = dataModel.counter
+        }
+        .onReceive(timer) { time in
+            if (self.counter < dataModel.countTo) {
                 self.counter += 1
+                if (counter == dataModel.countTo) {
+                    dataModel.isTimeOver = true
+                }
             }
         }
     }

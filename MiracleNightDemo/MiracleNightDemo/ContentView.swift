@@ -8,7 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    
     @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
     @State var isBottomSheetOn = false
     
     var body: some View {
@@ -33,28 +36,37 @@ struct ContentView: View {
                         .foregroundColor(.white)
                         .padding()
                     
-                    Text("당신의 방정리를 기다리고 있습니다.\n\n아래 버튼을 눌러 방정리를 시작해보세요!\n\n오늘 정리할 곳을 직접 정해주세요")
-                        .foregroundColor(.white)
-                        .padding()
+                    if (!dataModel.isDone){
+                        Text("당신의 방정리를 기다리고 있습니다.\n아래 버튼을 눌러 방정리를 시작해보세요!\n오늘 정리할 곳을 직접 정해주세요")
+                            .foregroundColor(.white)
+                            .padding()
+                    } else {
+                        Text("오늘의 방정리가 끝났습니다\n수고하셨습니다!")
+                            .foregroundColor(.white)
+                            .padding()
+                    }
                     
                     NavigationLink(destination: CameraView().environmentObject(dataModel)) {
                         ZStack {
-                            CountdownView()
-                            Image("Bitmap")
+                            if (dataModel.isTimerOn && !dataModel.isDone) {
+                                CountdownView()
+                            } else {
+                                Circle()
+                                    .fill(Color.clear)
+                                    .frame(width: 200, height: 200)
+                                    .overlay(
+                                        Circle().stroke(Color.gray, lineWidth: 3)
+                                )
+                            }
+                            Image("Earth")
                                 .resizable()
                                 .frame(width: 150, height: 150)
-                            if (dataModel.beforeImage == nil) {
-                                Text("Take BF Image").foregroundColor(.black).bold().foregroundColor(.white)
-                            } else if (dataModel.afterImage == nil) {
-                                Text("Take AF Image").foregroundColor(.black).bold().foregroundColor(.white)
-                            } else {
-                                Text("오늘의 방정리가 끝났습니다.").foregroundColor(.black).bold().foregroundColor(.white)
-                            }
+                                .opacity((dataModel.isTimerOn && !dataModel.isTimeOver) || dataModel.isDone ? 0.1 : 1)
                         }
-                    }.disabled(dataModel.beforeImage != nil && dataModel.afterImage != nil)
+                    }
+                    .disabled((dataModel.isTimerOn && !dataModel.isTimeOver) || dataModel.isDone)
                     
                     Spacer()
-                    BottomSheetView(isBottomSheetOn: $isBottomSheetOn)
                 }
             }
         }
@@ -66,14 +78,12 @@ struct ContentView: View {
         .fullScreenCover(isPresented: $dataModel.isUnregistered) {
             GetNameView()
         }
-        .fullScreenCover(isPresented: $dataModel.isTimerOn) {
-            DoNotDisturbView()
-        }
-        .fullScreenCover(isPresented: $dataModel.isDone) {
-            BeforeAndAfterView()
-        }
-        .fullScreenCover(isPresented: $dataModel.test) {
-            TestView()
+        .fullScreenCover(isPresented: $dataModel.showCompareView) {
+            // after 사진까지 찍고 나서 UserDefaults에 저장하는 과정! -> 비동기적 처리 때문에 after 사진 찍은 직후에 CameraView에서 처리 불가능...
+            let _ = dataModel.afterImage = viewModel.recentImage
+            let _ = dataModel.saveDataToUserDefaults()
+            
+            CompareView()
         }
     }
 }

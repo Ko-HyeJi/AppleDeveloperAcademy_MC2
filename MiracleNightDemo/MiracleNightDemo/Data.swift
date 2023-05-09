@@ -19,8 +19,10 @@ class DataModel: ObservableObject {
     
     @Published var beforeImage:UIImage?
     @Published var afterImage:UIImage?
-    @Published var isTimerOn:Bool = false
-    @Published var isDone:Bool = false
+    @Published var isTimerOn:Bool = false //before 사진 찍고 타이머 온
+    @Published var isTimeOver:Bool = false
+    @Published var isDone:Bool = false //after 사진까지 찍었을 떄
+    @Published var showCompareView:Bool = false
     
     // 지우기!!!
     @Published var test:Bool = true
@@ -54,43 +56,26 @@ class DataModel: ObservableObject {
         return image
     }
     
+    func saveDataToUserDefaults() {
+        let beforeData = beforeImage?.pngData()
+        let aftereData = afterImage?.pngData()
+        let data = DailyData(date: Date(), before: beforeData!, after: aftereData!)
+        var dataArr = loadData()
+        dataArr.append(data)
+        saveData(dataArr)
+    }
+    
+    
+    @Published var counter: Int = 0 //타이머 시간 측정 변수
+    @Published var countTo: Int = 60 //타이머 시간 측정 변수
 }
 
-// DailyData 구조체
 struct DailyData: Codable {
     var date: Date
     var before: Data // UIImage 대신 Data 사용
     var after: Data // UIImage 대신 Data 사용
 }
 
-// 데이터 저장 및 로드를 관리하는 클래스
-class DataManager {
-    private let userDefaults = UserDefaults.standard
-    private let key = "dailyData"
-    
-    func saveData(_ data: [DailyData]) {
-        do {
-            let encodedData = try JSONEncoder().encode(data)
-            userDefaults.set(encodedData, forKey: key)
-        } catch {
-            print("Failed to encode data: \(error)")
-        }
-    }
-    
-    func loadData() -> [DailyData] {
-        guard let encodedData = userDefaults.data(forKey: key) else { return [] }
-        
-        do {
-            let decodedData = try JSONDecoder().decode([DailyData].self, from: encodedData)
-            return decodedData
-        } catch {
-            print("Failed to decode data: \(error)")
-            return []
-        }
-    }
-}
-
-//색 Hex코드로 전환시켜줌
 extension Color {
     init(hex: String) {
         let scanner = Scanner(string: hex)
@@ -110,28 +95,3 @@ extension Color {
     }
 }
 
-//func saveImageToUserDefaults(image: UIImage) {
-//    // 이미지를 UserDefaults에 저장
-////    if let image = UIImage(named: "myImage.png") {
-////        if let imageData = image.pngData() {
-////            UserDefaults.standard.set(imageData, forKey: "myImageKey")
-////        }
-////    }
-//
-//    if let imageData = image.pngData() {
-//        UserDefaults.standard.set(imageData, forKey: "myImageKey")
-//    }
-//}
-//
-//
-//func getImageFromUserDefaults() -> UIImage {
-////    // UserDefaults에서 이미지를 가져오기
-////    if let imageData = UserDefaults.standard.data(forKey: "myImageKey") {
-////        let image = UIImage(data: imageData)
-////        // 이미지 사용
-////    }
-//
-//    let imageData = UserDefaults.standard.data(forKey: "myImageKey")
-//    let image = UIImage(data: imageData!)
-//    return image!
-//}

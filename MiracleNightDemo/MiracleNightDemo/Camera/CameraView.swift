@@ -144,171 +144,269 @@
 //}
 
 
+//import SwiftUI
+//import AVFoundation
+//
+//struct CameraView: View {
+//    @ObservedObject var viewModel = CameraViewModel()
+//    @EnvironmentObject var dataModel: DataModel
+//    @Environment(\.presentationMode) var presentationMode
+//
+//    var body: some View {
+//        ZStack {
+//            viewModel.cameraPreview.ignoresSafeArea()
+//                .onAppear {
+//                    viewModel.configure()
+//                }
+//                .gesture(MagnificationGesture()
+//                            .onChanged { val in
+//                    viewModel.zoom(factor: val)
+//                }
+//                            .onEnded { _ in
+//                    viewModel.zoomInitialize()
+//                }
+//                )
+//
+//            VStack {
+//                HStack {
+//                    // 셔터사운드 온오프
+//                    Button(action: {viewModel.switchSilent()}) {
+//                        Image(systemName: viewModel.isSilentModeOn ?
+//                              "speaker.fill" : "speaker")
+//                            .foregroundColor(viewModel.isSilentModeOn ? .yellow : .white)
+//                    }
+//                    .padding(.horizontal, 30)
+//
+//                    // 플래시 온오프
+//                    Button(action: {viewModel.switchFlash()}) {
+//                        Image(systemName: viewModel.isFlashOn ?
+//                              "bolt.fill" : "bolt")
+//                            .foregroundColor(viewModel.isFlashOn ? .yellow : .white)
+//                    }
+//                    .padding(.horizontal, 30)
+//                }
+//                .font(.system(size:25))
+//                .padding()
+//
+//                Spacer()
+//
+//                HStack{
+//                    // 찍은 사진 미리보기
+//                    Button(action: {viewModel.showPreview = true}) {
+//                        if let previewImage = viewModel.recentImage {
+//                            Image(uiImage: previewImage)
+//                                .resizable()
+//                                .scaledToFill()
+//                                .frame(width: 75, height: 75)
+//                                .clipShape(RoundedRectangle(cornerRadius: 15))
+//                                .aspectRatio(1, contentMode: .fit)
+//                        } else {
+//                            RoundedRectangle(cornerRadius: 15)
+//                                .stroke(lineWidth: 3)
+//                                .foregroundColor(.white)
+//                                .frame(width: 75, height: 75)
+//                        }
+//                    }
+//                    .padding()
+//
+//                    Spacer()
+//
+//                    // 사진찍기 버튼
+//                    Button(action: {viewModel.capturePhoto()}) {
+//                        Circle()
+//                            .stroke(lineWidth: 5)
+//                            .frame(width: 75, height: 75)
+//                            .padding()
+//                    }
+//
+//                    Spacer()
+//
+////                    // 전후면 카메라 교체
+////                    Button(action: {viewModel.changeCamera()}) {
+////                        Image(systemName: "arrow.triangle.2.circlepath.camera")
+////                            .resizable()
+////                            .scaledToFit()
+////                            .frame(width: 50, height: 50)
+////
+////                    }
+////                    .frame(width: 75, height: 75)
+////                    .padding()
+//
+//                    // +) 확인 버튼 -> 수정 필요!!!
+//                    Button(action: {
+//                        if (dataModel.beforeImage == nil) {
+//                            print("Before Image Taken")
+//                            dataModel.beforeImage = viewModel.recentImage
+//                            dataModel.isTimerOn = true
+//                        } else if (dataModel.afterImage == nil) {
+//                            print("After Image Taken")
+//                            dataModel.afterImage = viewModel.recentImage
+//                            dataModel.isDone = true
+//
+//                            let beforeData = dataModel.beforeImage?.pngData()
+//                            let aftereData = dataModel.afterImage?.pngData()
+//                            let data = DailyData(date: Date(), before: beforeData!, after: aftereData!)
+//                            var dataArr = dataModel.loadData()
+//                            dataArr.append(data)
+//                            dataModel.saveData(dataArr)
+//
+//                        }
+//                        presentationMode.wrappedValue.dismiss() // CameraView 닫기
+//
+////                        viewModel.stopRunning() //수정 필요!
+//
+//                    }) {
+//                        ZStack {
+//                            Image(systemName: "paperplane")
+//                                .resizable()
+//                                .frame(width: 75, height: 75)
+//                                .padding()
+//
+//                            if (dataModel.beforeImage == nil) {
+//                                Text("Save Before").foregroundColor(.blue).bold()
+//                            } else if (dataModel.afterImage == nil) {
+//                                Text("Save After").foregroundColor(.blue).bold()
+//                            }
+//                        }
+//                    }
+//
+//
+//
+//
+//                }
+//            }
+//            .foregroundColor(.white)
+//
+//
+//
+//            //필터 기능 추가 -> 수정 필요
+//            if (dataModel.beforeImage == nil) {
+//                CameraFilterView()
+//            } else {
+//                Image(uiImage: dataModel.beforeImage!)
+//                    .resizable()
+//                    .scaledToFill()
+//                    .opacity(0.5)
+//                    .ignoresSafeArea()
+//            }
+//
+//        }
+//        .fullScreenCover(isPresented: $viewModel.showPreview) {
+//            Image(uiImage: viewModel.recentImage ?? UIImage())
+//                .resizable()
+//                .scaledToFit()
+//                .frame(width: UIScreen.main.bounds.width,
+//                       height: UIScreen.main.bounds.height)
+//                .ignoresSafeArea()
+//                .onTapGesture {
+//                    viewModel.showPreview = false
+//                }
+//        }
+//        .opacity(viewModel.shutterEffect ? 0 : 1)
+//    }
+//}
+//
+//
+//struct CameraPreviewView: UIViewRepresentable {
+//    class VideoPreviewView: UIView {
+//        override class var layerClass: AnyClass {
+//            AVCaptureVideoPreviewLayer.self
+//        }
+//
+//        var videoPreviewLayer: AVCaptureVideoPreviewLayer {
+//            return layer as! AVCaptureVideoPreviewLayer
+//        }
+//    }
+//
+//    let session: AVCaptureSession
+//
+//    func makeUIView(context: Context) -> VideoPreviewView {
+//        let view = VideoPreviewView()
+//
+//        view.videoPreviewLayer.session = session
+//        view.backgroundColor = .black
+//        view.videoPreviewLayer.videoGravity = .resizeAspectFill
+//        view.videoPreviewLayer.cornerRadius = 0
+//        view.videoPreviewLayer.connection?.videoOrientation = .portrait
+//
+//        return view
+//    }
+//
+//    func updateUIView(_ uiView: VideoPreviewView, context: Context) {
+//
+//    }
+//}
+//
+//struct CameraView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CameraView()
+//    }
+//}
+
+
 import SwiftUI
 import AVFoundation
 
 struct CameraView: View {
-    @ObservedObject var viewModel = CameraViewModel()
     @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
     @Environment(\.presentationMode) var presentationMode
 
     var body: some View {
         ZStack {
             viewModel.cameraPreview.ignoresSafeArea()
-                .onAppear {
-                    viewModel.configure()
-                }
-                .gesture(MagnificationGesture()
-                            .onChanged { val in
-                    viewModel.zoom(factor: val)
-                }
-                            .onEnded { _ in
-                    viewModel.zoomInitialize()
-                }
-                )
-
+                .onAppear {viewModel.configure()}
             VStack {
-                HStack {
-                    // 셔터사운드 온오프
-                    Button(action: {viewModel.switchSilent()}) {
-                        Image(systemName: viewModel.isSilentModeOn ?
-                              "speaker.fill" : "speaker")
-                            .foregroundColor(viewModel.isSilentModeOn ? .yellow : .white)
-                    }
-                    .padding(.horizontal, 30)
-
-                    // 플래시 온오프
-                    Button(action: {viewModel.switchFlash()}) {
-                        Image(systemName: viewModel.isFlashOn ?
-                              "bolt.fill" : "bolt")
-                            .foregroundColor(viewModel.isFlashOn ? .yellow : .white)
-                    }
-                    .padding(.horizontal, 30)
-                }
-                .font(.system(size:25))
-                .padding()
-
                 Spacer()
-
                 HStack{
-                    // 찍은 사진 미리보기
-                    Button(action: {viewModel.showPreview = true}) {
-                        if let previewImage = viewModel.recentImage {
-                            Image(uiImage: previewImage)
-                                .resizable()
-                                .scaledToFill()
-                                .frame(width: 75, height: 75)
-                                .clipShape(RoundedRectangle(cornerRadius: 15))
-                                .aspectRatio(1, contentMode: .fit)
-                        } else {
-                            RoundedRectangle(cornerRadius: 15)
-                                .stroke(lineWidth: 3)
-                                .foregroundColor(.white)
-                                .frame(width: 75, height: 75)
-                        }
-                    }
-                    .padding()
-
                     Spacer()
-
-                    // 사진찍기 버튼
-                    Button(action: {viewModel.capturePhoto()}) {
-                        Circle()
-                            .stroke(lineWidth: 5)
-                            .frame(width: 75, height: 75)
-                            .padding()
-                    }
-
-                    Spacer()
-
-//                    // 전후면 카메라 교체
-//                    Button(action: {viewModel.changeCamera()}) {
-//                        Image(systemName: "arrow.triangle.2.circlepath.camera")
-//                            .resizable()
-//                            .scaledToFit()
-//                            .frame(width: 50, height: 50)
-//
-//                    }
-//                    .frame(width: 75, height: 75)
-//                    .padding()
                     
-                    // +) 확인 버튼 -> 수정 필요!!!
-                    Button(action: {
-                        if (dataModel.beforeImage == nil) {
-                            print("Before Image Taken")
-                            dataModel.beforeImage = viewModel.recentImage
-                            dataModel.isTimerOn = true
-                        } else if (dataModel.afterImage == nil) {
-                            print("After Image Taken")
-                            dataModel.afterImage = viewModel.recentImage
-                            dataModel.isDone = true
-                            
-//                            dataModel.imgDict[dataModel.count] = [dataModel.beforeImage!, dataModel.afterImage!]
-                            
-                            
-                            let beforeData = dataModel.beforeImage?.pngData()
-                            let aftereData = dataModel.afterImage?.pngData()
-                            let data = DailyData(date: Date(), before: beforeData!, after: aftereData!)
-//                            var dataArr: [DailyData] = []
-                            var dataArr = dataModel.loadData()
-                            dataArr.append(data)
-                            dataModel.saveData(dataArr)
-                            
-                            
-                            
-                        }
-                        presentationMode.wrappedValue.dismiss() // CameraView 닫기
-
-//                        viewModel.stopRunning() //수정 필요!
-
-                    }) {
-                        ZStack {
-                            Image(systemName: "paperplane")
+                    
+                    if (!dataModel.isTimeOver) { // before 사진 찍어야 할 때
+                        NavigationLink(destination: DoNotDisturbView()) {
+                            Image(systemName: "button.programmable")
                                 .resizable()
                                 .frame(width: 75, height: 75)
                                 .padding()
+                        }
+                        .simultaneousGesture(TapGesture().onEnded{
+                            viewModel.capturePhoto()
+//                            dataModel.beforeImage = viewModel.recentImage
+                        })
+                    } else { // after 사진 찍어야 할 때
+                        Button(action: {
+                            viewModel.capturePhoto()
+//                            dataModel.afterImage = viewModel.recentImage
 
-                            if (dataModel.beforeImage == nil) {
-                                Text("Save Before").foregroundColor(.blue).bold()
-                            } else if (dataModel.afterImage == nil) {
-                                Text("Save After").foregroundColor(.blue).bold()
-                            }
+//                            // after 사진까지 찍고 나서 UserDefaults에 저장하는 과정!
+//                            let beforeData = dataModel.beforeImage?.pngData()
+//                            let aftereData = viewModel.recentImage?.pngData()
+//                            let data = DailyData(date: Date(), before: beforeData!, after: aftereData!)
+//                            var dataArr = dataModel.loadData()
+//                            dataArr.append(data)
+//                            dataModel.saveData(dataArr)
+                            
+                            dataModel.isDone = true
+                            dataModel.showCompareView = true
+                            presentationMode.wrappedValue.dismiss() //ContentView로 돌아가기 위해
+                        }) {
+                            Image(systemName: "button.programmable")
+                                .resizable()
+                                .frame(width: 75, height: 75)
+                                .padding()
                         }
                     }
-                    
-                    
-                    
-                    
+                    Spacer()
                 }
+                .padding(.init(70))
             }
             .foregroundColor(.white)
             
+            CameraFilterView()
             
-            
-            //필터 기능 추가 -> 수정 필요
-            if (dataModel.beforeImage == nil) {
-                CameraFilterView()
-            } else {
-                Image(uiImage: dataModel.beforeImage!)
-                    .resizable()
-                    .scaledToFill()
-                    .opacity(0.5)
-                    .ignoresSafeArea()
-            }
-            
-        }
-        .fullScreenCover(isPresented: $viewModel.showPreview) {
-            Image(uiImage: viewModel.recentImage ?? UIImage())
-                .resizable()
-                .scaledToFit()
-                .frame(width: UIScreen.main.bounds.width,
-                       height: UIScreen.main.bounds.height)
-                .ignoresSafeArea()
-                .onTapGesture {
-                    viewModel.showPreview = false
-                }
         }
         .opacity(viewModel.shutterEffect ? 0 : 1)
+        .navigationBarBackButtonHidden(true)
     }
 }
 

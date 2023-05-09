@@ -20,7 +20,7 @@ class CameraViewModel: ObservableObject {
     @Published var shutterEffect = false
     @Published var recentImage: UIImage?
     @Published var isFlashOn = false
-    @Published var isSilentModeOn = false
+    @Published var isSilentModeOn = true
     
     // 초기 세팅
     func configure() {
@@ -51,7 +51,7 @@ class CameraViewModel: ObservableObject {
                     self.shutterEffect = false
                 }
             }
-            
+
             model.capturePhoto()
             print("[CameraViewModel]: Photo captured!")
         } else {
