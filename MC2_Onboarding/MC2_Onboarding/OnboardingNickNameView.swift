@@ -17,6 +17,8 @@ struct OnboardingNickNameView: View {
         ZStack {
             Color(hex: "#1C1C1E")
             VStack {
+                Text("당신의 이름을 알려주세요.")
+                    .font(.system(size: 22, weight: .bold))
                 Form {
                     TextField("닉네임을 입력해주세요", text : $nickName)
                         .frame(height: 45)
@@ -34,6 +36,10 @@ struct OnboardingNickNameView: View {
                 } label: {
                     Text("결정")
                         .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "1C1C1E"))
+                        .frame(width: 358, height: 56)
+                        .background(Color(hex: "82EFB8"))
+                        .cornerRadius(6)
                 }
                 .padding()
             }

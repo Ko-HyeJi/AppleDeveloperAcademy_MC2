@@ -39,6 +39,10 @@ struct OnboardingLastPageView: View {
                 } label: {
                     Text("밤정리 시작하기")
                         .fontWeight(.bold)
+                        .foregroundColor(Color(hex: "1C1C1E"))
+                        .frame(width: 358, height: 56)
+                        .background(Color(hex: "82EFB8"))
+                        .cornerRadius(6)
                 }
                 .padding()
                 

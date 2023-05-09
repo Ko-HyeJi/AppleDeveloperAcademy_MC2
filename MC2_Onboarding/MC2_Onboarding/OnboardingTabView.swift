@@ -31,7 +31,7 @@ struct OnboardingTabView: View {
                 OnboardingPageView(
                     title: "Better",
                     title2: "Begin",
-                    subtitle: " 더 나은 내일을 위해\n방정리를 사진으로 기록해줘요."
+                    subtitle: " 더 나은 내일을 위해\n정리된 공간을 사진으로 기록해줘요."
                     
                 )
                 
@@ -39,7 +39,7 @@ struct OnboardingTabView: View {
                 OnboardingLastPageView(
                     title: "Night",
                     title2: "Ritual",
-                    subtitle: " 하루를 마무리하는\n당신의 방정리를 도와주는",
+                    subtitle: " 공간을 정리하며\n하루를 마무리하는 ",
                     
                     isFirstLaunching: $isFirstLaunching
                 )
