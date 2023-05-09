@@ -11,6 +11,7 @@ struct OnboardingLastPageView: View {
     let title: String
     let title2: String
     let subtitle: String
+    @Binding var isFirstLaunching: Bool
     
     var body: some View {
         ZStack {
@@ -30,6 +31,16 @@ struct OnboardingLastPageView: View {
                     .font(.body)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
+                
+                // 온보딩 완료 버튼.
+                // AppStorage의 isFirstLaunching 값을 false로 바꾸기 때문에, 다음번에 앱을 실행할 때는 OnboardingTabView를 띄우지 않음.
+                Button {
+                    isFirstLaunching.toggle()
+                } label: {
+                    Text("밤정리 시작하기")
+                        .fontWeight(.bold)
+                }
+                .padding()
                 
             }
             .padding(.top, -100)

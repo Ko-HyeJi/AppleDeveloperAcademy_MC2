@@ -10,7 +10,7 @@ import SwiftUI
 struct OnboardingNickNameView: View {
     
     @State private var nickName = ""
-    @Binding var isFirstLaunching: Bool
+    @Binding var isSecondLaunching: Bool
     
     var body: some View {
         
@@ -28,16 +28,12 @@ struct OnboardingNickNameView: View {
                     .multilineTextAlignment(.center)
                 
                 // 온보딩 완료 버튼.
-                // AppStorage의 isFirstLaunching 값을 false로 바꾸기 때문에, 다음번에 앱을 실행할 때는 OnboardingTabView를 띄우지 않음.
+                // AppStorage의 isSecondLaunching 값을 false로 바꾸기 때문에, 다음번에 앱을 실행할 때는 OnboardingTabView를 띄우지 않음.
                 Button {
-                    isFirstLaunching.toggle()
+                    isSecondLaunching.toggle()
                 } label: {
-                    Text("시작하기")
+                    Text("결정")
                         .fontWeight(.bold)
-                        .foregroundColor(.white)
-                        .frame(width: 200, height: 50)
-                        .background(Color.blue)
-                        .cornerRadius(6)
                 }
                 .padding()
             }
