@@ -61,7 +61,6 @@ struct CompareView: View {
         }
         .onTapGesture {
             dataModel.showCompareView = false
-            defaults.set(dataModel.count + 1, forKey: "count")
         }
     }
 }

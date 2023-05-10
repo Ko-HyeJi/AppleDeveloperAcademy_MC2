@@ -42,7 +42,6 @@ struct BeforeAndAfterView: View {
         }
         .onTapGesture {
             dataModel.isDone = false
-            defaults.set(dataModel.count + 1, forKey: "count")
         }
     }
 }

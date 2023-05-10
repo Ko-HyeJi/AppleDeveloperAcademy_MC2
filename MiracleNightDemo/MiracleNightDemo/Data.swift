@@ -12,7 +12,6 @@ let defaults = UserDefaults.standard
 
 class DataModel: ObservableObject {
     @Published var username = defaults.string(forKey: "username")
-    @Published var count = defaults.integer(forKey: "count")
     
     @Published var isUnregistered = false
     @Published var name = ""
@@ -67,7 +66,7 @@ class DataModel: ObservableObject {
     
     
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 60 //타이머 시간 측정 변수
+    @Published var countTo: Int = 15 //타이머 시간 측정 변수
 }
 
 struct DailyData: Codable {

@@ -8,14 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-    
-    
     @EnvironmentObject var dataModel: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
-    @State var isBottomSheetOn = false
+//    @State var isBottomSheetOn = false   
+    
     
     var body: some View {
-        NavigationStack {
+        NavigationStack() {
             ZStack {
                 Color(hex: "1C1C1E").edgesIgnoringSafeArea(.all)
                 
@@ -28,25 +27,23 @@ struct ContentView: View {
                         Text(dataModel.name + "님 환영합니다!").font(.title).foregroundColor(.white)
                     }
 
-                    //tmp
-                    Text(String(dataModel.count) + "번 정리를 완료했습니다")
-                    
-                    RotatingMessagesView()
-                        .font(.title2)
-                        .foregroundColor(.white)
-                        .padding()
                     
                     if (!dataModel.isDone){
-                        Text("당신의 방정리를 기다리고 있습니다.\n아래 버튼을 눌러 방정리를 시작해보세요!\n오늘 정리할 곳을 직접 정해주세요")
+                        let msgArr = ["아래 버튼을 눌러 방정리를 시작해보세요!", "오늘 정리할 곳을 정하고", "당신의 방정리를 사진으로 남겨보세요"]
+                        RotatingMessagesView(msgArr: msgArr)
+                            .font(.title2)
                             .foregroundColor(.white)
                             .padding()
                     } else {
-                        Text("오늘의 방정리가 끝났습니다\n수고하셨습니다!")
+                        let msgArr = ["오늘의 방정리가 끝났습니다.", "수고하셨습니다!"]
+                        RotatingMessagesView(msgArr: msgArr)
+                            .font(.title2)
                             .foregroundColor(.white)
                             .padding()
                     }
                     
-                    NavigationLink(destination: CameraView().environmentObject(dataModel)) {
+                    
+                    NavigationLink(destination: CameraView()) {
                         ZStack {
                             if (dataModel.isTimerOn && !dataModel.isDone) {
                                 CountdownView()
@@ -79,7 +76,7 @@ struct ContentView: View {
             GetNameView()
         }
         .fullScreenCover(isPresented: $dataModel.showCompareView) {
-            // after 사진까지 찍고 나서 UserDefaults에 저장하는 과정! -> 비동기적 처리 때문에 after 사진 찍은 직후에 CameraView에서 처리 불가능...
+            // after 사진까지 찍고 나서 UserDefaults에 저장하는 과정! -> 비동기 처리 때문에 after 사진 찍은 직후에 CameraView에서 처리 불가능...
             let _ = dataModel.afterImage = viewModel.recentImage
             let _ = dataModel.saveDataToUserDefaults()
             
@@ -89,23 +86,27 @@ struct ContentView: View {
 }
 
 struct RotatingMessagesView: View {
-    let msgArr = ["이곳은", "Tip 메시지가", "나오는", "자리입니다", "잘 나오나요?"]
+    @EnvironmentObject var dataModel: DataModel
     @State var currentMsgIdx = 0
     @State var timer: Timer?
+    var msgArr: [String] = []
     
     var body: some View {
-        Text(msgArr[currentMsgIdx])
-            .font(.body)
-            .onAppear {
-                // `Timer`를 시작
-                self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
-                    self.currentMsgIdx = (self.currentMsgIdx + 1) % self.msgArr.count
+        HStack {
+            Text("Tips")
+            Text(msgArr[currentMsgIdx])
+                .font(.body)
+                .onAppear {
+                    // `Timer`를 시작
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                        self.currentMsgIdx = (self.currentMsgIdx + 1) % self.msgArr.count
+                    }
                 }
-            }
-            .onDisappear {
-                // `Timer`를 종료
-                self.timer?.invalidate()
-                self.timer = nil
-            }
+                .onDisappear {
+                    // `Timer`를 종료
+                    self.timer?.invalidate()
+                    self.timer = nil
+                }
+        }
     }
 }

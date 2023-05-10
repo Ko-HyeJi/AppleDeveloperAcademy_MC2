@@ -30,6 +30,15 @@ struct DoNotDisturbView: View {
             }
             
             VStack {
+                HStack {
+                    Spacer()
+                    Button(action: {
+                    }) {
+                        Image(systemName: "x.circle")
+                            .resizable()
+                            .frame(width: 30, height: 30)
+                    }.padding(.trailing)
+                }
                 VStack{
                     Spacer()
                     Text("Do Not Disturb")

@@ -63,7 +63,7 @@ class Camera: NSObject, ObservableObject {
     func capturePhoto() {
         // 사진 옵션 세팅
         let photoSettings = AVCapturePhotoSettings()
-        photoSettings.flashMode = self.flashMode
+//        photoSettings.flashMode = self.flashMode
 
         self.output.capturePhoto(with: photoSettings, delegate: self)
         print("[Camera]: Photo's taken")
@@ -177,7 +177,7 @@ extension Camera: AVCapturePhotoCaptureDelegate {
 
         self.photoData = imageData
         self.recentImage = UIImage(data: imageData)
-        self.savePhoto(imageData)
+//        self.savePhoto(imageData)
         self.isCameraBusy = false
     }
 }
