@@ -3,7 +3,7 @@ import AVFoundation
 import Combine
 
 class CameraViewModel: ObservableObject {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     
     private let model: Camera
     private let session: AVCaptureSession

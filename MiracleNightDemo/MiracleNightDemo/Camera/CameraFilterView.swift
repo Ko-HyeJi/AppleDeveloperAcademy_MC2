@@ -39,7 +39,7 @@ import SwiftUI
 
 struct CameraFilterView: View {
     @Environment(\.presentationMode) var presentationMode
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     
     var body: some View {
         VStack {
@@ -62,7 +62,7 @@ struct CameraFilterView: View {
                                 .frame(width: 30, height: 30)
                         }.padding(.trailing)
                     }
-                    if (dataModel.isTimeOver) {
+                    if (data.isTimeOver) {
                         Text("방정리 완료 후 사진을 찍어보세요!").foregroundColor(.white)
                     } else {
                         Text("방정리 전 비포 사진을 찍어주세요!").foregroundColor(.white)

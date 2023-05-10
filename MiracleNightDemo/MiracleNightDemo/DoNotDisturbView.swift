@@ -10,9 +10,10 @@ import SwiftUI
 struct DoNotDisturbView: View {
     @State private var timerSeconds = 0
     @State private var isButtonEnabled = false // 버튼 활성화 여부를 나타내는 상태 변수
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: [Int]
     
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     
@@ -33,6 +34,8 @@ struct DoNotDisturbView: View {
                 HStack {
                     Spacer()
                     Button(action: {
+//                        path = []
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Image(systemName: "x.circle")
                             .resizable()
@@ -72,19 +75,19 @@ struct DoNotDisturbView: View {
             .foregroundColor(Color.white)
             .onReceive(timer) { _ in
                 timerSeconds += 1
-                if timerSeconds >= dataModel.countTo { // 15분=900초 (60초 * 15분)
+                if timerSeconds >= data.countTo { // 15분=900초 (60초 * 15분)
                     isButtonEnabled = true // 15분이 넘으면 버튼 활성화
-                    dataModel.isTimeOver = true
+                    data.isTimeOver = true
                 }
             }
         }
         .onAppear {
-            dataModel.counter = 0
-            dataModel.isTimerOn = true
+            data.counter = 0
+            data.isTimerOn = true
         }
         .onDisappear() {
-            dataModel.beforeImage = viewModel.recentImage // 사진을 찍은 직후나, DoNotDisturbView가 OnAppear됐을떄는 recentImage가 nil이다. 아마 비동기적 처리 문제 때문일듯?
-            dataModel.counter = timerSeconds
+            data.beforeImage = viewModel.recentImage // 사진을 찍은 직후나, DoNotDisturbView가 OnAppear됐을떄는 recentImage가 nil이다. 아마 비동기적 처리 문제 때문일듯?
+            data.counter = timerSeconds
         }
     }
         

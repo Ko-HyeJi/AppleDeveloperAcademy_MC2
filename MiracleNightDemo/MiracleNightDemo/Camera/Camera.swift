@@ -3,7 +3,7 @@ import AVFoundation
 import Photos
 
 class Camera: NSObject, ObservableObject {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
 
     var session = AVCaptureSession() //Input 과 Output 을 연결해주는 파이프 역할, Capture 의 디테일 설정을 관리
     var videoDeviceInput: AVCaptureDeviceInput! //카메라 기기로부터 프로그램에 들어오는 사진이나 동영상 데이터

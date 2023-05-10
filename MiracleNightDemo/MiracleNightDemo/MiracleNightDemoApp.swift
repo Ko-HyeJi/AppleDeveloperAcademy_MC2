@@ -9,13 +9,13 @@ import SwiftUI
 
 @main
 struct MiracleNightDemoApp: App {
-    let dataModel = DataModel()
+    let data = DataModel()
     let viewModel = CameraViewModel()
     
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(dataModel)
+                .environmentObject(data)
                 .environmentObject(viewModel)
         }
     }

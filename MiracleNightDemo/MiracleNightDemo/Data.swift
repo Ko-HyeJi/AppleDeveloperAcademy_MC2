@@ -11,6 +11,8 @@ import SwiftUI
 let defaults = UserDefaults.standard
 
 class DataModel: ObservableObject {
+    @EnvironmentObject var viewModel: CameraViewModel
+    
     @Published var username = defaults.string(forKey: "username")
     
     @Published var isUnregistered = false
@@ -22,9 +24,12 @@ class DataModel: ObservableObject {
     @Published var isTimeOver:Bool = false
     @Published var isDone:Bool = false //after 사진까지 찍었을 떄
     @Published var showCompareView:Bool = false
+    @Published var isSaved:Bool = false
+    
+    @Published var tmpSavedAfter:Bool = false
     
     // 지우기!!!
-    @Published var test:Bool = true
+    @Published var test:Bool = false
     
     func saveData(_ data: [DailyData]) {
         do {
@@ -47,14 +52,6 @@ class DataModel: ObservableObject {
         }
     }
     
-    func convertToUIImage(from data: Data) -> UIImage? {
-        guard let image = UIImage(data: data) else {
-            print("Failed to convert data to UIImage")
-            return nil
-        }
-        return image
-    }
-    
     func saveDataToUserDefaults() {
         let beforeData = beforeImage?.pngData()
         let aftereData = afterImage?.pngData()
@@ -64,9 +61,18 @@ class DataModel: ObservableObject {
         saveData(dataArr)
     }
     
+    func convertToUIImage(from data: Data) -> UIImage? {
+        guard let image = UIImage(data: data) else {
+            print("Failed to convert data to UIImage")
+            return nil
+        }
+        return image
+    }
     
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 15 //타이머 시간 측정 변수
+    @Published var countTo: Int = 5 //타이머 시간 측정 변수
+    
+    @Published var selectedIndex: Int = 0
 }
 
 struct DailyData: Codable {

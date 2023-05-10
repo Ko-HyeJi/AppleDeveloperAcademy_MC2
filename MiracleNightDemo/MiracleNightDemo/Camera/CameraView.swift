@@ -348,10 +348,12 @@ import SwiftUI
 import AVFoundation
 
 struct CameraView: View {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
     @Environment(\.presentationMode) var presentationMode
+    @Binding var path: [Int]
 
+    
     var body: some View {
         ZStack {
             viewModel.cameraPreview.ignoresSafeArea()
@@ -362,8 +364,8 @@ struct CameraView: View {
                     Spacer()
                     
                     
-                    if (!dataModel.isTimeOver) { // before 사진 찍어야 할 때
-                        NavigationLink(destination: DoNotDisturbView()) {
+                    if (!data.isTimeOver) { // before 사진 찍어야 할 때
+                        NavigationLink(destination: DoNotDisturbView(path: $path)) {
                             Image(systemName: "button.programmable")
                                 .resizable()
                                 .frame(width: 75, height: 75)
@@ -371,23 +373,15 @@ struct CameraView: View {
                         }
                         .simultaneousGesture(TapGesture().onEnded{
                             viewModel.capturePhoto()
-//                            dataModel.beforeImage = viewModel.recentImage
+                            data.beforeImage = viewModel.recentImage
+//                            path.append(2)
                         })
+                                                
                     } else { // after 사진 찍어야 할 때
                         Button(action: {
                             viewModel.capturePhoto()
-//                            dataModel.afterImage = viewModel.recentImage
-
-//                            // after 사진까지 찍고 나서 UserDefaults에 저장하는 과정!
-//                            let beforeData = dataModel.beforeImage?.pngData()
-//                            let aftereData = viewModel.recentImage?.pngData()
-//                            let data = DailyData(date: Date(), before: beforeData!, after: aftereData!)
-//                            var dataArr = dataModel.loadData()
-//                            dataArr.append(data)
-//                            dataModel.saveData(dataArr)
-                            
-                            dataModel.isDone = true
-                            dataModel.showCompareView = true
+                            data.isDone = true
+                            data.showCompareView = true
                             presentationMode.wrappedValue.dismiss() //ContentView로 돌아가기 위해
                         }) {
                             Image(systemName: "button.programmable")

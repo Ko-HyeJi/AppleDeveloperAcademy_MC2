@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct CompareView: View {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
     
     var body: some View {
         ZStack {
@@ -19,13 +20,25 @@ struct CompareView: View {
                         .font(.title2 .bold())
                         .foregroundColor(.white)
                     VStack (spacing: 30) {
+                        let dataArr = data.loadData()
                         ZStack {
-                            if let lastData = dataModel.loadData().last, let beforeImage = dataModel.convertToUIImage(from: lastData.before) {
-                                Image(uiImage: beforeImage)
-                                    .resizable()
-                                    .frame(width: 400, height: 200)
-                                    .scaledToFill()
+//                            if let lastData = data.loadData().last, let beforeImage = data.convertToUIImage(from: lastData.before) {
+//                            let dataArr = data.loadData()
+                            if data.selectedIndex < dataArr.count {
+                                let specificData = dataArr[data.selectedIndex] // 특정 인덱스의 요소를 가져옴
+
+                                if let beforeImage = data.convertToUIImage(from: specificData.before) {
+                                    Image(uiImage: beforeImage)
+                                        .resizable()
+                                        .frame(width: 400, height: 200)
+                                        .scaledToFill()
+                                }
                             }
+//                            Image(uiImage: data.beforeImage!)
+//                                .resizable()
+//                                .frame(width: 400, height: 200)
+//                                .scaledToFill()
+////                            }
                             Rectangle()//이미지 위 블러
                                 .foregroundColor(Color.black)
                                 .frame(width: 400, height: 200)
@@ -37,12 +50,23 @@ struct CompareView: View {
                                 .opacity(0.8)
                         }
                         ZStack {
-                            if let lastData = dataModel.loadData().last, let afterImage = dataModel.convertToUIImage(from: lastData.after) {
-                                Image(uiImage: afterImage)
-                                    .resizable()
-                                    .frame(width: 400, height: 200)
-                                    .scaledToFill()
+//                            if let lastData = data.loadData().last, let afterImage = data.convertToUIImage(from: lastData.after) {
+//                            Image(uiImage: viewModel.recentImage!)
+//                                .resizable()
+//                                .frame(width: 400, height: 200)
+//                                .scaledToFill()
+////                            }
+                            if data.selectedIndex < dataArr.count {
+                                let specificData = dataArr[data.selectedIndex] // 특정 인덱스의 요소를 가져옴
+
+                                if let afterImage = data.convertToUIImage(from: specificData.after) {
+                                    Image(uiImage: afterImage)
+                                        .resizable()
+                                        .frame(width: 400, height: 200)
+                                        .scaledToFill()
+                                }
                             }
+
                             Rectangle()//이미지 위 블러
                                 .foregroundColor(Color.black)
                                 .frame(width: 400, height: 200)
@@ -60,7 +84,15 @@ struct CompareView: View {
             .padding()
         }
         .onTapGesture {
-            dataModel.showCompareView = false
+            data.showCompareView = false
+            data.test = false
+        }
+        .onDisappear {
+            if (!data.isSaved) {
+                let _ = data.afterImage = viewModel.recentImage
+                let _ = data.saveDataToUserDefaults()
+                let _ = data.isSaved = true
+            }
         }
     }
 }

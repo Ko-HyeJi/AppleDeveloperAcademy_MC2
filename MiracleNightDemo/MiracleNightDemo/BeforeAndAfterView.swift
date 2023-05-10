@@ -8,13 +8,13 @@
 import SwiftUI
 
 struct BeforeAndAfterView: View {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     
     
     var body: some View {
         VStack {
             ZStack {
-                if let lastData = dataModel.loadData().last, let beforeImage = dataModel.convertToUIImage(from: lastData.before) {
+                if let lastData = data.loadData().last, let beforeImage = data.convertToUIImage(from: lastData.before) {
                     Image(uiImage: beforeImage)
                         .resizable()
                         .rotationEffect(Angle(degrees: 270))
@@ -27,7 +27,7 @@ struct BeforeAndAfterView: View {
                     .bold()
             }
             ZStack {
-                if let lastData = dataModel.loadData().last, let afterImage = dataModel.convertToUIImage(from: lastData.after) {
+                if let lastData = data.loadData().last, let afterImage = data.convertToUIImage(from: lastData.after) {
                     Image(uiImage: afterImage)
                         .resizable()
                         .rotationEffect(Angle(degrees: 270))
@@ -41,7 +41,7 @@ struct BeforeAndAfterView: View {
             }
         }
         .onTapGesture {
-            dataModel.isDone = false
+            data.isDone = false
         }
     }
 }

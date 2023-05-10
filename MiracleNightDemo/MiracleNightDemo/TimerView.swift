@@ -57,7 +57,7 @@ struct ProgressBar: View {
 }
 
 struct CountdownView: View {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     @State var counter: Int = 0
     
 //    var countTo: Int = 5
@@ -66,17 +66,17 @@ struct CountdownView: View {
         VStack{
             ZStack{
                 ProgressTrack()
-                ProgressBar(counter: counter, countTo: dataModel.countTo)
+                ProgressBar(counter: counter, countTo: data.countTo)
             }
         }
         .onAppear {
-            counter = dataModel.counter
+            counter = data.counter
         }
         .onReceive(timer) { time in
-            if (self.counter < dataModel.countTo) {
+            if (self.counter < data.countTo) {
                 self.counter += 1
-                if (counter == dataModel.countTo) {
-                    dataModel.isTimeOver = true
+                if (counter == data.countTo) {
+                    data.isTimeOver = true
                 }
             }
         }

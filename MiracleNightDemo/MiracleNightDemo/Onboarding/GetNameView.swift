@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct GetNameView: View {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
 
     var body: some View {
         VStack {
-            TextField("Enter your name", text: $dataModel.name)
+            TextField("Enter your name", text: $data.name)
                 .padding()
             Button("Save") {
                 let defaults = UserDefaults.standard
-                defaults.set(dataModel.name, forKey: "username")
-                dataModel.isUnregistered = false
+                defaults.set(data.name, forKey: "username")
+                data.isUnregistered = false
             }
         }
         .padding()

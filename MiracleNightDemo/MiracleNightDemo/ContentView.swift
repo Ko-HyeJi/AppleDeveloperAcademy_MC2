@@ -8,27 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var dataModel: DataModel
+    @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
-//    @State var isBottomSheetOn = false   
+//    @State var isBottomSheetOn = false
+    @State var path: [Int] = []
+
     
     
     var body: some View {
-        NavigationStack() {
+        @State var countDay: Int = 2
+        @State var currentGoal: Int = 7
+        @State var progress: Double = Double(countDay) / Double(currentGoal)
+        @State var progressText: String = "첫 방정리를 기다리고 있어요"
+        
+        NavigationStack(path: $path) {
             ZStack {
                 Color(hex: "1C1C1E").edgesIgnoringSafeArea(.all)
                 
                 VStack {
                     Spacer()
                     
-                    if (dataModel.username != nil) { //두번째 이후
-                        Text(dataModel.username! + "님 환영합니다!").font(.title).foregroundColor(.white)
+                    if (data.username != nil) { //두번째 이후
+                        Text(data.username! + "님 환영합니다!").font(.title).foregroundColor(.white)
                     } else { //처음 앱 사용할 때
-                        Text(dataModel.name + "님 환영합니다!").font(.title).foregroundColor(.white)
+                        Text(data.name + "님 환영합니다!").font(.title).foregroundColor(.white)
                     }
 
                     
-                    if (!dataModel.isDone){
+                    if (!data.isDone){
                         let msgArr = ["아래 버튼을 눌러 방정리를 시작해보세요!", "오늘 정리할 곳을 정하고", "당신의 방정리를 사진으로 남겨보세요"]
                         RotatingMessagesView(msgArr: msgArr)
                             .font(.title2)
@@ -43,43 +50,102 @@ struct ContentView: View {
                     }
                     
                     
-                    NavigationLink(destination: CameraView()) {
+                    NavigationLink(destination: CameraView(path: $path)) {
                         ZStack {
-                            if (dataModel.isTimerOn && !dataModel.isDone) {
+                            if (data.isTimerOn && !data.isDone) {
                                 CountdownView()
                             } else {
                                 Circle()
-                                    .fill(Color.clear)
+                                    .stroke(lineWidth: 3)
+                                    .foregroundColor(.gray)
                                     .frame(width: 200, height: 200)
-                                    .overlay(
-                                        Circle().stroke(Color.gray, lineWidth: 3)
-                                )
                             }
                             Image("Earth")
                                 .resizable()
                                 .frame(width: 150, height: 150)
-                                .opacity((dataModel.isTimerOn && !dataModel.isTimeOver) || dataModel.isDone ? 0.1 : 1)
+                                .opacity((data.isTimerOn && !data.isTimeOver) || data.isDone ? 0.1 : 1)
                         }
                     }
-                    .disabled((dataModel.isTimerOn && !dataModel.isTimeOver) || dataModel.isDone)
+                    .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
+                    .simultaneousGesture(TapGesture().onEnded{
+//                        path.append(1)
+                    })
                     
                     Spacer()
+                        
+                    GeometryReader {
+                        let size = $0.size
+
+                        VStack(alignment: .center) {
+                            Spacer()
+                                RoundedRectangle(cornerRadius: 10)
+                                    .frame(width: size.width / 1.08, height: size.height / 6.16)
+                                    .foregroundColor(Color (hex: "48484A"))
+                                    .overlay {
+                                        VStack(alignment: .leading) {
+                                            HStack {
+                                                Text("방정리 체크")
+                                                    .fontWeight(.bold)
+                                                    .foregroundColor(Color.white)
+                                                    .padding(.vertical)
+
+                                                Spacer()
+
+                                                NavigationLink(destination: CheckProgressView().navigationBarBackButtonHidden(true).navigationBarHidden(true)) {
+                                                    Label {
+                                                        Image(systemName: "chevron.right")
+                                                                .foregroundColor(Color(hex: "757575"))
+                                                            } icon: {
+                                                                Text("more")
+                                                                    .foregroundColor(.white)
+                                                        }
+                                                    .padding(.vertical)
+                                                }
+                                            }
+                                            .padding(.top)
+
+                                            Spacer()
+
+                                            Text("\(countDay)/\(currentGoal)")
+                                                .foregroundColor(Color.white)
+                                                .fontWeight(.semibold)
+
+                                            ProgressView("\(progressText)",value: progress)
+                                                .progressViewStyle(LinearProgressViewStyle(tint: Color(hex: "9DEBBB")))
+                                                .foregroundColor(.white)
+                                                .padding(.bottom, size.height / 30)
+
+                                            Spacer()
+                                        }
+                                        .padding(.vertical, size.height / 30 )
+                                        .padding(.horizontal, size.width / 15)
+                                    }
+                        }
+                        .padding()
+                        .position(x: size.width / 2, y: size.height / 2)
+                    }
+                    
+//                    NavigationLink(destination: TestView()) {
+//                        Image(systemName: "photo.artframe")
+//                            .resizable()
+//                            .frame(width: 75, height: 75)
+//                            .padding()
+//                    }
                 }
             }
         }
         .onAppear{
-            if (dataModel.username == nil) {
-                dataModel.isUnregistered = true
+            if (data.username == nil) {
+                data.isUnregistered = true
             }
         }
-        .fullScreenCover(isPresented: $dataModel.isUnregistered) {
+        .fullScreenCover(isPresented: $data.isUnregistered) {
             GetNameView()
         }
-        .fullScreenCover(isPresented: $dataModel.showCompareView) {
-            // after 사진까지 찍고 나서 UserDefaults에 저장하는 과정! -> 비동기 처리 때문에 after 사진 찍은 직후에 CameraView에서 처리 불가능...
-            let _ = dataModel.afterImage = viewModel.recentImage
-            let _ = dataModel.saveDataToUserDefaults()
-            
+        .fullScreenCover(isPresented: $data.showCompareView) {
+            CompareView()
+        }
+        .fullScreenCover(isPresented: $data.test) {
             CompareView()
         }
     }

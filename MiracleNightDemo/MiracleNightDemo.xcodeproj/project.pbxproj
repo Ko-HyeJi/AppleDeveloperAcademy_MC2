@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		8B5A8DCF2A091E1200F14FAA /* TestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B5A8DCE2A091E1200F14FAA /* TestView.swift */; };
+		8B881A0E2A0BB4E200CE0F75 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B881A0C2A0BB4E200CE0F75 /* MainView.swift */; };
+		8B881A0F2A0BB4E200CE0F75 /* CheckProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B881A0D2A0BB4E200CE0F75 /* CheckProgressView.swift */; };
 		8B941E092A0A0CFF00B5E153 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B941E082A0A0CFF00B5E153 /* CompareView.swift */; };
 		8BB465D42A05B85F00282AB3 /* BeforeAndAfterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB465D32A05B85F00282AB3 /* BeforeAndAfterView.swift */; };
 		8BB625812A02739500DB2EA8 /* MiracleNightDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB625802A02739500DB2EA8 /* MiracleNightDemoApp.swift */; };
@@ -29,6 +31,8 @@
 
 /* Begin PBXFileReference section */
 		8B5A8DCE2A091E1200F14FAA /* TestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestView.swift; sourceTree = "<group>"; };
+		8B881A0C2A0BB4E200CE0F75 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		8B881A0D2A0BB4E200CE0F75 /* CheckProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckProgressView.swift; sourceTree = "<group>"; };
 		8B941E082A0A0CFF00B5E153 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
 		8BB465D32A05B85F00282AB3 /* BeforeAndAfterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeforeAndAfterView.swift; sourceTree = "<group>"; };
 		8BB6257D2A02739500DB2EA8 /* MiracleNightDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiracleNightDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -79,6 +83,8 @@
 		8BB6257F2A02739500DB2EA8 /* MiracleNightDemo */ = {
 			isa = PBXGroup;
 			children = (
+				8B881A0C2A0BB4E200CE0F75 /* MainView.swift */,
+				8B881A0D2A0BB4E200CE0F75 /* CheckProgressView.swift */,
 				8BB6259F2A029FDA00DB2EA8 /* Data.swift */,
 				8BB625802A02739500DB2EA8 /* MiracleNightDemoApp.swift */,
 				8BB6259D2A02962200DB2EA8 /* ContentView.swift */,
@@ -214,8 +220,10 @@
 				8BB625A82A02B00F00DB2EA8 /* GetNameView.swift in Sources */,
 				8B5A8DCF2A091E1200F14FAA /* TestView.swift in Sources */,
 				8BB465D42A05B85F00282AB3 /* BeforeAndAfterView.swift in Sources */,
+				8B881A0E2A0BB4E200CE0F75 /* MainView.swift in Sources */,
 				8BB625952A0273CD00DB2EA8 /* BottomSheet.swift in Sources */,
 				8BB625A02A029FDA00DB2EA8 /* Data.swift in Sources */,
+				8B881A0F2A0BB4E200CE0F75 /* CheckProgressView.swift in Sources */,
 				8BB625812A02739500DB2EA8 /* MiracleNightDemoApp.swift in Sources */,
 				8B941E092A0A0CFF00B5E153 /* CompareView.swift in Sources */,
 				8BB8F1C32A04E31400EAADD9 /* DoNotDisturbView.swift in Sources */,
