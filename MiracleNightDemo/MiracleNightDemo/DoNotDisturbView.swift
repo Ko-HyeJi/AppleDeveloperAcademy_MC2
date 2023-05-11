@@ -60,13 +60,11 @@ struct DoNotDisturbView: View {
                 }
                 .padding()
                 VStack {
-                    VStack {
+                    VStack(spacing:-12) {
                         Text("\(timeStringMinutes(time: TimeInterval(timerSeconds)))")
-                            .font(.largeTitle .bold())
-                            .scaleEffect(y:1.1)
+                            .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .condensed)))
                         Text("\(timeStringSeconds(time: TimeInterval(timerSeconds)))")
-                            .font(.largeTitle .bold())
-                            .scaleEffect(y:1.1)
+                            .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .condensed)))
                     }
                     .foregroundColor(Color.white)
                     Spacer()
