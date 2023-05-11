@@ -350,8 +350,7 @@ import AVFoundation
 struct CameraView: View {
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
-    @Environment(\.presentationMode) var presentationMode
-    @Binding var path: [Int]
+    @EnvironmentObject var router: Router<Path>
 
     
     var body: some View {
@@ -365,25 +364,24 @@ struct CameraView: View {
                     
                     
                     if (!data.isTimeOver) { // before 사진 찍어야 할 때
-                        NavigationLink(destination: DoNotDisturbView(path: $path)) {
+                        Button {
+                            router.push(.C)
+                            viewModel.capturePhoto()
+                            data.beforeImage = viewModel.recentImage
+                        } label: {
                             Image(systemName: "button.programmable")
                                 .resizable()
                                 .frame(width: 75, height: 75)
                                 .padding()
                         }
-                        .simultaneousGesture(TapGesture().onEnded{
-                            viewModel.capturePhoto()
-                            data.beforeImage = viewModel.recentImage
-//                            path.append(2)
-                        })
                                                 
                     } else { // after 사진 찍어야 할 때
-                        Button(action: {
+                        Button {
+                            router.popToRoot()
                             viewModel.capturePhoto()
                             data.isDone = true
                             data.showCompareView = true
-                            presentationMode.wrappedValue.dismiss() //ContentView로 돌아가기 위해
-                        }) {
+                        } label: {
                             Image(systemName: "button.programmable")
                                 .resizable()
                                 .frame(width: 75, height: 75)

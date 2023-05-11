@@ -1,11 +1,11 @@
 {
   "images" : [
     {
+      "filename" : "Cross.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "Bitmap_2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

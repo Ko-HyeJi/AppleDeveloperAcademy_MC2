@@ -1,5 +1,5 @@
 //
-//  CompareView.swift
+//  DetailView.swift
 //  MiracleNightDemo
 //
 //  Created by 고혜지 on 2023/05/09.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct CompareView: View {
+struct DetailView: View {
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
     
@@ -20,11 +20,18 @@ struct CompareView: View {
                         .font(.title2 .bold())
                         .foregroundColor(.white)
                     VStack (spacing: 30) {
+//                        let dataArr = data.loadData()
                         ZStack {
-                            Image(uiImage: data.beforeImage!)
-                                .resizable()
-                                .frame(width: 400, height: 200)
-                                .scaledToFill()
+                            if data.selectedIndex < data.dataArr.count {
+                                let specificData = data.dataArr[data.selectedIndex] // 특정 인덱스의 요소를 가져옴
+
+                                if let beforeImage = data.convertToUIImage(from: specificData.before) {
+                                    Image(uiImage: beforeImage)
+                                        .resizable()
+                                        .frame(width: 400, height: 200)
+                                        .scaledToFill()
+                                }
+                            }
                             Rectangle()//이미지 위 블러
                                 .foregroundColor(Color.black)
                                 .frame(width: 400, height: 200)
@@ -36,10 +43,17 @@ struct CompareView: View {
                                 .opacity(0.8)
                         }
                         ZStack {
-                            Image(uiImage: viewModel.recentImage!)
-                                .resizable()
-                                .frame(width: 400, height: 200)
-                                .scaledToFill()
+                            if data.selectedIndex < data.dataArr.count {
+                                let specificData = data.dataArr[data.selectedIndex] // 특정 인덱스의 요소를 가져옴
+
+                                if let afterImage = data.convertToUIImage(from: specificData.after) {
+                                    Image(uiImage: afterImage)
+                                        .resizable()
+                                        .frame(width: 400, height: 200)
+                                        .scaledToFill()
+                                }
+                            }
+
                             Rectangle()//이미지 위 블러
                                 .foregroundColor(Color.black)
                                 .frame(width: 400, height: 200)
@@ -57,14 +71,7 @@ struct CompareView: View {
             .padding()
         }
         .onTapGesture {
-            data.showCompareView = false
-        }
-        .onDisappear {
-            if (!data.isSaved) {
-                let _ = data.afterImage = viewModel.recentImage
-                let _ = data.saveDataToUserDefaults()
-                let _ = data.isSaved = true
-            }
+            data.showDetailView = false
         }
     }
 }

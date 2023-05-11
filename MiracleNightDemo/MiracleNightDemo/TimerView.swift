@@ -15,9 +15,9 @@ struct ProgressTrack: View {
     var body: some View {
         Circle()
             .fill(Color.clear)
-            .frame(width: 200, height: 200)
+            .frame(width: 160, height: 160)
             .overlay(
-                Circle().stroke(Color.gray, lineWidth: 20)
+                Circle().stroke(Color(hex: "3F3F3F"), lineWidth: 15)
         )
     }
 }
@@ -29,18 +29,19 @@ struct ProgressBar: View {
     var body: some View {
         Circle()
             .fill(Color.clear)
-            .frame(width: 200, height: 200)
+            .frame(width: 160, height: 160)
             .overlay(
                 Circle().trim(from:0, to: progress())
                     .stroke(
                         style: StrokeStyle(
-                            lineWidth: 20,
+                            lineWidth: 15,
                             lineCap: .round,
                             lineJoin:.round
                         )
                 )
                     .foregroundColor(
-                        (completed() ? Color.green : Color.white)
+                        Color(hex: "5E5CE6")
+//                        (completed() ? Color(hex: "5E5CE6") : Color.white)
                 ).animation(
                     .easeInOut(duration: 0.2)
                 )
@@ -59,9 +60,7 @@ struct ProgressBar: View {
 struct CountdownView: View {
     @EnvironmentObject var data: DataModel
     @State var counter: Int = 0
-    
-//    var countTo: Int = 5
-    
+
     var body: some View {
         VStack{
             ZStack{
@@ -82,9 +81,3 @@ struct CountdownView: View {
         }
     }
 }
-
-//struct CountdownView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        CountdownView()
-//    }
-//}

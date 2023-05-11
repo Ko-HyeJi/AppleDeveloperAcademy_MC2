@@ -28,8 +28,9 @@ class DataModel: ObservableObject {
     
     @Published var tmpSavedAfter:Bool = false
     
-    // 지우기!!!
-    @Published var test:Bool = false
+    @Published var showDetailView:Bool = false
+    
+    @Published var dataArr: [DailyData] = [] //앱이 처음 실행됐을 때, saveDataToUserDefaults 함수가 호출됐을 때 업데이트
     
     func saveData(_ data: [DailyData]) {
         do {
@@ -59,6 +60,7 @@ class DataModel: ObservableObject {
         var dataArr = loadData()
         dataArr.append(data)
         saveData(dataArr)
+        self.dataArr = dataArr
     }
     
     func convertToUIImage(from data: Data) -> UIImage? {
@@ -69,8 +71,29 @@ class DataModel: ObservableObject {
         return image
     }
     
+    func getDate(index: Int) -> String {
+        let monthFormat = DateFormatter()
+        monthFormat.setLocalizedDateFormatFromTemplate("MMMM")
+        let dayFormat = DateFormatter()
+        dayFormat.dateFormat = "dd"
+        
+        return (monthFormat.string(from: self.dataArr[index].date) + "\n" + dayFormat.string(from: self.dataArr[index].date))
+    }
+    
+    func getLastDay() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM.dd"
+        
+        if let date = self.dataArr.last?.date {
+            return dateFormatter.string(from: date)
+        } else {
+            return ("")
+        }
+
+    }
+    
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 5 //타이머 시간 측정 변수
+    @Published var countTo: Int = 10 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
 }
@@ -100,3 +123,32 @@ extension Color {
     }
 }
 
+final class Router<T: Hashable>: ObservableObject {
+    @Published var paths: [T] = []
+    func push(_ path: T) {
+        paths.append(path)
+    }
+    
+    func pop() {
+        paths.removeLast(1)
+    }
+    
+    func pop(to: T) {
+        guard let found = paths.firstIndex(where: { $0 == to }) else {
+            return
+        }
+
+        let numToPop = (found..<paths.endIndex).count - 1
+        paths.removeLast(numToPop)
+    }
+    
+    func popToRoot() {
+        paths.removeAll()
+    }
+}
+
+enum Path {
+    case A
+    case B
+    case C
+}

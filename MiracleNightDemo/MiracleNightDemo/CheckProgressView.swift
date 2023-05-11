@@ -25,11 +25,15 @@ struct CheckProgressView: View {
     
     @EnvironmentObject var data: DataModel
     
+    @Environment(\.presentationMode) var presentationMode
+    
     
     var body: some View {
         VStack(spacing: 1) {
             HStack {
-                NavigationLink(destination: MainView().navigationBarBackButtonHidden(true).navigationBarHidden(true)) {
+                Button(action: {
+                    presentationMode.wrappedValue.dismiss()
+                }) {
                     Image(systemName: "chevron.backward")
                         .foregroundColor(.white)
                         .padding(.bottom)
@@ -88,10 +92,10 @@ struct HorizontalScrollView: View {
                     HStack {
                         ForEach(0..<dayCount) { index in
                             Circle()
-                                .stroke(index < clearedCount ? Color(hex: "9DEBBB"): Color(hex: "979797"), lineWidth: 1)
+                                .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "979797"), lineWidth: 1)
                                 .frame(width: 36, height: 36)
                                 .padding(.horizontal)
-                                .background(Circle().fill(index < activatedCount ? index < clearedCount ? Color(hex: "9DEBBB") : Color(hex: "879392") : Color(.clear)))
+                                .background(Circle().fill(index < activatedCount ? index < clearedCount ? Color(hex: "5E5CE6") : Color(hex: "879392") : Color(.clear)))
 //                                .scaleEffect(selectedIndex == index ? 1.2 : 1)
                                 .id(index)
                                 .onTapGesture {
@@ -108,7 +112,8 @@ struct HorizontalScrollView: View {
                     }
                     .onAppear {
 //                        activatedCount = data.loadData().count
-                        clearedCount = data.loadData().count
+//                        clearedCount = data.loadData().count
+                        clearedCount = data.dataArr.count
                     }
                     .onReceive(Just(scrollToIndex)) { index in
                                         withAnimation {
@@ -147,12 +152,12 @@ struct VerticalScrollView: View {
             ScrollViewReader { scrollViewProxy in
                 VStack {
                     LazyVGrid(columns: columns) {
-                        let dataArr = data.loadData()
-                        ForEach(0..<dataArr.count) { index in
+//                        let dataArr = data.loadData()
+                        ForEach(0..<data.dataArr.count) { index in
                             let _ = print(index)
                             ZStack {
                                 RoundedRectangle(cornerRadius: 40)
-                                    .stroke(index < clearedCount ? Color(hex: "9DEBBB"): Color(hex: "979797"), lineWidth: 2)
+                                    .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "979797"), lineWidth: 2)
                                     .background(RoundedRectangle(cornerRadius: 40).fill(index == clearedCount ? (Color(hex: "979797")) : Color.clear))
                                     .id(index)
                                     .padding(.vertical)
@@ -161,34 +166,34 @@ struct VerticalScrollView: View {
                                         ZStack {
                                             if index < clearedCount {
                                             
-                                            VStack(spacing: 0) {
-                                                if index < dataArr.count {
-                                                    let specificData = dataArr[index] // 특정 인덱스의 요소를 가져옴
-
-                                                    if let beforeImage = data.convertToUIImage(from: specificData.before) {
-                                                        Image(uiImage: beforeImage)
-                                                            .resizable()
-                                                            .scaledToFill()
+                                                ZStack {
+                                                    VStack(spacing: 0) {
+                                                        if index < data.dataArr.count {
+                                                            let specificData = data.dataArr[index] // 특정 인덱스의 요소를 가져옴
+                                                            
+                                                            if let beforeImage = data.convertToUIImage(from: specificData.before) {
+                                                                Image(uiImage: beforeImage)
+                                                                    .resizable()
+                                                                    .scaledToFill()
+                                                            }
+                                                        }
+                                                        if index < data.dataArr.count {
+                                                            let specificData = data.dataArr[index] // 특정 인덱스의 요소를 가져옴
+                                                            
+                                                            if let afterImage = data.convertToUIImage(from: specificData.after) {
+                                                                Image(uiImage: afterImage)
+                                                                    .resizable()
+                                                                    .scaledToFill()
+                                                            }
+                                                        }
+                                                        
                                                     }
+                                                    .mask(RoundedRectangle(cornerRadius: 40).frame(width: 103, height: 106))
+                                                    
+                                                    Color(.black).opacity(0.3).mask(RoundedRectangle(cornerRadius: 40).frame(width: 103, height: 106))
+                                                    
+                                                    Text(data.getDate(index: index)).multilineTextAlignment(.center).font(.title2)
                                                 }
-                                                if index < dataArr.count {
-                                                    let specificData = dataArr[index] // 특정 인덱스의 요소를 가져옴
-
-                                                    if let afterImage = data.convertToUIImage(from: specificData.after) {
-                                                        Image(uiImage: afterImage)
-                                                            .resizable()
-                                                            .scaledToFill()
-                                                    }
-                                                }
-                                                
-                                            }
-                                            .mask(RoundedRectangle(cornerRadius: 40).frame(width: 103, height: 106))
-                                            
-                                        }
-                                            if selectedIndex == index {
-                                                Text("Selected")
-                                                    .foregroundColor(.white)
-                                                    .font(.headline)
                                             }
                                         }
                                     }
@@ -197,9 +202,8 @@ struct VerticalScrollView: View {
                                             selectedIndex = index
                                             scrollToIndex = index
                                         }
-                                        data.test = true
+                                        data.showDetailView = true
                                         data.selectedIndex = index
-                                        print(data.test)
                                     }
                             }
                             .frame(width: 105, height: 140)
@@ -214,7 +218,7 @@ struct VerticalScrollView: View {
                 }
                 .onAppear {
 //                    activatedCount = data.loadData().count
-                    clearedCount = data.loadData().count
+                    clearedCount = data.dataArr.count
                 }
                 .onReceive(Just(scrollToIndex)) { index in
                     withAnimation {
