@@ -18,8 +18,12 @@ struct OnboardingAlarmTimeView: View {
             Color(hex: "#1C1C1E")
                 .edgesIgnoringSafeArea(.all)
             VStack {
-                Text("언제 알람받기를 원하시나요?")
-                    .font(.system(size: 22, weight: .bold))
+                Text("언제 알람받기를 원하시나요?").font(.system(size: 22, weight: .bold))
+                
+                let dateFormatter = DateFormatter()
+                let _ = dateFormatter.dateFormat = "hh:mm a"
+                Text(dateFormatter.string(from: alarmTime)).frame(alignment: .leading).padding()
+                
                 Form {
                     DatePicker("Please enter a date", selection: $alarmTime, displayedComponents: .hourAndMinute)
                         .datePickerStyle(WheelDatePickerStyle())
