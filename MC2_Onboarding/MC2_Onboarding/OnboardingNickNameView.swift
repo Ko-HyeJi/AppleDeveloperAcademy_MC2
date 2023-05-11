@@ -14,36 +14,52 @@ struct OnboardingNickNameView: View {
     
     var body: some View {
         
-        ZStack {
-            Color(hex: "#1C1C1E")
-            VStack {
-                Text("당신의 이름을 알려주세요.")
-                    .font(.system(size: 22, weight: .bold))
-                Form {
-                    TextField("닉네임을 입력해주세요", text : $nickName)
-                        .frame(height: 45)
+        NavigationView {
+            ZStack {
+                Color(hex: "#1C1C1E")
+                    .edgesIgnoringSafeArea(.all)
+                VStack {
+                    Text("당신의 이름을 알려주세요.")
+                        .font(.system(size: 22, weight: .bold))
+                    Form {
+                        TextField("닉네임을 입력해주세요", text : $nickName)
+                            .frame(height: 45)
+                    }
+                    .frame(height: 140, alignment: .center)
+                    Text("\(nickName) 의 방문을 환영합니다")
+                        .font(.body)
+                        .foregroundColor(.white)
+                        .multilineTextAlignment(.center)
                 }
-                    .frame(height: 140)
-                Text("\(nickName) 의 방문을 환영합니다")
-                    .font(.body)
-                    .foregroundColor(.white)
-                    .multilineTextAlignment(.center)
-                
-                // 온보딩 완료 버튼.
-                // AppStorage의 isSecondLaunching 값을 false로 바꾸기 때문에, 다음번에 앱을 실행할 때는 OnboardingTabView를 띄우지 않음.
-                Button {
-                    isSecondLaunching.toggle()
-                } label: {
-                    Text("결정")
-                        .fontWeight(.bold)
-                        .foregroundColor(Color(hex: "1C1C1E"))
-                        .frame(width: 358, height: 56)
-                        .background(Color(hex: "82EFB8"))
-                        .cornerRadius(6)
+                // 다음 페이지로 이동하기
+                VStack{
+                    if nickName .isEmpty {
+                        NavigationLink(destination: OnboardingAlarmTimeView(isSecondLaunching: $isSecondLaunching)) {
+                            Text("작성 완료")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color(hex: "FFFFFF"))
+                                .frame(width: 358, height: 56)
+                                .background(Color(hex: "9C9C9C"))
+                                .cornerRadius(14)
+                        }
+                            .disabled(nickName.isEmpty)
+                    } else {
+                        NavigationLink(destination: OnboardingAlarmTimeView(isSecondLaunching: $isSecondLaunching)) {
+                            Text("작성 완료")
+                                .fontWeight(.bold)
+                                .foregroundColor(Color(hex: "FFFFFF"))
+                                .frame(width: 358, height: 56)
+                                .background(Color(hex: "5E5CE6"))
+                                .cornerRadius(14)
+                        }
+                    }
+                    
                 }
-                .padding()
+                .frame(maxHeight: .infinity, alignment: .bottom)
+                .padding(.bottom, 85)
             }
+            .edgesIgnoringSafeArea(.all)
         }
-        .ignoresSafeArea()
     }
 }
+

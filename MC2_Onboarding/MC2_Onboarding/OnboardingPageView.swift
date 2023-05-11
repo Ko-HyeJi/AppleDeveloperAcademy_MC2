@@ -8,22 +8,22 @@
 import SwiftUI
 
 struct OnboardingPageView: View {
-    let title: String
-    let title2: String
+    let uppertitle: String
+    let lowertitle: String
     let subtitle: String
     
     var body: some View {
         ZStack {
-            Color(hex: "#1C1C1E")
-                .ignoresSafeArea()
+            Image("onboardingBG")
+                .edgesIgnoringSafeArea(.all)
             VStack {
-                Text(title)
+                Text(uppertitle)
                     .frame(width: 350)
                     .font(.system(size: 120, weight: .bold))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, -80)
-                Text(title2)
+                Text(lowertitle)
                     .frame(width: 350)
                     .font(.system(size: 120, weight: .bold))
                     .foregroundColor(.white)
@@ -32,20 +32,22 @@ struct OnboardingPageView: View {
                 Text(subtitle)
                     .frame(width: 250)
                     .font(.body)
+                    .lineSpacing(2)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
+                    .padding(.top, 60)
             }
             .padding(.top, -180)
         }
-       
+        .edgesIgnoringSafeArea(.all)
     }
 }
 
 struct OnboardingPageView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingPageView(
-            title: "00",
-            title2: "00",
+            uppertitle: "00",
+            lowertitle: "00",
             subtitle: "24시간 중 단 1%\n 15분동안 정리할 곳을 정해"
         )
     }

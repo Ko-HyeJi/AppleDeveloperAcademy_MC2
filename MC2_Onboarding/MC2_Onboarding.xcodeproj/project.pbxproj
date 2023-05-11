@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A67880C2A0B629B001FC9D0 /* ImageCropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67880B2A0B629B001FC9D0 /* ImageCropView.swift */; };
+		4A67880E2A0B6A10001FC9D0 /* dragCoordinateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A67880D2A0B6A10001FC9D0 /* dragCoordinateView.swift */; };
+		4A6788122A0CCCB3001FC9D0 /* OnboardingAlarmTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6788112A0CCCB3001FC9D0 /* OnboardingAlarmTimeView.swift */; };
+		4A6788142A0CD8CE001FC9D0 /* timePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A6788132A0CD8CE001FC9D0 /* timePickerView.swift */; };
 		4A79AA3C2A08C98100D6BD28 /* MC2_OnboardingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A79AA3B2A08C98100D6BD28 /* MC2_OnboardingApp.swift */; };
 		4A79AA3E2A08C98100D6BD28 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A79AA3D2A08C98100D6BD28 /* ContentView.swift */; };
 		4A79AA402A08C98200D6BD28 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4A79AA3F2A08C98200D6BD28 /* Assets.xcassets */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A67880B2A0B629B001FC9D0 /* ImageCropView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCropView.swift; sourceTree = "<group>"; };
+		4A67880D2A0B6A10001FC9D0 /* dragCoordinateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dragCoordinateView.swift; sourceTree = "<group>"; };
+		4A6788112A0CCCB3001FC9D0 /* OnboardingAlarmTimeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingAlarmTimeView.swift; sourceTree = "<group>"; };
+		4A6788132A0CD8CE001FC9D0 /* timePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = timePickerView.swift; sourceTree = "<group>"; };
 		4A79AA382A08C98100D6BD28 /* MC2_Onboarding.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MC2_Onboarding.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A79AA3B2A08C98100D6BD28 /* MC2_OnboardingApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MC2_OnboardingApp.swift; sourceTree = "<group>"; };
 		4A79AA3D2A08C98100D6BD28 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,11 +71,15 @@
 			children = (
 				4A79AA3B2A08C98100D6BD28 /* MC2_OnboardingApp.swift */,
 				4A79AA3D2A08C98100D6BD28 /* ContentView.swift */,
+				4A67880B2A0B629B001FC9D0 /* ImageCropView.swift */,
+				4A67880D2A0B6A10001FC9D0 /* dragCoordinateView.swift */,
 				4A79AA4F2A08DA3C00D6BD28 /* Data.swift */,
 				4A79AA4B2A08CB8900D6BD28 /* OnboardingTabView.swift */,
 				4A79AA492A08CB4200D6BD28 /* OnboardingPageView.swift */,
 				4A79AA4D2A08CBF100D6BD28 /* OnboardingLastPageView.swift */,
 				4A79AA512A08E73E00D6BD28 /* OnboardingNickNameView.swift */,
+				4A6788112A0CCCB3001FC9D0 /* OnboardingAlarmTimeView.swift */,
+				4A6788132A0CD8CE001FC9D0 /* timePickerView.swift */,
 				4A79AA3F2A08C98200D6BD28 /* Assets.xcassets */,
 				4A79AA412A08C98200D6BD28 /* Preview Content */,
 			);
@@ -152,12 +164,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A67880C2A0B629B001FC9D0 /* ImageCropView.swift in Sources */,
+				4A67880E2A0B6A10001FC9D0 /* dragCoordinateView.swift in Sources */,
 				4A79AA4A2A08CB4200D6BD28 /* OnboardingPageView.swift in Sources */,
+				4A6788142A0CD8CE001FC9D0 /* timePickerView.swift in Sources */,
 				4A79AA502A08DA3C00D6BD28 /* Data.swift in Sources */,
 				4A79AA3E2A08C98100D6BD28 /* ContentView.swift in Sources */,
 				4A79AA3C2A08C98100D6BD28 /* MC2_OnboardingApp.swift in Sources */,
 				4A79AA522A08E73E00D6BD28 /* OnboardingNickNameView.swift in Sources */,
 				4A79AA4C2A08CB8900D6BD28 /* OnboardingTabView.swift in Sources */,
+				4A6788122A0CCCB3001FC9D0 /* OnboardingAlarmTimeView.swift in Sources */,
 				4A79AA4E2A08CBF100D6BD28 /* OnboardingLastPageView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

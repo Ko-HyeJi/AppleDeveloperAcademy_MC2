@@ -15,30 +15,30 @@ struct OnboardingTabView: View {
             TabView {
                 // 페이지 1: 앱 컨셉 안내
                 OnboardingPageView(
-                    title: "24",
-                    title2: "01",
+                    uppertitle: "24",
+                    lowertitle: "01",
                     subtitle: "24시간 중 단 1%\n 15분동안 정리할 곳을 정해보세요."
                 )
                 
                 // 페이지 2: 앱 사용시간 안내
                 OnboardingPageView(
-                    title: "06",
-                    title2: "00",
-                    subtitle: "오후 6시부터 12시까지\n실행가능해요\n\n*다크모드를 권장합니다*"
+                    uppertitle: "06",
+                    lowertitle: "00",
+                    subtitle: "밤정리는 오후 6시부터 밤 12시까지\n실행가능해요."
                 )
                 
                 // 페이지 3: 앱 목표
                 OnboardingPageView(
-                    title: "Better",
-                    title2: "Begin",
+                    uppertitle: "Better",
+                    lowertitle: "Begin",
                     subtitle: " 더 나은 내일을 위해\n정리된 공간을 사진으로 기록해줘요."
                     
                 )
                 
                 //페이지 4: 앱 이름공개
                 OnboardingLastPageView(
-                    title: "Night",
-                    title2: "Ritual",
+                    uppertitle: "Night",
+                    lowertitle: "Ritual",
                     subtitle: " 공간을 정리하며\n하루를 마무리하는 ",
                     
                     isFirstLaunching: $isFirstLaunching
@@ -48,7 +48,7 @@ struct OnboardingTabView: View {
     //            OnboardingNickNameView()
             }
             .tabViewStyle(PageTabViewStyle())
-        .ignoresSafeArea()
+            .edgesIgnoringSafeArea(.all)
         }
     }
 }
