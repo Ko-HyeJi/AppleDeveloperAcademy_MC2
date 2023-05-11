@@ -12,6 +12,9 @@ struct ContentView: View {
     @EnvironmentObject var viewModel: CameraViewModel
     @ObservedObject var router = Router<Path>()
     
+    @AppStorage("_isFirstLaunching") var isFirstLaunching: Bool = true
+    @AppStorage("_isSecondLaunching") var isSecondLaunching: Bool = true
+    
     var body: some View {
         NavigationStack(path: $router.paths) {
             MainView()
@@ -24,21 +27,11 @@ struct ContentView: View {
             }
         }
         .environmentObject(router)
-        .onAppear{
-            if (data.username == nil) {
-                data.isUnregistered = true
-            }
-            data.dataArr = data.loadData()
-        }
-        .fullScreenCover(isPresented: $data.isUnregistered) {
-            GetNameView()
-        }
-        .fullScreenCover(isPresented: $data.showCompareView) {
-            CompareView()
-        }
-        .fullScreenCover(isPresented: $data.showDetailView) {
-            DetailView()
-        }
+        .onAppear{ data.dataArr = data.loadData() }
+        .fullScreenCover(isPresented: $data.showCompareView) { CompareView() }
+        .fullScreenCover(isPresented: $data.showDetailView) { DetailView() }
+        .fullScreenCover(isPresented: $isFirstLaunching) { OnboardingTabView(isFirstLaunching: $isFirstLaunching) }
+        .fullScreenCover(isPresented: $isSecondLaunching) { OnboardingNickNameView(isSecondLaunching: $isSecondLaunching) }
     }
 }
 

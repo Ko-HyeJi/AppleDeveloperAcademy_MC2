@@ -10,13 +10,12 @@ import SwiftUI
 
 let defaults = UserDefaults.standard
 
-class DataModel: ObservableObject {
+class DataModel: ObservableObject {    
     @EnvironmentObject var viewModel: CameraViewModel
     
     @Published var username = defaults.string(forKey: "username")
-    
-    @Published var isUnregistered = false
     @Published var name = ""
+    @Published var notificationTime: DateComponents?
     
     @Published var beforeImage:UIImage?
     @Published var afterImage:UIImage?

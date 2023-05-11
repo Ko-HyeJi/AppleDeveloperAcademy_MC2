@@ -23,15 +23,16 @@ func RequestNotificationPermission() {
     }
 }
 
-func SendNotification() {
+func SendNotification(notificationTime: DateComponents) {
     let content = UNMutableNotificationContent()
-    content.title = "☽ Miracle Night ☽"
-//    content.subtitle = "밤정리"
-    content.body = "당신의 방을 정리할 시간입니다\n지금 정리를 시작해주세요 🧹"
+    content.title = "밤정리"
+    content.body = "새로운 하루가 시작되었어요.\n어제의 정리정돈 덕분에 오늘의 시작을 더 가볍게!"
     content.sound = UNNotificationSound.default
     
-    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-//    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(hour: 21, minute: 30), repeats: false)
+//    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+//    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(hour: 23, minute: 52), repeats: false)
+    let trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
+//    print(notificationTime)
     
     let request = UNNotificationRequest(identifier: "testNotification", content: content, trigger: trigger)
     
