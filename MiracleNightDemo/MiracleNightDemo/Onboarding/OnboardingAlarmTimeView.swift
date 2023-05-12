@@ -31,7 +31,7 @@ struct OnboardingAlarmTimeView: View {
                         .onChange(of: alarmTime) { newValue in
                             data.notificationTime = Calendar.current.dateComponents([.hour, .minute, .second], from: alarmTime)
                         }
-                }
+                }.scrollDisabled(true)
             }.padding(.top, 64)
             // 온보딩 완료 버튼.
             // AppStorage의 isSecondLaunching 값을 false로 바꾸기 때문에, 다음번에 앱을 실행할 때는 OnboardingTabView를 띄우지 않음.
@@ -70,7 +70,7 @@ struct OnboardingAlarmTimeView: View {
                 
             }
             .frame(maxHeight: .infinity, alignment: .bottom)
-            .padding(.bottom, 85)
+            .padding(.bottom, 50)
             .onAppear {
                 
                 

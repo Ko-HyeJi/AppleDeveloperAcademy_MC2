@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import AVFoundation
 
 let defaults = UserDefaults.standard
 
@@ -16,6 +17,7 @@ class DataModel: ObservableObject {
     @Published var username = defaults.string(forKey: "username")
     @Published var name = ""
     @Published var notificationTime: DateComponents?
+    @Published var isSetNotification = defaults.bool(forKey: "isSetNotification")
     
     @Published var beforeImage:UIImage?
     @Published var afterImage:UIImage?
@@ -92,7 +94,7 @@ class DataModel: ObservableObject {
     }
     
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 10 //타이머 시간 측정 변수
+    @Published var countTo: Int = 1 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
 }
@@ -151,3 +153,20 @@ enum Path {
     case B
     case C
 }
+
+//func playSound(filename: String) -> some View {
+//    var audioPlayer: AVAudioPlayer?
+//    if let path = Bundle.main.path(forResource: filename, ofType: "mp3") {
+//        let url = URL(fileURLWithPath: path)
+//        do {
+//            audioPlayer = try AVAudioPlayer(contentsOf: url)
+//        } catch {
+//            //error handler
+//        }
+//    }
+//    return(Text("").onAppear{ audioPlayer?.play() })
+//}
+//
+//func pauseSound(audioPlayer: AVAudioPlayer?) {
+//    audioPlayer?.pause()
+//}

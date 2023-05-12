@@ -23,10 +23,11 @@ struct OnboardingNickNameView: View {
                         .font(.system(size: 22, weight: .bold))
                     Form {
                         TextField("닉네임을 입력해주세요", text : $data.name)
+                            .multilineTextAlignment(.center)
                             .frame(height: 45)
-                    }
+                    }.scrollDisabled(true)
                     .frame(height: 140, alignment: .center)
-                    Text("\(data.name) 의 방문을 환영합니다")
+                    Text("\(data.name)의 방문을 환영합니다")
                         .font(.body)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)

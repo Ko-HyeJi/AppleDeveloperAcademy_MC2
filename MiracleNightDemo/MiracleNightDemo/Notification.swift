@@ -32,7 +32,6 @@ func SendNotification(notificationTime: DateComponents) {
 //    let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
 //    let trigger = UNCalendarNotificationTrigger(dateMatching: DateComponents(hour: 23, minute: 52), repeats: false)
     let trigger = UNCalendarNotificationTrigger(dateMatching: notificationTime, repeats: false)
-//    print(notificationTime)
     
     let request = UNNotificationRequest(identifier: "testNotification", content: content, trigger: trigger)
     

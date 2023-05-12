@@ -19,13 +19,13 @@ struct OnboardingLastPageView: View {
                 .edgesIgnoringSafeArea(.all)
             VStack {
                 Text(uppertitle)
-                    .font(.system(size: 120, weight: .bold))
+                    .font(Font(UIFont.systemFont(ofSize: 120, weight: .bold, width: .condensed)))
                     .foregroundColor(.white)
                     .lineSpacing(-64)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, -80)
                 Text(lowertitle)
-                    .font(.system(size: 120, weight: .bold))
+                    .font(Font(UIFont.systemFont(ofSize: 120, weight: .bold, width: .condensed)))
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
                     .padding(.bottom, 40)
@@ -49,7 +49,6 @@ struct OnboardingLastPageView: View {
                         .cornerRadius(14)
                         .padding(.top, 120)
                 }
-                .padding(.bottom, 85)
             }
             .padding(.top, 60)
         }
