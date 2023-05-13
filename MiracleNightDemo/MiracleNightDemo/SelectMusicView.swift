@@ -32,6 +32,7 @@ struct SelectMusicView: View {
                                 .padding(.trailing, 15)
                         }
                     }
+                    .padding(.top, 20)
                     HStack {
                         Text("음악과 함께하면 정리정돈이 더 즐거워져요 🎧")
                             .font(.system(size: 14))
@@ -48,7 +49,6 @@ struct SelectMusicView: View {
                     Group {
                         Button {
                             data.isMusicOn.toggle()
-                            print(data.isMusicOn)
                         } label: {
                             Image("AppleMusic")
                                 .resizable()

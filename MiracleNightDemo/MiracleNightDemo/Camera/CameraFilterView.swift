@@ -18,7 +18,7 @@ struct CameraFilterView: View {
                 Rectangle()
                     .foregroundColor(Color.black)
                     .frame(height: 160)
-                    .opacity(0.3)
+                    .opacity(0.5)
 
                 VStack {
                     ZStack {
@@ -52,7 +52,7 @@ struct CameraFilterView: View {
                 Rectangle()
                     .foregroundColor(Color.black)
                     .frame(height: 160)
-                    .opacity(0.3)
+                    .opacity(0.5)
                 
                 ShutterButtonView()
                     .foregroundColor(.white)

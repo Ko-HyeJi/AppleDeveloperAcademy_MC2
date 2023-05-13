@@ -102,7 +102,7 @@ struct CheckBeforeImageView: View {
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $bottomSheetOn) {
             SelectMusicView(bottomSheetOn: $bottomSheetOn)
-                .presentationDetents([.fraction(0.4), .large])
+                .presentationDetents([.fraction(0.4)])
                 .foregroundColor(.white)
         }
     }
