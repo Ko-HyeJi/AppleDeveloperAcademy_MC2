@@ -26,43 +26,50 @@ struct CheckBeforeImageView: View {
                         Button {
                             router.pop(to: .B)
                         } label: {
-                            Image("LessThan").padding(.leading)
+                            Image(systemName: "chevron.backward")
+                                .resizable()
+                                .frame(width: 17, height: 22)
+                                .foregroundColor(.white)
+                                .padding(.leading, 30)
                             Text("다시 찍기")
                             Spacer()
                         }
                     }
+                    .padding(.top, 20)
                     .foregroundColor(.white)
                 }
                 
-                Spacer()
-                
-                if let imageData = viewModel.recentImage?.pngData() {
-                    let beforeImage = data.convertToUIImage(from: imageData)
-                    Image(uiImage: beforeImage!)
-                        .resizable()
-                        .frame(width: 390, height: 285)
-                        .padding()
-                } else {
-    //                Text("Did not take Before Image")
-                }
-                
-                Button {
-                    bottomSheetOn = true
-                } label: {
-                    Image("MusicIcon")
-                        .resizable()
-                        .frame(width: 54, height: 54)
-                }
-                ZStack {
-                    Image("SpeechBubble")
-                        .resizable()
-                        .frame(width: 225, height: 56)
-                    Text("밤정리를 도와줄 음악을 추가해보세요")
-                        .foregroundColor(.white)
-                        .font(.system(size: 13)).padding(.top)
-                }
+                Group {
+                    Spacer()
+                    
+                    if let imageData = viewModel.recentImage?.pngData() {
+                        let beforeImage = data.convertToUIImage(from: imageData)
+                        Image(uiImage: beforeImage!)
+                            .resizable()
+                            .frame(width: 390, height: 285)
+                            .padding()
+                    } else {
+        //                Text("Did not take Before Image")
+                    }
+                    
+                    Button {
+                        bottomSheetOn = true
+                    } label: {
+                        Image("MusicIcon")
+                            .resizable()
+                            .frame(width: 54, height: 54)
+                    }
+                    ZStack {
+                        Image("SpeechBubble")
+                            .resizable()
+                            .frame(width: 225, height: 56)
+                        Text("밤정리를 도와줄 음악을 추가해보세요")
+                            .foregroundColor(.white)
+                            .font(.system(size: 13)).padding(.top)
+                    }
 
-                Spacer()
+                    Spacer()
+                }
                 
                 ZStack {
                     Rectangle().frame(height: 160).foregroundColor(.clear)
@@ -83,8 +90,8 @@ struct CheckBeforeImageView: View {
                     }
                 }
             }
+            .edgesIgnoringSafeArea(.all)
         }
-        .edgesIgnoringSafeArea(.all)
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $bottomSheetOn) {
             SelectMusicView(bottomSheetOn: $bottomSheetOn)

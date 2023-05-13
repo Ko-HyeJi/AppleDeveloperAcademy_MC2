@@ -38,7 +38,7 @@ struct CameraFilterView: View {
                             }
                         }
                     }
-                    .padding(.top, 30)
+                    .padding(.top, 50)
                     
                     Text(data.isTimeOver ? "방정리 완료 후 사진을 찍어보세요!" : "방정리 전 비포 사진을 찍어주세요!")
                         .font(.system(size: 16))

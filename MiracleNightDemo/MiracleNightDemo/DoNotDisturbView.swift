@@ -25,7 +25,7 @@ struct DoNotDisturbView: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
-                    .background(Color(.black))
+//                    .background(Color(.black))
             } else {
 //                Text("Did not take Before Image")
             }
@@ -52,7 +52,7 @@ struct DoNotDisturbView: View {
                                 }
                             }
                         }
-                        .padding(.top, 30)
+                        .padding(.top, 50)
                         
                         Text(isButtonEnabled ? "이제 밤정리 후 사진을 찍을 수 있어요📸" : "지금은 밤정리 중🌙")
                             .font(.system(size: 16))
@@ -61,6 +61,7 @@ struct DoNotDisturbView: View {
                 }
                 
                 Group {
+                    Spacer()
                     Spacer()
                     
                     VStack(spacing:-15){
@@ -72,6 +73,7 @@ struct DoNotDisturbView: View {
                     .foregroundColor(Color.white)
 
 
+                    Spacer()
                     Spacer()
 
                     Button {
