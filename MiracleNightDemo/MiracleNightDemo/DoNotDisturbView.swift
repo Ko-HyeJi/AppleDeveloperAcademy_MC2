@@ -48,7 +48,7 @@ struct DoNotDisturbView: View {
                                     Image("ExitButton")
                                         .resizable()
                                         .frame(width: 30, height: 30)
-                                        .padding(.trailing, 15)
+                                        .padding(.trailing, 30)
                                 }
                             }
                         }
@@ -104,6 +104,7 @@ struct DoNotDisturbView: View {
                     }.disabled(!isButtonEnabled)
                 }
             }
+            .edgesIgnoringSafeArea(.all)
             .onReceive(timer) { _ in
                 timerSeconds += 1
                 if timerSeconds >= data.countTo { // 15분=900초 (60초 * 15분)
@@ -113,7 +114,6 @@ struct DoNotDisturbView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
-        .edgesIgnoringSafeArea(.all)
         .onAppear {
             data.counter = 0
             data.isTimerOn = true
