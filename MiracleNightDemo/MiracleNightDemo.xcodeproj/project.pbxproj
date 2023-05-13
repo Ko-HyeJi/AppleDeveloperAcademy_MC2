@@ -11,7 +11,6 @@
 		8B881A0F2A0BB4E200CE0F75 /* CheckProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B881A0D2A0BB4E200CE0F75 /* CheckProgressView.swift */; };
 		8B941E092A0A0CFF00B5E153 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B941E082A0A0CFF00B5E153 /* CompareView.swift */; };
 		8BB625812A02739500DB2EA8 /* MiracleNightDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB625802A02739500DB2EA8 /* MiracleNightDemoApp.swift */; };
-		8BB625852A02739600DB2EA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB625842A02739600DB2EA8 /* Assets.xcassets */; };
 		8BB625882A02739600DB2EA8 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BB625872A02739600DB2EA8 /* Preview Assets.xcassets */; };
 		8BB625942A0273CD00DB2EA8 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB625902A0273CD00DB2EA8 /* Notification.swift */; };
 		8BB625992A02740700DB2EA8 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BB625962A02740700DB2EA8 /* Camera.swift */; };
@@ -30,6 +29,9 @@
 		8BE16F1B2A0DFD1800D3FE0A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16F1A2A0DFD1800D3FE0A /* MainView.swift */; };
 		8BE16F1D2A0DFECC00D3FE0A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16F1C2A0DFECC00D3FE0A /* DetailView.swift */; };
 		8BE16F202A0E0C3000D3FE0A /* music.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8BE16F1F2A0E0C3000D3FE0A /* music.mp3 */; };
+		8BE16F262A0F4CA900D3FE0A /* CheckBeforeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16F252A0F4CA900D3FE0A /* CheckBeforeImageView.swift */; };
+		8BE16F282A0F4CBC00D3FE0A /* SelectMusicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16F272A0F4CBC00D3FE0A /* SelectMusicView.swift */; };
+		8BE16F2A2A0F517E00D3FE0A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8BE16F292A0F517E00D3FE0A /* Assets.xcassets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,7 +40,6 @@
 		8B941E082A0A0CFF00B5E153 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
 		8BB6257D2A02739500DB2EA8 /* MiracleNightDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiracleNightDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB625802A02739500DB2EA8 /* MiracleNightDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiracleNightDemoApp.swift; sourceTree = "<group>"; };
-		8BB625842A02739600DB2EA8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8BB625872A02739600DB2EA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8BB625902A0273CD00DB2EA8 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		8BB625962A02740700DB2EA8 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -58,6 +59,9 @@
 		8BE16F1C2A0DFECC00D3FE0A /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		8BE16F1F2A0E0C3000D3FE0A /* music.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music.mp3; sourceTree = "<group>"; };
 		8BE16F232A0E0F8000D3FE0A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		8BE16F252A0F4CA900D3FE0A /* CheckBeforeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBeforeImageView.swift; sourceTree = "<group>"; };
+		8BE16F272A0F4CBC00D3FE0A /* SelectMusicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMusicView.swift; sourceTree = "<group>"; };
+		8BE16F292A0F517E00D3FE0A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +78,7 @@
 		8BB625742A02739500DB2EA8 = {
 			isa = PBXGroup;
 			children = (
+				8BE16F292A0F517E00D3FE0A /* Assets.xcassets */,
 				8BB6257F2A02739500DB2EA8 /* MiracleNightDemo */,
 				8BB6257E2A02739500DB2EA8 /* Products */,
 			);
@@ -99,11 +104,12 @@
 				8BB8F1C02A039D9900EAADD9 /* TimerView.swift */,
 				8BB8F1C22A04E31400EAADD9 /* DoNotDisturbView.swift */,
 				8B941E082A0A0CFF00B5E153 /* CompareView.swift */,
+				8BE16F252A0F4CA900D3FE0A /* CheckBeforeImageView.swift */,
+				8BE16F272A0F4CBC00D3FE0A /* SelectMusicView.swift */,
 				8BE16F242A0E250E00D3FE0A /* Progress */,
 				8BB8F1BF2A039D6900EAADD9 /* Onboarding */,
 				8BB6259C2A02740E00DB2EA8 /* Camera */,
 				8BE16F1E2A0E0C1600D3FE0A /* Resources */,
-				8BB625842A02739600DB2EA8 /* Assets.xcassets */,
 				8BB625862A02739600DB2EA8 /* Preview Content */,
 			);
 			path = MiracleNightDemo;
@@ -217,8 +223,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				8BB625882A02739600DB2EA8 /* Preview Assets.xcassets in Resources */,
+				8BE16F2A2A0F517E00D3FE0A /* Assets.xcassets in Resources */,
 				8BE16F202A0E0C3000D3FE0A /* music.mp3 in Resources */,
-				8BB625852A02739600DB2EA8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +235,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BE16F282A0F4CBC00D3FE0A /* SelectMusicView.swift in Sources */,
 				8BB625942A0273CD00DB2EA8 /* Notification.swift in Sources */,
 				8BE16F1B2A0DFD1800D3FE0A /* MainView.swift in Sources */,
 				8BB6259E2A02962200DB2EA8 /* ContentView.swift in Sources */,
@@ -242,6 +249,7 @@
 				8B881A0E2A0BB4E200CE0F75 /* ProgressBarView.swift in Sources */,
 				8BE16EFE2A0D087900D3FE0A /* OnboardingLastPageView.swift in Sources */,
 				8BE16EFD2A0D087900D3FE0A /* OnboardingNickNameView.swift in Sources */,
+				8BE16F262A0F4CA900D3FE0A /* CheckBeforeImageView.swift in Sources */,
 				8BB625A02A029FDA00DB2EA8 /* Data.swift in Sources */,
 				8B881A0F2A0BB4E200CE0F75 /* CheckProgressView.swift in Sources */,
 				8BE16EFC2A0D087900D3FE0A /* OnboardingPageView.swift in Sources */,

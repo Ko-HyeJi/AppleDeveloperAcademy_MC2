@@ -355,44 +355,9 @@ struct CameraView: View {
     
     var body: some View {
         ZStack {
-            viewModel.cameraPreview.ignoresSafeArea()
+            viewModel.cameraPreview
+                .ignoresSafeArea()
                 .onAppear {viewModel.configure()}
-            VStack {
-                Spacer()
-                HStack{
-                    Spacer()
-                    
-                    
-                    if (!data.isTimeOver) { // before 사진 찍어야 할 때
-                        Button {
-                            router.push(.C)
-                            viewModel.capturePhoto()
-                            data.beforeImage = viewModel.recentImage
-                        } label: {
-                            Image(systemName: "button.programmable")
-                                .resizable()
-                                .frame(width: 75, height: 75)
-                                .padding()
-                        }
-                                                
-                    } else { // after 사진 찍어야 할 때
-                        Button {
-                            router.popToRoot()
-                            viewModel.capturePhoto()
-                            data.isDone = true
-                            data.showCompareView = true
-                        } label: {
-                            Image(systemName: "button.programmable")
-                                .resizable()
-                                .frame(width: 75, height: 75)
-                                .padding()
-                        }
-                    }
-                    Spacer()
-                }
-                .padding(.init(70))
-            }
-            .foregroundColor(.white)
             
             CameraFilterView()
             

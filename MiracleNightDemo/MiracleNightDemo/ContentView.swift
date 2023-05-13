@@ -23,7 +23,8 @@ struct ContentView: View {
                 switch path {
                 case .A: MainView()
                 case .B: CameraView()
-                case .C: DoNotDisturbView()
+                case .C: CheckBeforeImageView()
+                case .D: DoNotDisturbView()
                 }
             }
         }

@@ -90,7 +90,7 @@ struct HorizontalScrollView: View {
             ScrollViewReader { scrollViewProxy in
                 ZStack(alignment: .topLeading) {
                     HStack {
-                        ForEach(0..<dayCount) { index in
+                        ForEach(0 ..< dayCount) { index in
                             Circle()
                                 .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "979797"), lineWidth: 1)
                                 .frame(width: 36, height: 36)
@@ -111,8 +111,6 @@ struct HorizontalScrollView: View {
                         }
                     }
                     .onAppear {
-//                        activatedCount = data.loadData().count
-//                        clearedCount = data.loadData().count
                         clearedCount = data.dataArr.count
                     }
                     .onReceive(Just(scrollToIndex)) { index in
