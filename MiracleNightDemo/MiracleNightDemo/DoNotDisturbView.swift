@@ -77,9 +77,9 @@ struct DoNotDisturbView: View {
                     Spacer()
 
                     Button {
-                        // action
+                        data.isMusicOn.toggle()
                     } label: {
-                        Image("Play")
+                        Image(data.isMusicOn ? "Play" : "Pause")
                             .resizable()
                             .frame(width: 54, height: 54)
                     }

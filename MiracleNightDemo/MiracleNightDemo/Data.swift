@@ -97,6 +97,8 @@ class DataModel: ObservableObject {
     @Published var countTo: Int = 10 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
+    
+    @Published var isMusicOn = false
 }
 
 struct DailyData: Codable {

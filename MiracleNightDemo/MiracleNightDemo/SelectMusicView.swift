@@ -10,16 +10,10 @@ import AVFoundation
 
 
 struct SelectMusicView: View {
-    @State var playMusic = false
-    @State private var audioPlayer: AVAudioPlayer?
+    @EnvironmentObject var data: DataModel
     @Binding var bottomSheetOn: Bool
         
     var body: some View {
-        if (playMusic) {
-            playSound(filename: "music")
-        } else {
-            pauseSound()
-        }
         ZStack {
             Color(hex: "1C1C1E").edgesIgnoringSafeArea(.all)
             VStack {
@@ -53,7 +47,8 @@ struct SelectMusicView: View {
                     //반복문 사용해서 코드 줄이기
                     Group {
                         Button {
-                            //action
+                            data.isMusicOn.toggle()
+                            print(data.isMusicOn)
                         } label: {
                             Image("AppleMusic")
                                 .resizable()
@@ -79,51 +74,8 @@ struct SelectMusicView: View {
                 Spacer()
             }
             .foregroundColor(.white)
-            
-            
-//            VStack {
-//                Text("몰입감을 높여주는 음악을 추가해보세요.").font(.title2).foregroundColor(.white)
-//                Text("음악과 함께하면 집중도가 높아져요!").foregroundColor(.white).padding()
-//
-//                ZStack {
-//                    Rectangle()
-//                        .cornerRadius(20)
-//                        .foregroundColor(Color(hex: "1C1C1E"))
-//                        .frame(width: 350, height: 100)
-//                    HStack {
-//                        Spacer()
-//                        Image("AppleMusic").resizable().frame(width: 60, height: 60)
-//                        Text("Apple Music").foregroundColor(.white)
-//                        Spacer()
-//                        Button {
-//                            playMusic.toggle()
-//                        } label: {
-//                            Image("PlayButton").resizable().frame(width: 66, height: 28)
-//                        }
-//                        Spacer()
-//                    }
-//                }
-//            }
         }
     }
-    
-    func playSound(filename: String) -> some View {
-        var audioPlayer: AVAudioPlayer?
-        if let path = Bundle.main.path(forResource: filename, ofType: "mp3") {
-            let url = URL(fileURLWithPath: path)
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-            } catch {
-                //error handler
-            }
-        }
-        return(Text("").onAppear{ audioPlayer?.play() })
-    }
-
-    func pauseSound() -> some View {
-        return(Text("").onAppear{ audioPlayer?.pause() })
-    }
-
 }
 
 //struct SelectMusicView_Previews: PreviewProvider {
