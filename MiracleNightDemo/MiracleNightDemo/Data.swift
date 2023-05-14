@@ -11,7 +11,45 @@ import AVFoundation
 
 let defaults = UserDefaults.standard
 
-class DataModel: ObservableObject {    
+class DataModel: ObservableObject {
+    private var audioPlayer: AVAudioPlayer?
+    
+    @Published var isMusicOn = false
+    @Published var currentTime: TimeInterval = 0
+
+    init() {
+        configureAudioSession()
+    }
+
+    func configureAudioSession() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+        } catch {
+            print("오디오 세션 설정에 실패했습니다.")
+        }
+    }
+    
+    func playMusic() {
+        if let path = Bundle.main.path(forResource: "music", ofType: "mp3") {
+            do {
+                let url = URL(fileURLWithPath: path)
+                audioPlayer = try AVAudioPlayer(contentsOf: url)
+                audioPlayer?.currentTime = currentTime
+                audioPlayer?.play()
+                isMusicOn = true
+            } catch {
+                print("음악 재생에 실패했습니다.")
+            }
+        }
+    }
+
+    func pauseMusic() {
+        audioPlayer?.pause()
+        currentTime = audioPlayer?.currentTime ?? 0
+        isMusicOn = false
+    }
+    
     @EnvironmentObject var viewModel: CameraViewModel
     
     @Published var username = defaults.string(forKey: "username")
@@ -97,8 +135,6 @@ class DataModel: ObservableObject {
     @Published var countTo: Int = 10 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
-    
-    @Published var isMusicOn = false
 }
 
 struct DailyData: Codable {
@@ -157,19 +193,22 @@ enum Path {
     case D
 }
 
-//func playSound(filename: String) -> some View {
-//    var audioPlayer: AVAudioPlayer?
-//    if let path = Bundle.main.path(forResource: filename, ofType: "mp3") {
-//        let url = URL(fileURLWithPath: path)
-//        do {
-//            audioPlayer = try AVAudioPlayer(contentsOf: url)
-//        } catch {
-//            //error handler
+//class AudioPlayer: ObservableObject {
+//    private var audioPlayer: AVAudioPlayer?
+//
+//    func playMusic() {
+//        if let path = Bundle.main.path(forResource: "music", ofType: "mp3") {
+//            do {
+//                let url = URL(fileURLWithPath: path)
+//                audioPlayer = try AVAudioPlayer(contentsOf: url)
+//                audioPlayer?.play()
+//            } catch {
+//                print("음악 재생에 실패했습니다.")
+//            }
 //        }
 //    }
-//    return(Text("").onAppear{ audioPlayer?.play() })
-//}
 //
-//func pauseSound(audioPlayer: AVAudioPlayer?) {
-//    audioPlayer?.pause()
+//    func pauseMusic() {
+//        audioPlayer?.pause()
+//    }
 //}

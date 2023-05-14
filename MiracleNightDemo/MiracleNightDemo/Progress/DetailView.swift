@@ -43,7 +43,10 @@ struct DetailView: View {
                         }
                         .padding(.top, 50)
                         
-                        Text("2023.05.06 정리를 완료했어요 🎉")
+                        let dateFormatter = DateFormatter()
+                        let _ = dateFormatter.dateFormat = "yyyy.MM.dd"
+                        let date = data.dataArr[data.selectedIndex].date
+                        Text(dateFormatter.string(from: date) + " 정리를 완료했어요 🎉")
                             .font(.system(size: 16))
                             .foregroundColor(.white)
                     }
@@ -84,10 +87,12 @@ struct SlideMaskView: View {
             }
             
             Text("Before")
-            .foregroundColor(Color.white)
-            .background(Color.black .opacity(0.2))
-            .padding(.top, 200)
-            .padding(.leading, -180)
+                .font(.system(size: 15))
+                .frame(width: 67, height: 28)
+                .foregroundColor(Color.white)
+                .background(RoundedRectangle(cornerRadius: 15).fill(.black).opacity(0.5))
+                .padding(.top, 180)
+                .padding(.leading, -180)
                 
             
             if data.selectedIndex < data.dataArr.count {
@@ -107,9 +112,11 @@ struct SlideMaskView: View {
                 }
 
             Text("After")
+                .font(.system(size: 15))
+                .frame(width: 56, height: 28)
                 .foregroundColor(Color.white)
-                .background(Color.black .opacity(0.2))
-                .padding(.bottom, 200)
+                .background(RoundedRectangle(cornerRadius: 15).fill(.black).opacity(0.5))
+                .padding(.bottom, 180)
                 .padding(.leading, -180)
                 .mask(
                     Rectangle()

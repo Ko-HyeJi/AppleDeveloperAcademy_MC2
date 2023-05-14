@@ -13,14 +13,8 @@ struct CheckBeforeImageView: View {
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
     @State private var bottomSheetOn = false
-    @State var audioPlayer: AVAudioPlayer?
     
     var body: some View {
-        if (data.isMusicOn) {
-            playSound(filename: "music")
-        } else {
-            pauseSound()
-        }
         ZStack {
             Color(hex: "1C1C1E").edgesIgnoringSafeArea(.all)
             
@@ -105,23 +99,6 @@ struct CheckBeforeImageView: View {
                 .presentationDetents([.fraction(0.4)])
                 .foregroundColor(.white)
         }
-    }
-    
-    func playSound(filename: String) -> some View {
-        var audioPlayer: AVAudioPlayer?
-        if let path = Bundle.main.path(forResource: filename, ofType: "mp3") {
-            let url = URL(fileURLWithPath: path)
-            do {
-                audioPlayer = try AVAudioPlayer(contentsOf: url)
-            } catch {
-                //error handler
-            }
-        }
-        return(Text("").onAppear{ audioPlayer?.play() })
-    }
-
-    func pauseSound() -> some View {
-        return(Text("").onAppear{ audioPlayer?.pause() })
     }
 }
 

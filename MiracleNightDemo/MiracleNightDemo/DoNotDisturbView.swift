@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AVFoundation
 
 struct DoNotDisturbView: View {
     @State private var timerSeconds = 0
@@ -25,7 +26,6 @@ struct DoNotDisturbView: View {
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
                     .opacity(0.3)
-//                    .background(Color(.black))
             } else {
 //                Text("Did not take Before Image")
             }
@@ -77,7 +77,11 @@ struct DoNotDisturbView: View {
                     Spacer()
 
                     Button {
-                        data.isMusicOn.toggle()
+                        if (data.isMusicOn) {
+                            data.pauseMusic()
+                        } else {
+                            data.playMusic()
+                        }
                     } label: {
                         Image(data.isMusicOn ? "Play" : "Pause")
                             .resizable()
