@@ -21,8 +21,16 @@ struct OnboardingAlarmTimeView: View {
                 Text("언제 알람받기를 원하시나요?").font(.system(size: 22, weight: .bold))
                 
                 let dateFormatter = DateFormatter()
-                let _ = dateFormatter.dateFormat = "hh:mm a"
-                Text(dateFormatter.string(from: alarmTime)).frame(alignment: .leading).padding()
+                let _ = dateFormatter.dateFormat = "h:mm a"
+                HStack {
+                    Text(dateFormatter.string(from: alarmTime))
+                        .font(.system(size: 17))
+                        .frame(alignment: .leading)
+                        .padding([.top, .leading])
+                    Spacer()
+                }
+                Divider()
+                    .foregroundColor(Color(hex: "545458"))
                 
                 Form {
                     DatePicker("Please enter a date", selection: $alarmTime, displayedComponents: .hourAndMinute)

@@ -17,8 +17,9 @@ struct MainView: View {
             
             VStack {
                 Spacer()
+                SettingButtonView()
                 MessageView()
-                Spacer()
+                Spacer(minLength: 150)
                 
                 Button {
                     router.push(.B)
@@ -27,36 +28,54 @@ struct MainView: View {
                 }
                 .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
                 
-                Spacer(minLength: 300)
+                Spacer(minLength: 350)
             }
             
             ProgressBarView()
+                .padding(.bottom, 30)
         }
     }
 }
 
+struct SettingButtonView: View {
+    var body: some View {
+        Button {
+            // action
+        } label: {
+            HStack {
+                Spacer()
+                Image(systemName: "gearshape")
+                    .resizable()
+                    .frame(width: 20, height: 20)
+                    .foregroundColor(.white)
+                    .padding()
+            }
+            .padding(.top, 30)
+        }
+    }
+}
 
 struct MessageView: View {
     @EnvironmentObject var data: DataModel
     
     var body: some View {
         if (data.username != nil) { //두번째 이후
-            Text(data.username! + "님 환영합니다!").font(.title2).foregroundColor(.white).bold()
+            Text(data.username! + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
         } else { //처음 앱 사용할 때
-            Text(data.name + "님 환영합니다!").font(.title2).foregroundColor(.white).bold()
+            Text(data.name + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
         }
 
         
         if (!data.isDone){
             let msgArr = ["아래 버튼을 눌러 방정리를 시작해보세요!", "오늘 정리할 곳을 정하고", "당신의 방정리를 사진으로 남겨보세요"]
             RotatingMessagesView(msgArr: msgArr)
-                .font(.title2)
+                .font(.system(size: 16))
                 .foregroundColor(.white)
                 .padding()
         } else {
             let msgArr = ["내일 6PM에 다시 만나요!"]
             RotatingMessagesView(msgArr: msgArr)
-                .font(.title2)
+                .font(.system(size: 16))
                 .foregroundColor(.white)
                 .padding()
         }
@@ -75,7 +94,7 @@ struct RotatingMessagesView: View {
                 .font(.body)
                 .onAppear {
                     // `Timer`를 시작
-                    self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                    self.timer = Timer.scheduledTimer(withTimeInterval: 1.5, repeats: true) { timer in
                         self.currentMsgIdx = (self.currentMsgIdx + 1) % self.msgArr.count
                     }
                 }
@@ -94,20 +113,19 @@ struct ButtonView: View {
     var body: some View {
         if (data.isDone) {
             ZStack {
-                Circle().stroke(lineWidth: 15).frame(width: 160, height: 160).foregroundColor(Color(hex: "6E6E6E"))
-                Image("Moon1").resizable().frame(width: 165, height: 165)
+                Circle().stroke(lineWidth: 10).frame(width: 115, height: 115).foregroundColor(Color(hex: "6E6E6E"))
+                Image("Moon1").resizable().frame(width: 120, height: 120)
                 Image("X").resizable().frame(width: 40, height: 40)
             }
         } else if (data.isTimerOn) {
             ZStack {
-//                Circle().stroke(lineWidth: 15).frame(width: 160, height: 160).foregroundColor(Color(hex: "3F3F3F"))
                 CountdownView()
-                Image("Moon3").resizable().frame(width: 165, height: 165)
+                Image("Moon3").resizable().frame(width: 120, height: 120)
             }
         } else {
             ZStack {
-                Circle().stroke(lineWidth: 15).frame(width: 160, height: 160).foregroundColor(Color(hex: "3F3F3F"))
-                Image("Moon2").resizable().frame(width: 165, height: 165)
+                Circle().stroke(lineWidth: 10).frame(width: 115, height: 115).foregroundColor(Color(hex: "3F3F3F"))
+                Image("Moon2").resizable().frame(width: 120, height: 120)
                 Image("Cross").resizable().frame(width: 40, height: 40)
             }
         }

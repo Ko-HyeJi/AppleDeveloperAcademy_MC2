@@ -15,7 +15,6 @@ struct ProgressBarView: View {
         @State var countDay: Int = 2
         @State var currentGoal: Int = 7
         @State var progress: Double = Double(calcCountDay(currentGoal: calcCurrentGoal())) / Double(calcCurrentGoal())
-//        @State var progressText: String = "첫 방정리를 기다리고 있어요"
 
         VStack(alignment: .center) {
             Spacer()
@@ -64,8 +63,6 @@ struct ProgressBarView: View {
                     }
             }
             .padding()
-//            .position(x: size.width / 2, y: size.height / 2)
-//        }
     }
     
     func calcCurrentGoal() -> Int {

@@ -13,12 +13,7 @@ let timer = Timer
 
 struct ProgressTrack: View {
     var body: some View {
-        Circle()
-            .fill(Color.clear)
-            .frame(width: 160, height: 160)
-            .overlay(
-                Circle().stroke(Color(hex: "3F3F3F"), lineWidth: 15)
-        )
+        Circle().stroke(lineWidth: 10).frame(width: 115, height: 115).foregroundColor(Color(hex: "3F3F3F"))
     }
 }
 
@@ -29,27 +24,22 @@ struct ProgressBar: View {
     var body: some View {
         Circle()
             .fill(Color.clear)
-            .frame(width: 160, height: 160)
+            .frame(width: 115, height: 115)
             .overlay(
-                Circle().trim(from:0, to: progress())
+                Circle().trim(from: 0, to: progress())
                     .stroke(
                         style: StrokeStyle(
-                            lineWidth: 15,
+                            lineWidth: 10,
                             lineCap: .round,
                             lineJoin:.round
                         )
                 )
                     .foregroundColor(
                         Color(hex: "5E5CE6")
-//                        (completed() ? Color(hex: "5E5CE6") : Color.white)
                 ).animation(
                     .easeInOut(duration: 0.2)
                 )
         )
-    }
-    
-    func completed() -> Bool {
-        return progress() == 1
     }
     
     func progress() -> CGFloat {
@@ -68,9 +58,7 @@ struct CountdownView: View {
                 ProgressBar(counter: counter, countTo: data.countTo)
             }
         }
-        .onAppear {
-            counter = data.counter
-        }
+        .onAppear { counter = data.counter }
         .onReceive(timer) { time in
             if (self.counter < data.countTo) {
                 self.counter += 1

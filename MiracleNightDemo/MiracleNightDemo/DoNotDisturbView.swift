@@ -25,6 +25,7 @@ struct DoNotDisturbView: View {
                     .resizable()
                     .scaledToFill()
                     .edgesIgnoringSafeArea(.all)
+                    .background(Color.black)
                     .opacity(0.3)
             } else {
 //                Text("Did not take Before Image")
@@ -54,7 +55,7 @@ struct DoNotDisturbView: View {
                         }
                         .padding(.top, 50)
                         
-                        Text(isButtonEnabled ? "이제 밤정리 후 사진을 찍을 수 있어요📸" : "지금은 밤정리 중🌙")
+                        Text(isButtonEnabled ? "이제 밤정리 후 사진을 찍을 수 있어요 📸" : "지금은 밤정리 중 🌙")
                             .font(.system(size: 16))
                             .foregroundColor(.white)
                     }

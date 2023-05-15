@@ -137,11 +137,11 @@
 		8BB8F1BF2A039D6900EAADD9 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				8BE16EF62A0D087900D3FE0A /* OnboardingAlarmTimeView.swift */,
+				8BE16EFA2A0D087900D3FE0A /* OnboardingTabView.swift */,
+				8BE16EF72A0D087900D3FE0A /* OnboardingPageView.swift */,
 				8BE16EF92A0D087900D3FE0A /* OnboardingLastPageView.swift */,
 				8BE16EF82A0D087900D3FE0A /* OnboardingNickNameView.swift */,
-				8BE16EF72A0D087900D3FE0A /* OnboardingPageView.swift */,
-				8BE16EFA2A0D087900D3FE0A /* OnboardingTabView.swift */,
+				8BE16EF62A0D087900D3FE0A /* OnboardingAlarmTimeView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";

@@ -37,6 +37,7 @@ struct ContentView: View {
             } catch {
                 print("오디오 세션 설정에 실패했습니다: \(error)")
             }
+            defaults.set(false, forKey: "isSetNotification")
         }
         .fullScreenCover(isPresented: $data.showCompareView) { CompareView() }
         .fullScreenCover(isPresented: $data.showDetailView) { DetailView() }

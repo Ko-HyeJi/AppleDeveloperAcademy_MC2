@@ -34,7 +34,9 @@ struct CheckProgressView: View {
                 Button(action: {
                     presentationMode.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "chevron.backward")
+                    Image("ExitButton")
+                        .resizable()
+                        .frame(width: 30, height: 30)
                         .foregroundColor(.white)
                         .padding(.bottom)
                         .padding(.leading)

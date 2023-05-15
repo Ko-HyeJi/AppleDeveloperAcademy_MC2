@@ -9,7 +9,6 @@ import SwiftUI
 import AVFoundation
 
 struct SelectMusicView: View {
-    @EnvironmentObject var data: DataModel
     @Binding var bottomSheetOn: Bool
         
     var body: some View {
@@ -32,70 +31,20 @@ struct SelectMusicView: View {
                         }
                     }
                     .padding(.top, 20)
+                    
                     HStack {
                         Text("음악과 함께하면 정리정돈이 더 즐거워져요 🎧")
                             .font(.system(size: 14))
                             .padding(.leading, 15)
                         Spacer()
                     }
+                    
                     Divider()
-                        .background(Color.white)
+                        .background(Color(hex: "545458"))
                         .padding([.top, .bottom], 15)
                 }
                 
-                HStack {
-                    //반복문 사용해서 코드 줄이기
-                    Group {
-                        Button {
-                            if let appleMusicURL = URL(string: "music://") {
-                                if UIApplication.shared.canOpenURL(appleMusicURL) {
-                                    UIApplication.shared.open(appleMusicURL, options: [:], completionHandler: nil)
-                                } else {
-                                    if let appStoreURL = URL(string: "https://apps.apple.com/kr/app/apple-music/id1108187390") {
-                                        UIApplication.shared.open(appStoreURL, options: [:], completionHandler: nil)
-                                    }
-                                }
-                            }
-                            bottomSheetOn = false
-                        } label: {
-                            Image("AppleMusic")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        }
-                        Button {
-                            if let melonURL = URL(string: "melon://") {
-                                if UIApplication.shared.canOpenURL(melonURL) {
-                                    UIApplication.shared.open(melonURL, options: [:], completionHandler: nil)
-                                } else {
-                                    if let appStoreURL = URL(string: "https://apps.apple.com/kr/app/%EB%A9%9C%EB%A1%A0-melon/id415597317") {
-                                        UIApplication.shared.open(appStoreURL, options: [:], completionHandler: nil)
-                                    }
-                                }
-                            }
-                            bottomSheetOn = false
-                        } label: {
-                            Image("Melon")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        }
-                        Button {
-                            if let spotifyURL = URL(string: "spotify://") {
-                                if UIApplication.shared.canOpenURL(spotifyURL) {
-                                    UIApplication.shared.open(spotifyURL, options: [:], completionHandler: nil)
-                                } else {
-                                    if let appStoreURL = URL(string: "https://apps.apple.com/kr/app/spotify-%EC%8A%A4%ED%8F%AC%ED%8B%B0%ED%8C%8C%EC%9D%B4-%EB%AE%A4%EC%A7%81-%ED%8C%9F%EC%BA%90%EC%8A%A4%ED%8A%B8-%EC%95%B1/id324684580") {
-                                        UIApplication.shared.open(appStoreURL, options: [:], completionHandler: nil)
-                                    }
-                                }
-                            }
-                            bottomSheetOn = false
-                        } label: {
-                            Image("Spotify")
-                                .resizable()
-                                .frame(width: 60, height: 60)
-                        }
-                    }.padding(.trailing, 20)
-                }.frame(width: 360, alignment: .leading)
+                MusicAppView(bottomSheetOn: $bottomSheetOn)
                 
                 Spacer()
             }
@@ -104,9 +53,41 @@ struct SelectMusicView: View {
     }
 }
 
-//struct SelectMusicView_Previews: PreviewProvider {
-//    @Binding var bottomSheetOn: Bool
-//    static var previews: some View {
-//        SelectMusicView(bottomSheetOn: $bottomSheetOn)
-//    }
-//}
+struct MusicAppView: View {
+    @Binding var bottomSheetOn: Bool
+    
+    let musicApps: [MusicApp] = [
+        MusicApp(appIcon: "AppleMusic", appURL: "music://", appStoreURL: "apple-music/id1108187390"),
+        MusicApp(appIcon: "Melon", appURL: "melon://", appStoreURL: "%EB%A9%9C%EB%A1%A0-melon/id415597317"),
+        MusicApp(appIcon: "Spotify", appURL: "spotify://", appStoreURL: "spotify-%EC%8A%A4%ED%8F%AC%ED%8B%B0%ED%8C%8C%EC%9D%B4-%EB%AE%A4%EC%A7%81-%ED%8C%9F%EC%BA%90%EC%8A%A4%ED%8A%B8-%EC%95%B1/id324684580")]
+    
+    var body: some View {
+        HStack {
+            ForEach(musicApps, id: \.self.appIcon) { app in
+                Button {
+                    if let appURL = URL(string: app.appURL) {
+                        if UIApplication.shared.canOpenURL(appURL) {
+                            UIApplication.shared.open(appURL, options: [:], completionHandler: nil)
+                        } else {
+                            if let appStoreURL = URL(string: ("https://apps.apple.com/kr/app/" + app.appStoreURL)) {
+                                UIApplication.shared.open(appStoreURL, options: [:], completionHandler: nil)
+                            }
+                        }
+                    }
+                    bottomSheetOn = false
+                } label: {
+                    Image(app.appIcon)
+                        .resizable()
+                        .frame(width: 60, height: 60)
+                }
+            }.padding(.trailing, 20)
+        }.frame(width: 360, alignment: .leading)
+    }
+}
+
+struct MusicApp {
+    let appIcon: String
+    let appURL: String
+    let appStoreURL: String
+}
+

@@ -59,6 +59,7 @@ struct CheckBeforeImageView: View {
                         Image("MusicIcon")
                             .resizable()
                             .frame(width: 54, height: 54)
+                            .padding(.top)
                     }
                     ZStack {
                         Image("SpeechBubble")
@@ -96,7 +97,7 @@ struct CheckBeforeImageView: View {
         .navigationBarBackButtonHidden(true)
         .sheet(isPresented: $bottomSheetOn) {
             SelectMusicView(bottomSheetOn: $bottomSheetOn)
-                .presentationDetents([.fraction(0.4)])
+                .presentationDetents([.fraction(0.37), .fraction(0.371)])
                 .foregroundColor(.white)
         }
     }
