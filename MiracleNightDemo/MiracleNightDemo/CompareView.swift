@@ -64,17 +64,24 @@ struct CompareView: View {
         }
         .onTapGesture {
             data.showCompareView = false
+
+            if (!data.isSaved) {
+                let _ = data.afterImage = viewModel.recentImage
+                let _ = data.saveDataToUserDefaults()
+                let _ = data.isSaved = true
+            }
+
 //            if (data.isSetNotification == false) {
 //                SendNotification(notificationTime: data.notificationTime!) //일단 임시로 여기에 옮겨둠... 첫 번째 방정리를 끝낸 다음에 알림을 받는게 좋으니깐 전혀 틀린건 아닐지도..?
 //                defaults.set(true, forKey: "isSetNotification")
 //            }
         }
         .onDisappear {
-            if (!data.isSaved) {
-                let _ = data.afterImage = viewModel.recentImage
-                let _ = data.saveDataToUserDefaults()
-                let _ = data.isSaved = true
-            }
+//            if (!data.isSaved) {
+//                let _ = data.afterImage = viewModel.recentImage
+//                let _ = data.saveDataToUserDefaults()
+//                let _ = data.isSaved = true
+//            }
         }
     }
 }

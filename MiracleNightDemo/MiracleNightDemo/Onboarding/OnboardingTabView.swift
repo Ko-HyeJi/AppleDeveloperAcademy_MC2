@@ -17,7 +17,7 @@ struct OnboardingTabView: View {
                 OnboardingPageView(
                     uppertitle: "24",
                     lowertitle: "01",
-                    subtitle: "24시간 중 단 1%\n 15분동안 정리할 곳을 정해보세요."
+                    subtitle: "24시간 중 단 1%\n 5분동안 정리할 곳을 정해보세요."
                 )
                 
                 // 페이지 2: 앱 사용시간 안내

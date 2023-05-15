@@ -364,6 +364,11 @@ struct CameraView: View {
         }
         .opacity(viewModel.shutterEffect ? 0 : 1)
         .navigationBarBackButtonHidden(true)
+        .onAppear {
+            if data.isMusicOn {
+                data.pauseMusic()
+            }
+        }
     }
 }
 

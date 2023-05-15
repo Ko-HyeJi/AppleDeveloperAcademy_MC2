@@ -33,6 +33,10 @@ struct MainView: View {
             
             ProgressBarView()
                 .padding(.bottom, 30)
+            
+            if data.isTimerOn && !data.isDone {
+                SoundButtonView()
+            }
         }
     }
 }
@@ -131,3 +135,32 @@ struct ButtonView: View {
         }
     }
 }
+
+struct SoundButtonView: View {
+    @EnvironmentObject var data: DataModel
+    
+    var body: some View {
+        VStack {
+            Spacer()
+            Spacer()
+            Button {
+                if (data.isMusicOn) {
+                    data.pauseMusic()
+                } else {
+                    data.playMusic()
+                }
+            } label: {
+                Image(data.isMusicOn ? "Play" : "Pause")
+                    .resizable()
+                    .frame(width: 54, height: 54)
+            }
+            Spacer()
+        }
+    }
+}
+//
+//struct SoundButtonView_Preview: PreviewProvider {
+//    static var previews: some View {
+//        SoundButtonView()
+//    }
+//}

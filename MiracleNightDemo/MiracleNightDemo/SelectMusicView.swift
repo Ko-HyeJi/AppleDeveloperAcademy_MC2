@@ -54,6 +54,7 @@ struct SelectMusicView: View {
 }
 
 struct MusicAppView: View {
+    @EnvironmentObject var data: DataModel
     @Binding var bottomSheetOn: Bool
     
     let musicApps: [MusicApp] = [
@@ -81,6 +82,19 @@ struct MusicAppView: View {
                         .frame(width: 60, height: 60)
                 }
             }.padding(.trailing, 20)
+            
+            Button {
+                if (data.isMusicOn) {
+                    data.pauseMusic()
+                } else {
+                    data.playMusic()
+                }
+            } label: {
+                Image("Music")
+                    .resizable()
+                    .frame(width: 60, height: 60)
+            }.padding(.trailing, 20)
+            
         }.frame(width: 360, alignment: .leading)
     }
 }
