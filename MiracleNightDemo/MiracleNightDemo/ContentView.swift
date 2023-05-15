@@ -25,6 +25,7 @@ struct ContentView: View {
                 case .B: CameraView()
                 case .C: CheckBeforeImageView()
                 case .D: DoNotDisturbView()
+                case .E: CompareView()
                 }
             }
         }
@@ -39,7 +40,6 @@ struct ContentView: View {
             }
             defaults.set(false, forKey: "isSetNotification")
         }
-        .fullScreenCover(isPresented: $data.showCompareView) { CompareView() }
         .fullScreenCover(isPresented: $data.showDetailView) { DetailView() }
         .fullScreenCover(isPresented: $isFirstLaunching) { OnboardingTabView(isFirstLaunching: $isFirstLaunching) }
         .fullScreenCover(isPresented: $isSecondLaunching) { OnboardingNickNameView(isSecondLaunching: $isSecondLaunching) }

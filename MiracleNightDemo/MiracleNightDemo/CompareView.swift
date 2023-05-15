@@ -10,78 +10,128 @@ import SwiftUI
 struct CompareView: View {
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
+    @EnvironmentObject var router: Router<Path>
     
     var body: some View {
         ZStack {
-            Color(hex: "#1C1C1E").ignoresSafeArea(.all)
+            FrameView()
+            ImageView()
+        }
+        .edgesIgnoringSafeArea(.all)
+        .navigationBarBackButtonHidden(true)
+    }
+}
+
+struct FrameView: View {
+    @EnvironmentObject var data: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
+    @EnvironmentObject var router: Router<Path>
+    
+    var body: some View {
+        VStack {
             ZStack {
-                VStack (spacing: 30) {
-                    Text("정리 전후 사진을 저장합니다")
-                        .font(.title2 .bold())
-                        .foregroundColor(.white)
-                    VStack (spacing: 30) {
-                        ZStack {
-                            let imageData = data.beforeImage?.pngData()
-                            if let image = data.convertToUIImage(from: imageData!) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 400, height: 300)
-                            }
-                            Rectangle()//이미지 위 블러
-                                .foregroundColor(Color.black)
-                                .frame(width: 400, height: 300)
-                                .opacity(0.3)
-                            Text("BEFORE")
-                                .font(.title3)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 150)
-                                .opacity(0.8)
-                        }
-                        ZStack {
-                            let imageData = viewModel.recentImage?.pngData()
-                            if let image = data.convertToUIImage(from: imageData!) {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .scaledToFill()
-                                    .frame(width: 400, height: 300)
-                            }
-                            Rectangle()//이미지 위 블러
-                                .foregroundColor(Color.black)
-                                .frame(width: 400, height: 300)
-                                .opacity(0.3)
-                            Text("AFTER")
-                                .font(.title3)
-                                .foregroundColor(Color.white)
-                                .padding(.top, 150)
-                                .opacity(0.8)
-                        }
+                Text("Record")
+                    .font(.system(size: 24))
+                    .bold()
+                HStack {
+                    Spacer()
+                    Button {
+                        router.pop(to: .B)
+                    } label: {
+                        Image(systemName: "chevron.backward")
+                            .resizable()
+                            .frame(width: 17, height: 22)
+                            .foregroundColor(.white)
+                        Text("다시 찍기")
+                        Spacer()
                     }
                 }
-                .padding()
-            }
-            .padding()
-        }
-        .onTapGesture {
-            data.showCompareView = false
-
-            if (!data.isSaved) {
-                let _ = data.afterImage = viewModel.recentImage
-                let _ = data.saveDataToUserDefaults()
-                let _ = data.isSaved = true
+                .frame(height: 160)
+                .foregroundColor(.white)
             }
 
-//            if (data.isSetNotification == false) {
-//                SendNotification(notificationTime: data.notificationTime!) //일단 임시로 여기에 옮겨둠... 첫 번째 방정리를 끝낸 다음에 알림을 받는게 좋으니깐 전혀 틀린건 아닐지도..?
-//                defaults.set(true, forKey: "isSetNotification")
-//            }
+            Spacer(minLength: 500)
+
+            HStack {
+                Button {
+                    router.popToRoot()
+                    
+                    if (!data.isSaved) {
+                        let _ = data.afterImage = viewModel.recentImage
+                        let _ = data.saveDataToUserDefaults()
+                        let _ = data.isSaved = true
+                    }
+                } label: {
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 10)
+                            .frame(width: 358, height: 56)
+                            .foregroundColor(Color(hex: "5E5CE6"))
+                            .padding()
+                        Text("저장하기")
+                            .font(.system(size: 20))
+                            .foregroundColor(.white)
+                            .bold()
+                    }
+                }
+            }
+            .frame(height: 160)
         }
-        .onDisappear {
-//            if (!data.isSaved) {
-//                let _ = data.afterImage = viewModel.recentImage
-//                let _ = data.saveDataToUserDefaults()
-//                let _ = data.isSaved = true
-//            }
+        .edgesIgnoringSafeArea(.all)
+    }
+}
+
+struct ImageView: View {
+    @EnvironmentObject var data: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
+    
+    var body: some View {
+        VStack {
+            ZStack {
+                let imageData = data.beforeImage?.pngData()
+                if let image = data.convertToUIImage(from: imageData!) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 390, height: 292)
+                }
+                VStack {
+                    HStack {
+                        Text("Before")
+                            .font(.system(size: 15))
+                            .frame(width: 56, height: 28)
+                            .foregroundColor(Color.white)
+                            .background(RoundedRectangle(cornerRadius: 15).fill(.black).opacity(0.5))
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                .padding(16)
+            }
+            .frame(width: 390, height: 292)
+            
+            ZStack {
+                let imageData = viewModel.recentImage?.pngData()
+                if let image = data.convertToUIImage(from: imageData!) {
+                    Image(uiImage: image)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 390, height: 292)
+                    }
+                
+                VStack {
+                    HStack {
+                        Text("After")
+                            .font(.system(size: 15))
+                            .frame(width: 56, height: 28)
+                            .foregroundColor(Color.white)
+                            .background(RoundedRectangle(cornerRadius: 15).fill(.black).opacity(0.5))
+                        Spacer()
+                    }
+                    Spacer()
+                }
+                .padding(16)
+            }
+            .frame(width: 390, height: 292)
         }
+        .edgesIgnoringSafeArea(.all)
     }
 }

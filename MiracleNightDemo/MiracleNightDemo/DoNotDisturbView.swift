@@ -66,10 +66,30 @@ struct DoNotDisturbView: View {
                     Spacer()
                     
                     VStack(spacing:-15){
-                        Text("\(timeStringMinutes(time: TimeInterval(timerSeconds)))")
-                            .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
-                        Text("\(timeStringSeconds(time: TimeInterval(timerSeconds)))")
-                            .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
+                        ZStack() {
+                            Text("\(timeStringMinutes(time: TimeInterval(timerSeconds)))")
+                                .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
+                            HStack {
+                                Spacer(minLength: 245)
+                                Text("min")
+                                    .font(Font(UIFont.systemFont(ofSize: 24, weight: .semibold, width: .compressed)))
+                                    .foregroundColor(.gray)
+                                    .padding(.top)
+                                Spacer()
+                            }
+                        }
+                        ZStack() {
+                            Text("\(timeStringSeconds(time: TimeInterval(timerSeconds)))")
+                                .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
+                            HStack {
+                                Spacer(minLength: 245)
+                                Text("sec")
+                                    .font(Font(UIFont.systemFont(ofSize: 24, weight: .semibold, width: .compressed)))
+                                    .foregroundColor(.gray)
+                                    .padding(.top)
+                                Spacer()
+                            }
+                        }
                     }
                     .foregroundColor(Color.white)
 

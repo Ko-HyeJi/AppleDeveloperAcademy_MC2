@@ -89,6 +89,7 @@ struct MusicAppView: View {
                 } else {
                     data.playMusic()
                 }
+                bottomSheetOn = false
             } label: {
                 Image("Music")
                     .resizable()

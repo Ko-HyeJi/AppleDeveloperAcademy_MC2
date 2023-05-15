@@ -62,7 +62,6 @@ class DataModel: ObservableObject {
     @Published var isTimerOn:Bool = false //before 사진 찍고 타이머 온
     @Published var isTimeOver:Bool = false
     @Published var isDone:Bool = false //after 사진까지 찍었을 떄
-    @Published var showCompareView:Bool = false
     @Published var isSaved:Bool = false
     
     @Published var tmpSavedAfter:Bool = false
@@ -132,7 +131,7 @@ class DataModel: ObservableObject {
     }
     
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 10 //타이머 시간 측정 변수
+    @Published var countTo: Int = 1 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
     
@@ -193,6 +192,7 @@ enum Path {
     case B
     case C
     case D
+    case E
 }
 
 //class AudioPlayer: ObservableObject {

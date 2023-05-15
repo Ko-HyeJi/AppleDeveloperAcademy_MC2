@@ -13,47 +13,48 @@ struct CheckProgressView: View {
     @State var dayCount: Int = 15  // 그리드 생성 개수
     @State var scrollToIndex: Int = 0  // 사용자가 터치한 원으로 스크롤
     
-    @State var isActivated: Bool = false  // 사용자가 진행하고 있는 챌린지 날짜 안인지 확인(활성화? 원 색상 변경 위해서)
-    @State var isDone: Bool = false  // 그 날의 챌린지 완료했는지
-    @State var isGoing: Bool = false  // 사용자가 청소 진행중인지(사진을 비포만 찍었는지)
+//    @State var isActivated: Bool = false  // 사용자가 진행하고 있는 챌린지 날짜 안인지 확인(활성화? 원 색상 변경 위해서)
+//    @State var isDone: Bool = false  // 그 날의 챌린지 완료했는지
+//    @State var isGoing: Bool = false  // 사용자가 청소 진행중인지(사진을 비포만 찍었는지)
     
     
-    @State var activatedCount: Int = 15// 활성화된 날짜 수
-    @State var clearedCount: Int = 3
+    @State var activatedCount: Int = 3// 활성화된 날짜 수
+    @State var clearedCount: Int = 0
     
     var subheadingText: String = "아직 정리되지 않은 곳이 있어요!"
     
     @EnvironmentObject var data: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
+
     
     @Environment(\.presentationMode) var presentationMode
     
     
     var body: some View {
         VStack(spacing: 1) {
-            HStack {
-                Button(action: {
-                    presentationMode.wrappedValue.dismiss()
-                }) {
-                    Image("ExitButton")
-                        .resizable()
-                        .frame(width: 30, height: 30)
-                        .foregroundColor(.white)
-                        .padding(.bottom)
-                        .padding(.leading)
+            ZStack {
+                HStack {
+                    Button(action: {
+                        presentationMode.wrappedValue.dismiss()
+                    }) {
+                        Image("ExitButton")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 30)
+                            .foregroundColor(.white)
+                            .padding(.bottom)
+                            .padding(.horizontal)
+                }
+                    Spacer()
                 }
             
-                Spacer()
+                
                 
                 Text("History")
                     .font(.system(size: 22))
                     .foregroundColor(.white)
                     .fontWeight(.bold)
                     .padding(.bottom)
-                
-                Spacer()
-                
-                Text("")
-                    .padding(.trailing)
             }
 
             
@@ -62,6 +63,7 @@ struct CheckProgressView: View {
                 .foregroundColor(.white)
             
             HorizontalScrollView(dayCount: $dayCount, selectedIndex: $selectedIndex, scrollToIndex: $scrollToIndex, activatedCount: $activatedCount, clearedCount: $clearedCount)
+                .padding(.horizontal, 23)
             
             Divider()
             
@@ -71,8 +73,21 @@ struct CheckProgressView: View {
         .background(.black)
         .padding(.bottom)
         .edgesIgnoringSafeArea(.bottom)
+        .onAppear {
+            activatedCount = calcActivatedCount()
+        }
        
     }
+    func calcActivatedCount() -> Int {
+        if data.dataArr.count < 3 {
+            return 3
+        } else if data.dataArr.count < 8 {
+            return 8
+        } else {
+            return 15
+        }
+    }
+
 }
 
 
@@ -91,25 +106,35 @@ struct HorizontalScrollView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             ScrollViewReader { scrollViewProxy in
                 ZStack(alignment: .topLeading) {
-                    HStack {
+                    HStack(spacing: 0) {
                         ForEach(0 ..< dayCount) { index in
-                            Circle()
-                                .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "979797"), lineWidth: 1)
-                                .frame(width: 36, height: 36)
-                                .padding(.horizontal)
-                                .background(Circle().fill(index < activatedCount ? index < clearedCount ? Color(hex: "5E5CE6") : Color(hex: "879392") : Color(.clear)))
-//                                .scaleEffect(selectedIndex == index ? 1.2 : 1)
-                                .id(index)
-                                .onTapGesture {
-                                    withAnimation {
-                                        selectedIndex = index
-                                        scrollToIndex = index
+                            VStack {
+                                Circle()
+                                    .stroke(index < activatedCount ? Color(hex: "5E5CE6"): Color(hex: "595959"), lineWidth: 1)
+                                    .frame(width: 36, height: 36)
+//                                    .padding(.horizontal)
+                                    .background(Circle().fill(index < activatedCount ? index < clearedCount ? Color(hex: "5E5CE6") : Color(hex: "595959") : Color(.clear)))
+    //                                .scaleEffect(selectedIndex == index ? 1.2 : 1)
+                                    .id(index)
+                                    .onTapGesture {
+                                        withAnimation {
+                                            selectedIndex = index
+                                            scrollToIndex = index
+                                    }
                                 }
+                                    .overlay{
+                                        (index <= clearedCount ? index == clearedCount ? Image(systemName: "ellipsis") : Image(systemName: "checkmark") : Image(systemName: ""))
+                                        .foregroundColor(.white)
+                                }
+                                    .padding(.trailing, 16)
+                                
+                                Text("\(index + 1)")
+                                    .font(.system(size: 16))
+                                    .foregroundColor(.white)
+                                    .padding(.horizontal)
+                                    .opacity(index < activatedCount ? 1 : 0)
+                                    .padding(.trailing, 16)
                             }
-                                .overlay{
-                                    (index <= clearedCount ? index == clearedCount ? Image(systemName: "ellipsis") : Image(systemName: "checkmark") : Image(systemName: ""))
-                                    .foregroundColor(.black)
-                                }
                         }
                     }
                     .onAppear {
@@ -120,7 +145,7 @@ struct HorizontalScrollView: View {
                                             scrollViewProxy.scrollTo(scrollToIndex, anchor: .center)
                                         }
                                     }
-                    .padding()
+                    .padding(.vertical)
                     }
                 }
             }
@@ -143,6 +168,8 @@ struct VerticalScrollView: View {
     @Binding var clearedCount: Int
     
     @EnvironmentObject var data: DataModel
+    @EnvironmentObject var viewModel: CameraViewModel
+
     
 //    @State var beforeImage: String = "image1"
 //    @State var afterImage: String = "image2"
@@ -153,12 +180,13 @@ struct VerticalScrollView: View {
                 VStack {
                     LazyVGrid(columns: columns) {
 //                        let dataArr = data.loadData()
-                        ForEach(0..<data.dataArr.count) { index in
+                        ForEach(0..<max(activatedCount, data.dataArr.count)) { index in
                             let _ = print(index)
                             ZStack {
                                 RoundedRectangle(cornerRadius: 40)
-                                    .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "979797"), lineWidth: 2)
-                                    .background(RoundedRectangle(cornerRadius: 40).fill(index == clearedCount ? (Color(hex: "979797")) : Color.clear))
+//                                    .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "595959"), lineWidth: 2)
+                                    .stroke(Color(hex: "5E5CE6"), lineWidth: 2)
+                                    .background(RoundedRectangle(cornerRadius: 40).fill(Color(hex: "595959")))
                                     .id(index)
                                     .padding(.vertical)
                                     .contentShape(Rectangle())
@@ -192,9 +220,27 @@ struct VerticalScrollView: View {
                                                     
                                                     Color(.black).opacity(0.3).mask(RoundedRectangle(cornerRadius: 40).frame(width: 103, height: 106))
                                                     
-                                                    Text(data.getDate(index: index)).multilineTextAlignment(.center).font(.title2)
+                                                    if index < clearedCount {
+                                                        Text(data.getDate(index: index)).multilineTextAlignment(.center).font(.title2)
+                                                            .foregroundColor(.white)
+                                                    }
                                                 }
                                             }
+                                            
+//                                            if index == clearedCount {
+//
+//                                                if let imageData = viewModel.recentImage?.pngData() {
+//                                                    let beforeImage = data.convertToUIImage(from: imageData)
+//                                                    Image(uiImage: beforeImage!)
+//                                                        .resizable()
+//                                                        .scaledToFill()
+//                                                        .mask(RoundedRectangle(cornerRadius: 40).frame(width: 103, height: 106))
+//
+//
+//                                                } else {
+//                                    //                Text("Did not take Before Image")
+//                                                }
+//                                            }
                                         }
                                     }
                                     .onTapGesture {
@@ -202,8 +248,10 @@ struct VerticalScrollView: View {
                                             selectedIndex = index
                                             scrollToIndex = index
                                         }
-                                        data.showDetailView = true
-                                        data.selectedIndex = index
+                                        if index < clearedCount {
+                                            data.showDetailView = true
+                                            data.selectedIndex = index
+                                        }
                                     }
                             }
                             .frame(width: 105, height: 140)

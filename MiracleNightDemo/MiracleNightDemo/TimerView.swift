@@ -38,7 +38,7 @@ struct ProgressBar: View {
                         Color(hex: "5E5CE6")
                 ).animation(
                     .easeInOut(duration: 0.2)
-                )
+                ).rotationEffect(Angle(degrees: -90))
         )
     }
     

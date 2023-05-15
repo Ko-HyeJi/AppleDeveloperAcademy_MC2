@@ -81,10 +81,9 @@ struct ShutterButtonView: View {
 
         } else { // after 사진 찍어야 할 때
             Button {
-                router.popToRoot()
+                router.push(.E)
                 viewModel.capturePhoto()
                 data.isDone = true
-                data.showCompareView = true
             } label: {
                 Image(systemName: "button.programmable")
                     .resizable()
