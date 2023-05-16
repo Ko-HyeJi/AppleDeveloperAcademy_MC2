@@ -90,20 +90,14 @@ struct CheckProgressView: View {
     }
     
     func selectSubheadingText() -> String {
-        var countDay = calcCountDay(activatedCount: activatedCount)
+        var countDay =  activatedCount - data.dataArr.count
         
-         func calcCountDay(activatedCount: Int) -> Int {
-            if activatedCount == 3 {
-                return activatedCount - data.dataArr.count
-            } else if activatedCount == 5 {
-                return activatedCount - data.dataArr.count - 3
-            } else {
-                return activatedCount - data.dataArr.count - 8
-            }
+        if countDay >= 0 {
+            return "목표 정리 횟수 \(countDay)회 남았어요!"
+        } else {
+            return "15일간의 방정리를 완료했어요!"
         }
-        return "목표 정리 횟수 \(countDay)회 남았어요!"
     }
-
 }
 
 
