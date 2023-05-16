@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct SettingView: View {
-    @State var yourName = "nickname"
-    @State var timerNum: Int = 5
+    @State var name: String = ""
+    @State var timerMin: Int = 0
     
     @State var isEditing: Bool = false
     @State var isClicked: Bool = false
@@ -45,9 +45,9 @@ struct SettingView: View {
                 }
                 .padding(.bottom, 32)
             
-                SetNameView(yourName: $yourName, isEditing: $isEditing)
+                SetNameView(name: $name, isEditing: $isEditing)
                 
-                SetTimerView(timerNum: $timerNum, isClicked: $isClicked)
+                SetTimerView(timerMin: $timerMin, isClicked: $isClicked)
                 
                 CallOnboardingView(showOnboarding: $showOnboarding)
                 
@@ -61,20 +61,14 @@ struct SettingView: View {
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
-            if data.name != "" {
-                yourName = data.name
-            } else {
-                yourName = data.username!
-            }
-            timerNum = data.countTo / 60
+            name = data.userName
+            timerMin = data.timerSec / 60
         }
         .onDisappear {
-            if yourName != "" {
-                data.name = yourName
-                defaults.set(yourName, forKey: "username")
+            if name != "" {
+                data.userName = name
             }
-            data.countTo = timerNum * 60
-            defaults.set(timerNum * 60, forKey: "timer")
+            data.timerSec = timerMin * 60
         }
     }
 }
@@ -86,7 +80,7 @@ struct SettingView_Previews: PreviewProvider {
 }
 
 struct SetNameView: View {
-    @Binding var yourName: String
+    @Binding var name: String
     @Binding var isEditing: Bool
     
     var body: some View {
@@ -103,7 +97,7 @@ struct SetNameView: View {
                     Spacer()
                     
                     ZStack(alignment: .trailing) {
-                        Text("\(yourName)")  // data.name
+                        Text("\(name)")  // data.name
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                             .onTapGesture {
@@ -114,7 +108,7 @@ struct SetNameView: View {
                         HStack {
 //                                    Spacer()
                             
-                            TextField("\(yourName)", text:$yourName)  // 여기 data.name이어야 할 것 같아용!!
+                            TextField("\(name)", text:$name)  // 여기 data.name이어야 할 것 같아용!!
                                 .multilineTextAlignment(.trailing)
                                 .frame(alignment: .trailing)
                                 .fontWeight(.bold)
@@ -134,7 +128,7 @@ struct SetNameView: View {
 }
 
 struct SetTimerView: View {
-    @Binding var timerNum: Int
+    @Binding var timerMin: Int
     @Binding var isClicked: Bool
     
     var body: some View {
@@ -162,8 +156,8 @@ struct SetTimerView: View {
                     Spacer()
                     
                     Button {
-                        if timerNum > 1 {
-                            timerNum -= 1
+                        if timerMin > 1 {
+                            timerMin -= 1
                         }
                     } label: {
                         Image("Minus")
@@ -171,7 +165,7 @@ struct SetTimerView: View {
                             .frame(width: 30, height: 30)
                     }
                     
-                    Text(String(format: "%02d", timerNum))
+                    Text(String(format: "%02d", timerMin))
                         .font(.title3)
                         .foregroundColor(.white)
                         .fontWeight(.bold)
@@ -179,8 +173,8 @@ struct SetTimerView: View {
                     
                     
                     Button {
-                        if timerNum < 15 {
-                            timerNum += 1
+                        if timerMin < 15 {
+                            timerMin += 1
                         }
                     } label: {
                         Image("Plus")
@@ -212,7 +206,7 @@ struct CallOnboardingView: View {
                     Spacer()
                     
                     NavigationLink(
-                        destination: OnboardingTabView(isFirstLaunching: $showOnboarding).navigationBarBackButtonHidden(true)) {
+                        destination: OnboardingTabView().navigationBarBackButtonHidden(true)) {
                             Text("다시보기")
                                 .foregroundColor(.white)
                         }

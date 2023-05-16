@@ -55,8 +55,8 @@ struct CountdownView: View {
         VStack{
             ZStack{
                 ProgressTrack()
-                if data.counter < data.countTo {
-                    ProgressBar(counter: counter, countTo: data.countTo)
+                if data.currentSec < data.timerSec {
+                    ProgressBar(counter: counter, countTo: data.timerSec)
                 }
                 else {
                     Circle()
@@ -82,18 +82,18 @@ struct CountdownView: View {
                 }
             }
         }
-        .onAppear { counter = data.counter }
+        .onAppear { counter = data.currentSec }
         .onReceive(timer) { time in
-            if (self.counter < data.countTo) {
+            if (self.counter < data.timerSec) {
                 self.counter += 1
-                if (counter == data.countTo) {
+                if (counter == data.timerSec) {
                     data.isTimeOver = true
                     hapticFeedback(duration: 3, interval: 0.03)
                 }
             }
         }
         .onDisappear {
-            data.counter = counter
+            data.currentSec = counter
         }
     }
     

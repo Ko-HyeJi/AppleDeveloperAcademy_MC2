@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct OnboardingTabView: View {
-    @Binding var isFirstLaunching: Bool
+    @EnvironmentObject var data: DataModel
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -43,7 +43,7 @@ struct OnboardingTabView: View {
                         lowertitle: "Ritual",
                         subtitle: " 공간을 정리하며\n하루를 마무리하는 ",
                         
-                        isFirstLaunching: $isFirstLaunching
+                        isFirstLaunching: $data.isFirstLaunching
                     )
                     
                     //페이지 5: 닉네임 설정 + 온보딩 완료
@@ -63,7 +63,7 @@ struct OnboardingTabView: View {
                                 .padding(.top, 50)
                         }
                         Spacer()
-                    }.opacity(isFirstLaunching ? 0 : 1)
+                    }.opacity(data.isFirstLaunching ? 0 : 1)
                     Spacer()
                 }
                 

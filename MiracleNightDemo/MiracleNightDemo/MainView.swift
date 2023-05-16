@@ -10,7 +10,6 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var router: Router<Path>
     @EnvironmentObject var data: DataModel
-//    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         ZStack {
@@ -81,11 +80,7 @@ struct MessageView: View {
     @EnvironmentObject var data: DataModel
     
     var body: some View {
-        if (data.name == "" && data.username != nil) { //두번째 이후
-            Text(data.username! + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
-        } else { //처음 앱 사용할 때
-            Text(data.name + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
-        }
+        Text(data.userName + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
 
         
         if (!data.isDone){

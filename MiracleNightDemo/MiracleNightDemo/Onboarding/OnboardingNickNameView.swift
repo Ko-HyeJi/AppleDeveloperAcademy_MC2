@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct OnboardingNickNameView: View {
-
     @EnvironmentObject var data: DataModel
-    @Binding var isSecondLaunching: Bool
 
     var body: some View {
 
@@ -26,13 +24,13 @@ struct OnboardingNickNameView: View {
                         .padding(.top, 38)
 
                     Form {
-                        TextField("닉네임을 입력해주세요", text : $data.name)
+                        TextField("닉네임을 입력해주세요", text : $data.userName)
                             .frame(height: 45)
                     }
                     .scrollDisabled(true)
                     .frame(height: 140, alignment: .center)
 
-                    Text("\(data.name)의 방문을 환영합니다")
+                    Text("\(data.userName)의 방문을 환영합니다")
                         .font(.body)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
@@ -63,7 +61,7 @@ struct OnboardingNickNameView: View {
 //                    }
                     
                     VStack { //알림 시간 설정 기능 제거
-                        if data.name.isEmpty {
+                        if data.userName.isEmpty {
                             Button {
                                 
                             } label: {
@@ -73,11 +71,11 @@ struct OnboardingNickNameView: View {
                                     .frame(width: 358, height: 56)
                                     .background(Color(hex: "9C9C9C"))
                                     .cornerRadius(14)
-                            }.disabled(data.name.isEmpty)
+                            }.disabled(data.userName.isEmpty)
                         }
                         else {
                             Button {
-                                isSecondLaunching.toggle()
+                                data.isSecondLaunching.toggle()
                             } label: {
                                 Text("작성 완료")
                                     .fontWeight(.bold)
@@ -91,10 +89,6 @@ struct OnboardingNickNameView: View {
                 }
                 // 다음 페이지로 이동하기
             }
-        }
-        .onDisappear {
-            defaults.set(data.name, forKey: "username")
-            defaults.set(300, forKey: "timer")
         }
     }
 }
