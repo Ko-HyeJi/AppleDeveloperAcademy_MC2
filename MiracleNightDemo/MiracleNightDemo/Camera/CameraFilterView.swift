@@ -72,7 +72,6 @@ struct ShutterButtonView: View {
             Button {
                 router.push(.C)
                 viewModel.capturePhoto()
-                data.beforeImage = viewModel.recentImage
             } label: {
                 Image(systemName: "button.programmable")
                     .resizable()

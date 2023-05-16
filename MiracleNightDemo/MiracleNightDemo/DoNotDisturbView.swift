@@ -128,10 +128,6 @@ struct DoNotDisturbView: View {
             .edgesIgnoringSafeArea(.all)
         }
         .navigationBarBackButtonHidden(true)
-        .onAppear {
-            data.currentSec = 0
-            data.isTimerOn = true
-        }
         .onDisappear() {
             data.beforeImage = viewModel.recentImage // 사진을 찍은 직후나, DoNotDisturbView가 OnAppear됐을떄는 recentImage가 nil이다. 아마 비동기적 처리 문제 때문일듯?
         }

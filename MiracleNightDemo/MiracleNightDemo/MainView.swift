@@ -23,14 +23,24 @@ struct MainView: View {
                 
                 Spacer(minLength: 120)
                 
-                Button {
-                    hapticFeedback(duration: 0.2, interval: 0.05)
-                    router.push(.B)
-                } label: {
-                    ButtonView()
+                ZStack {
+                    Button {
+                        hapticFeedback(duration: 0.2, interval: 0.05)
+                        router.push(.B)
+                    } label: {
+                        ButtonView()
+                    }
+                    .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
+                    
+                    Button { //DoNotDisturb뷰로 돌아가는 버튼
+                        router.push(.D)
+                    } label: {
+                        Image("")
+                            .frame(width: 150, height: 150)
+                            .foregroundColor(.clear)
+                    }.opacity(data.isTimerOn && !data.isTimeOver ? 1 : 0)
                 }
-                .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
-                
+
                 Spacer(minLength: 300)
             }
             
@@ -126,6 +136,7 @@ struct RotatingMessagesView: View {
 
 struct ButtonView: View {
     @EnvironmentObject var data: DataModel
+    @EnvironmentObject var router: Router<Path>
     
     var body: some View {
         if (data.isDone) {
@@ -159,3 +170,22 @@ struct ButtonView: View {
 //        SoundButtonView()
 //    }
 //}
+
+
+struct GoBackView: View {
+    @EnvironmentObject var router: Router<Path>
+    
+    var body: some View {
+        HStack {
+            Spacer()
+            Button {
+                router.push(.D)
+            } label: {
+                Image(systemName: "gobackward")
+                    .resizable()
+                    .frame(width: 50, height: 50)
+                    .foregroundColor(.white)
+            }
+        }
+    }
+}

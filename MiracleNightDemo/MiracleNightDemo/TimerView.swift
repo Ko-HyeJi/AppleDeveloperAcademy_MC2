@@ -14,17 +14,8 @@ struct CountdownView: View {
         VStack{
             ZStack{
                 ProgressTrack()
-                if data.currentSec < data.timerSec {
-                    ProgressBar(counter: data.currentSec, countTo: data.timerSec)
-                }
-                else {
-                    Circle()
-                        .stroke(style: StrokeStyle(lineWidth: 15))
-                        .frame(width: 170, height: 170)
-                        .foregroundColor(Color(hex: "5E5CE6"))
-                }
-                
                 if !data.isTimeOver {
+                    ProgressBar(counter: data.currentSec, countTo: data.timerSec)
                     Image("Moon3").resizable().frame(width: 175, height: 175)
                     VStack(spacing: -20) {
                         Text("\(timeStringMinutes(time: TimeInterval(data.currentSec)))")
@@ -36,6 +27,10 @@ struct CountdownView: View {
                     }
                 }
                 else {
+                    Circle()
+                        .stroke(style: StrokeStyle(lineWidth: 15))
+                        .frame(width: 170, height: 170)
+                        .foregroundColor(Color(hex: "5E5CE6"))
                     Image("Moon2").resizable().frame(width: 175, height: 175)
                     Image("Cross").resizable().frame(width: 40, height: 40)
                 }

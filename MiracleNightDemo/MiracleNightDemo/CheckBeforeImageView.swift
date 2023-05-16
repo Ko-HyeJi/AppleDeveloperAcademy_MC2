@@ -78,6 +78,8 @@ struct CheckBeforeImageView: View {
                     
                     Button {
                         router.push(.D)
+                        data.isTimerOn = true
+                        data.currentSec = 0
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
