@@ -111,6 +111,7 @@ struct DoNotDisturbView: View {
                     Rectangle().frame(height: 160).foregroundColor(.clear)
                     
                     Button {
+                        router.popToRoot()
                         router.push(.B)
                     } label: {
                         ZStack {

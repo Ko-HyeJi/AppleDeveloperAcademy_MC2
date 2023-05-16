@@ -186,7 +186,6 @@ struct VerticalScrollView: View {
                     LazyVGrid(columns: columns) {
 //                        let dataArr = data.loadData()
                         ForEach(0..<max(activatedCount, data.dataArr.count)) { index in
-                            let _ = print(index)
                             ZStack {
                                 RoundedRectangle(cornerRadius: 40)
 //                                    .stroke(index < clearedCount ? Color(hex: "5E5CE6"): Color(hex: "595959"), lineWidth: 2)
