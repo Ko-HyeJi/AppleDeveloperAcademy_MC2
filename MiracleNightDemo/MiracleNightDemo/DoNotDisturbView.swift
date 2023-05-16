@@ -15,6 +15,8 @@ struct DoNotDisturbView: View {
     
     var body: some View {
         ZStack {
+            Color.black.edgesIgnoringSafeArea(.all)
+            
             if let beforeImage = viewModel.recentImage {
                 Image(uiImage: beforeImage)
                     .resizable()
@@ -109,7 +111,7 @@ struct DoNotDisturbView: View {
                     Rectangle().frame(height: 160).foregroundColor(.clear)
                     
                     Button {
-                        router.pop(to: .B)
+                        router.push(.B)
                     } label: {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)

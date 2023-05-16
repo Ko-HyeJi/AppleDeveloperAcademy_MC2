@@ -32,6 +32,7 @@ struct FrameView: View {
             ZStack {
                 Text("Record")
                     .font(.system(size: 24))
+                    .foregroundColor(.white)
                     .bold()
                 HStack {
                     Spacer()
@@ -77,6 +78,7 @@ struct FrameView: View {
             .frame(height: 160)
         }
         .edgesIgnoringSafeArea(.all)
+        .background(Color.black)
     }
 }
 
