@@ -70,7 +70,7 @@ struct DoNotDisturbView: View {
                             Text("\(timeStringMinutes(time: TimeInterval(timerSeconds)))")
                                 .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
                             HStack {
-                                Spacer(minLength: 245)
+                                Spacer(minLength: 250)
                                 Text("min")
                                     .font(Font(UIFont.systemFont(ofSize: 24, weight: .semibold, width: .compressed)))
                                     .foregroundColor(.gray)
@@ -82,7 +82,7 @@ struct DoNotDisturbView: View {
                             Text("\(timeStringSeconds(time: TimeInterval(timerSeconds)))")
                                 .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
                             HStack {
-                                Spacer(minLength: 245)
+                                Spacer(minLength: 250)
                                 Text("sec")
                                     .font(Font(UIFont.systemFont(ofSize: 24, weight: .semibold, width: .compressed)))
                                     .foregroundColor(.gray)

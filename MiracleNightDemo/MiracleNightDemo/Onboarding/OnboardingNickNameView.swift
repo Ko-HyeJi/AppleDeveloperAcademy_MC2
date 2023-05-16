@@ -39,19 +39,46 @@ struct OnboardingNickNameView: View {
 
                     Spacer()
 
-                    VStack {
-                        if data.name .isEmpty {
-                            NavigationLink(destination: OnboardingAlarmTimeView(isSecondLaunching: $isSecondLaunching ).navigationBarHidden(true)) {
+//                    VStack {
+//                        if data.name .isEmpty {
+//                            NavigationLink(destination: OnboardingAlarmTimeView(isSecondLaunching: $isSecondLaunching ).navigationBarHidden(true)) {
+//                                Text("작성 완료")
+//                                    .fontWeight(.bold)
+//                                    .foregroundColor(Color(hex: "FFFFFF"))
+//                                    .frame(width: 358, height: 56)
+//                                    .background(Color(hex: "9C9C9C"))
+//                                    .cornerRadius(14)
+//                            }
+//                            .disabled(data.name.isEmpty)
+//                        } else {
+//                            NavigationLink(destination: OnboardingAlarmTimeView(isSecondLaunching: $isSecondLaunching)) {
+//                                Text("작성 완료")
+//                                    .fontWeight(.bold)
+//                                    .foregroundColor(Color(hex: "FFFFFF"))
+//                                    .frame(width: 358, height: 56)
+//                                    .background(Color(hex: "5E5CE6"))
+//                                    .cornerRadius(14)
+//                            }
+//                        }
+//                    }
+                    
+                    VStack { //알림 시간 설정 기능 제거
+                        if data.name.isEmpty {
+                            Button {
+                                
+                            } label: {
                                 Text("작성 완료")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color(hex: "FFFFFF"))
                                     .frame(width: 358, height: 56)
                                     .background(Color(hex: "9C9C9C"))
                                     .cornerRadius(14)
-                            }
-                            .disabled(data.name.isEmpty)
-                        } else {
-                            NavigationLink(destination: OnboardingAlarmTimeView(isSecondLaunching: $isSecondLaunching)) {
+                            }.disabled(data.name.isEmpty)
+                        }
+                        else {
+                            Button {
+                                isSecondLaunching.toggle()
+                            } label: {
                                 Text("작성 완료")
                                     .fontWeight(.bold)
                                     .foregroundColor(Color(hex: "FFFFFF"))

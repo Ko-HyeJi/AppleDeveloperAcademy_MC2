@@ -131,7 +131,7 @@ class DataModel: ObservableObject {
     }
     
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 1 //타이머 시간 측정 변수
+    @Published var countTo: Int = 10 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
     

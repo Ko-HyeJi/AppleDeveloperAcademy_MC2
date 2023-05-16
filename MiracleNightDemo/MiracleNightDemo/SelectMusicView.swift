@@ -80,7 +80,8 @@ struct MusicAppView: View {
                     Image(app.appIcon)
                         .resizable()
                         .frame(width: 60, height: 60)
-                }
+                        .opacity(0.4)
+                }.disabled(true)
             }.padding(.trailing, 20)
             
             Button {

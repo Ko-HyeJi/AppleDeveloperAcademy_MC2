@@ -13,7 +13,7 @@ let timer = Timer
 
 struct ProgressTrack: View {
     var body: some View {
-        Circle().stroke(lineWidth: 10).frame(width: 115, height: 115).foregroundColor(Color(hex: "3F3F3F"))
+        Circle().stroke(lineWidth: 15).frame(width: 170, height: 170).foregroundColor(Color(hex: "3F3F3F"))
     }
 }
 
@@ -24,12 +24,12 @@ struct ProgressBar: View {
     var body: some View {
         Circle()
             .fill(Color.clear)
-            .frame(width: 115, height: 115)
+            .frame(width: 170, height: 170)
             .overlay(
                 Circle().trim(from: 0, to: progress())
                     .stroke(
                         style: StrokeStyle(
-                            lineWidth: 10,
+                            lineWidth: 15,
                             lineCap: .round,
                             lineJoin:.round
                         )
@@ -56,6 +56,21 @@ struct CountdownView: View {
             ZStack{
                 ProgressTrack()
                 ProgressBar(counter: counter, countTo: data.countTo)
+                if !data.isTimeOver {
+                    Image("Moon3").resizable().frame(width: 175, height: 175)
+                    VStack(spacing: -20) {
+                        Text("\(timeStringMinutes(time: TimeInterval(counter)))")
+                            .font(Font(UIFont.systemFont(ofSize: 56, weight: .semibold, width: .compressed)))
+                            .foregroundColor(.white)
+                        Text("\(timeStringSeconds(time: TimeInterval(counter)))")
+                            .font(Font(UIFont.systemFont(ofSize: 56, weight: .semibold, width: .compressed)))
+                            .foregroundColor(.white)
+                    }
+                }
+                else {
+                    Image("Moon2").resizable().frame(width: 175, height: 175)
+                    Image("Cross").resizable().frame(width: 40, height: 40)
+                }
             }
         }
         .onAppear { counter = data.counter }
@@ -68,4 +83,15 @@ struct CountdownView: View {
             }
         }
     }
+    
+    func timeStringMinutes(time: TimeInterval) -> String {
+        let minutes = Int(time) / 60 % 60
+        return String(format: "%02i", minutes)
+    }
+
+    func timeStringSeconds(time: TimeInterval) -> String {
+        let seconds = Int(time) % 60
+        return String(format: "%02i", seconds)
+    }
+
 }

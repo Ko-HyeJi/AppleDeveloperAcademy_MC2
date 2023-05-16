@@ -356,8 +356,12 @@ struct CameraView: View {
     var body: some View {
         ZStack {
             viewModel.cameraPreview
-                .ignoresSafeArea()
-                .onAppear {viewModel.configure()}
+                .ignoresSafeArea() //.ignoresSafeArea(): 뷰가 안전 영역 경계를 무시하도록 지시, 뷰가 전체 화면을 차지하고 안전 영역에 있는 내용을 가리는 것을 허용
+                .onAppear { viewModel.configure() } //뷰가 나타날 때 ViewModel에서 제공하는 configure() 메서드가 호출됨
+                .gesture( MagnificationGesture() //.gesture(): 메서드는 뷰에 제스처 인식기를 추가 //MagnificationGesture(): 확대 / 축소 제스처를 인식
+                    .onChanged { val in viewModel.zoom(factor: val) } //.onChanged(): 제스처의 변화가 있을 때 호출 //val 매개변수로 전달된 값에 따라 ViewModel의 zoom() 메서드를 호출
+                    .onEnded { _ in viewModel.zoomInitialize() } ) //.onEnded(): 제스처가 종료될 때 호출 //ViewModel의 zoomInitialize() 메서드를 호출하여 제스처를 초기화
+
             
             CameraFilterView()
             

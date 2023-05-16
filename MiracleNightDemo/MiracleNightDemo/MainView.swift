@@ -19,7 +19,7 @@ struct MainView: View {
                 Spacer()
                 SettingButtonView()
                 MessageView()
-                Spacer(minLength: 150)
+                Spacer(minLength: 200)
                 
                 Button {
                     router.push(.B)
@@ -28,15 +28,15 @@ struct MainView: View {
                 }
                 .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
                 
-                Spacer(minLength: 350)
-            }
+                Spacer(minLength: 400)
+            }.frame(height: 668)
             
             ProgressBarView()
-                .padding(.bottom, 30)
+//                .padding(.bottom, 50)
             
-            if data.isTimerOn && !data.isDone {
-                SoundButtonView()
-            }
+//            if data.isTimerOn && !data.isDone {
+//                SoundButtonView()
+//            }
         }
     }
 }
@@ -117,19 +117,23 @@ struct ButtonView: View {
     var body: some View {
         if (data.isDone) {
             ZStack {
-                Circle().stroke(lineWidth: 10).frame(width: 115, height: 115).foregroundColor(Color(hex: "6E6E6E"))
-                Image("Moon1").resizable().frame(width: 120, height: 120)
-                Image("X").resizable().frame(width: 40, height: 40)
+                Circle().stroke(lineWidth: 15).frame(width: 170, height: 170).foregroundColor(Color(hex: "6E6E6E"))
+                Image("Moon1").resizable().frame(width: 175, height: 175)
+                VStack(spacing: -10) {
+                    Text("See you")
+                        .font(Font(UIFont.systemFont(ofSize: 40, weight: .semibold, width: .compressed)))
+                        .foregroundColor(Color(hex: "757575"))
+                    Text("tomorrow")
+                        .font(Font(UIFont.systemFont(ofSize: 40, weight: .semibold, width: .compressed)))
+                        .foregroundColor(Color(hex: "757575"))
+                }
             }
         } else if (data.isTimerOn) {
-            ZStack {
-                CountdownView()
-                Image("Moon3").resizable().frame(width: 120, height: 120)
-            }
+            CountdownView()
         } else {
             ZStack {
-                Circle().stroke(lineWidth: 10).frame(width: 115, height: 115).foregroundColor(Color(hex: "3F3F3F"))
-                Image("Moon2").resizable().frame(width: 120, height: 120)
+                Circle().stroke(lineWidth: 15).frame(width: 170, height: 170).foregroundColor(Color(hex: "3F3F3F"))
+                Image("Moon2").resizable().frame(width: 175, height: 175)
                 Image("Cross").resizable().frame(width: 40, height: 40)
             }
         }
