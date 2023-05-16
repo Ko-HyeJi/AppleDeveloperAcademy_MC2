@@ -7,9 +7,60 @@
 
 import SwiftUI
 
-let timer = Timer
-    .publish(every: 1, on: .main, in: .common)
-    .autoconnect()
+struct CountdownView: View {
+    @EnvironmentObject var data: DataModel
+
+    var body: some View {
+        VStack{
+            ZStack{
+                ProgressTrack()
+                if data.currentSec < data.timerSec {
+                    ProgressBar(counter: data.currentSec, countTo: data.timerSec)
+                }
+                else {
+                    Circle()
+                        .stroke(style: StrokeStyle(lineWidth: 15))
+                        .frame(width: 170, height: 170)
+                        .foregroundColor(Color(hex: "5E5CE6"))
+                }
+                
+                if !data.isTimeOver {
+                    Image("Moon3").resizable().frame(width: 175, height: 175)
+                    VStack(spacing: -20) {
+                        Text("\(timeStringMinutes(time: TimeInterval(data.currentSec)))")
+                            .font(Font(UIFont.systemFont(ofSize: 56, weight: .semibold, width: .compressed)))
+                            .foregroundColor(.white)
+                        Text("\(timeStringSeconds(time: TimeInterval(data.currentSec)))")
+                            .font(Font(UIFont.systemFont(ofSize: 56, weight: .semibold, width: .compressed)))
+                            .foregroundColor(.white)
+                    }
+                }
+                else {
+                    Image("Moon2").resizable().frame(width: 175, height: 175)
+                    Image("Cross").resizable().frame(width: 40, height: 40)
+                }
+            }
+        }
+        .onReceive(data.timer) { time in
+            if (data.currentSec == data.timerSec) {
+                data.isTimeOver = true
+                hapticFeedback(duration: 3, interval: 0.03)
+            }
+            data.currentSec += 1
+        }
+    }
+    
+    func timeStringMinutes(time: TimeInterval) -> String {
+        let minutes = Int(time) / 60 % 60
+        return String(format: "%02i", minutes)
+    }
+
+    func timeStringSeconds(time: TimeInterval) -> String {
+        let seconds = Int(time) % 60
+        return String(format: "%02i", seconds)
+    }
+
+}
 
 struct ProgressTrack: View {
     var body: some View {
@@ -45,66 +96,4 @@ struct ProgressBar: View {
     func progress() -> CGFloat {
         return (CGFloat(counter) / CGFloat(countTo))
     }
-}
-
-struct CountdownView: View {
-    @EnvironmentObject var data: DataModel
-    @State var counter: Int = 0
-
-    var body: some View {
-        VStack{
-            ZStack{
-                ProgressTrack()
-                if data.currentSec < data.timerSec {
-                    ProgressBar(counter: counter, countTo: data.timerSec)
-                }
-                else {
-                    Circle()
-                        .stroke(style: StrokeStyle(lineWidth: 15))
-                        .frame(width: 170, height: 170)
-                        .foregroundColor(Color(hex: "5E5CE6"))
-                }
-                
-                if !data.isTimeOver {
-                    Image("Moon3").resizable().frame(width: 175, height: 175)
-                    VStack(spacing: -20) {
-                        Text("\(timeStringMinutes(time: TimeInterval(counter)))")
-                            .font(Font(UIFont.systemFont(ofSize: 56, weight: .semibold, width: .compressed)))
-                            .foregroundColor(.white)
-                        Text("\(timeStringSeconds(time: TimeInterval(counter)))")
-                            .font(Font(UIFont.systemFont(ofSize: 56, weight: .semibold, width: .compressed)))
-                            .foregroundColor(.white)
-                    }
-                }
-                else {
-                    Image("Moon2").resizable().frame(width: 175, height: 175)
-                    Image("Cross").resizable().frame(width: 40, height: 40)
-                }
-            }
-        }
-        .onAppear { counter = data.currentSec }
-        .onReceive(timer) { time in
-            if (self.counter < data.timerSec) {
-                self.counter += 1
-                if (counter == data.timerSec) {
-                    data.isTimeOver = true
-                    hapticFeedback(duration: 3, interval: 0.03)
-                }
-            }
-        }
-        .onDisappear {
-            data.currentSec = counter
-        }
-    }
-    
-    func timeStringMinutes(time: TimeInterval) -> String {
-        let minutes = Int(time) / 60 % 60
-        return String(format: "%02i", minutes)
-    }
-
-    func timeStringSeconds(time: TimeInterval) -> String {
-        let seconds = Int(time) % 60
-        return String(format: "%02i", seconds)
-    }
-
 }

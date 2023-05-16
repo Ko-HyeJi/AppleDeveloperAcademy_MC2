@@ -9,14 +9,9 @@ import SwiftUI
 import AVFoundation
 
 struct DoNotDisturbView: View {
-    @State private var timerSeconds = 0
-    @State private var isButtonEnabled = false // 버튼 활성화 여부를 나타내는 상태 변수
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
     @EnvironmentObject var router: Router<Path>
-
-    let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
     
     var body: some View {
         ZStack {
@@ -27,8 +22,6 @@ struct DoNotDisturbView: View {
                     .edgesIgnoringSafeArea(.all)
                     .background(Color.black)
                     .opacity(0.3)
-            } else {
-//                Text("Did not take Before Image")
             }
             
             VStack {
@@ -55,7 +48,7 @@ struct DoNotDisturbView: View {
                         }
                         .padding(.top, 50)
                         
-                        Text(isButtonEnabled ? "이제 밤정리 후 사진을 찍을 수 있어요 📸" : "지금은 밤정리 중 🌙")
+                        Text(data.isTimeOver ? "이제 밤정리 후 사진을 찍을 수 있어요 📸" : "지금은 밤정리 중 🌙")
                             .font(.system(size: 16))
                             .foregroundColor(.white)
                     }
@@ -67,7 +60,7 @@ struct DoNotDisturbView: View {
                     
                     VStack(spacing:-15){
                         ZStack() {
-                            Text("\(timeStringMinutes(time: TimeInterval(timerSeconds)))")
+                            Text("\(timeStringMinutes(time: TimeInterval(data.currentSec)))")
                                 .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
                             HStack {
                                 Spacer(minLength: 250)
@@ -79,7 +72,7 @@ struct DoNotDisturbView: View {
                             }
                         }
                         ZStack() {
-                            Text("\(timeStringSeconds(time: TimeInterval(timerSeconds)))")
+                            Text("\(timeStringSeconds(time: TimeInterval(data.currentSec)))")
                                 .font(Font(UIFont.systemFont(ofSize: 72, weight: .semibold, width: .compressed)))
                             HStack {
                                 Spacer(minLength: 250)
@@ -121,24 +114,18 @@ struct DoNotDisturbView: View {
                         ZStack {
                             RoundedRectangle(cornerRadius: 10)
                                 .frame(width: 358, height: 56)
-                                .foregroundColor(isButtonEnabled ? Color(hex: "5E5CE6") : Color.gray)
+                                .foregroundColor(data.isTimeOver ? Color(hex: "5E5CE6") : Color.gray)
                                 .padding()
                             Text("애프터 사진 찍으러 가기")
-                                .foregroundColor(isButtonEnabled ? Color.white : Color.white.opacity(0.5))
+                                .foregroundColor(data.isTimeOver ? Color.white : Color.white.opacity(0.5))
                                 .font(.system(size: 20))
                                 .bold()
                         }
-                    }.disabled(!isButtonEnabled)
+                    }
+                    .disabled(!data.isTimeOver)
                 }
             }
             .edgesIgnoringSafeArea(.all)
-            .onReceive(timer) { _ in
-                timerSeconds += 1
-                if timerSeconds >= data.timerSec { // 15분=900초 (60초 * 15분)
-                    isButtonEnabled = true // 15분이 넘으면 버튼 활성화
-                    data.isTimeOver = true
-                }
-            }
         }
         .navigationBarBackButtonHidden(true)
         .onAppear {
@@ -147,7 +134,6 @@ struct DoNotDisturbView: View {
         }
         .onDisappear() {
             data.beforeImage = viewModel.recentImage // 사진을 찍은 직후나, DoNotDisturbView가 OnAppear됐을떄는 recentImage가 nil이다. 아마 비동기적 처리 문제 때문일듯?
-            data.currentSec = timerSeconds
         }
     }
     
@@ -161,9 +147,3 @@ struct DoNotDisturbView: View {
         return String(format: "%02i", seconds)
     }
 }
-
-//struct DoNotDisturbView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        DoNotDisturbView()
-//    }
-//}
