@@ -38,16 +38,28 @@ struct OnboardingTabView: View {
                     )
                     
                     //페이지 4: 앱 이름공개
-                    OnboardingLastPageView(
-                        uppertitle: "Night",
-                        lowertitle: "Ritual",
-                        subtitle: " 공간을 정리하며\n하루를 마무리하는 ",
-                        
-                        isFirstLaunching: $data.isFirstLaunching
-                    )
-                    
-                    //페이지 5: 닉네임 설정 + 온보딩 완료
-        //            OnboardingNickNameView()
+                    ZStack {
+                        OnboardingPageView(
+                            uppertitle: "Night",
+                            lowertitle: "Ritual",
+                            subtitle: " 공간을 정리하며\n하루를 마무리하는 "
+                        )
+
+                        VStack {
+                            Spacer(minLength: 730)
+                            Button {
+                                data.isFirstLaunching.toggle()
+                            } label: {
+                                Text("밤정리 시작하기")
+                                    .fontWeight(.bold)
+                                    .foregroundColor(Color(hex: "FFFFFF"))
+                                    .frame(width: 358, height: 56)
+                                    .background(Color(hex: "5E5CE6"))
+                                    .cornerRadius(14)
+                            }.opacity(data.isFirstLaunching ? 1 : 0)
+                            Spacer(minLength: 70)
+                        }
+                    }
                 }
                 
                 VStack { //설정에서 다시보기로 들어온 경우에만 보이는 버튼

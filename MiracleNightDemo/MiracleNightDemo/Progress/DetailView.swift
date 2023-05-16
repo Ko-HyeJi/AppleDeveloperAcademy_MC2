@@ -9,7 +9,9 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var data: DataModel
+    @Binding var showDetailView: Bool
     @State var showMessage = false
+    
     
     var body: some View {
         
@@ -31,7 +33,7 @@ struct DetailView: View {
                                 .bold()
                             HStack {
                                 Button {
-                                    data.showDetailView = false
+                                    showDetailView = false
                                 } label: {
                                     Image(systemName: "chevron.backward")
                                         .resizable()

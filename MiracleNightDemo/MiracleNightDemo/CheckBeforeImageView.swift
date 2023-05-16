@@ -104,10 +104,3 @@ struct CheckBeforeImageView: View {
         }
     }
 }
-
-//struct BottomSheetView_Previews: PreviewProvider {
-//    static var previews: some View {
-////        BottomSheetView()
-//        CheckBeforeImageView()
-//    }
-//}

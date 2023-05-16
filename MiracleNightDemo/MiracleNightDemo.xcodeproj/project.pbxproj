@@ -24,7 +24,6 @@
 		8BE16EFB2A0D087900D3FE0A /* OnboardingAlarmTimeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16EF62A0D087900D3FE0A /* OnboardingAlarmTimeView.swift */; };
 		8BE16EFC2A0D087900D3FE0A /* OnboardingPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16EF72A0D087900D3FE0A /* OnboardingPageView.swift */; };
 		8BE16EFD2A0D087900D3FE0A /* OnboardingNickNameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16EF82A0D087900D3FE0A /* OnboardingNickNameView.swift */; };
-		8BE16EFE2A0D087900D3FE0A /* OnboardingLastPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16EF92A0D087900D3FE0A /* OnboardingLastPageView.swift */; };
 		8BE16EFF2A0D087900D3FE0A /* OnboardingTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16EFA2A0D087900D3FE0A /* OnboardingTabView.swift */; };
 		8BE16F1B2A0DFD1800D3FE0A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16F1A2A0DFD1800D3FE0A /* MainView.swift */; };
 		8BE16F1D2A0DFECC00D3FE0A /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BE16F1C2A0DFECC00D3FE0A /* DetailView.swift */; };
@@ -55,7 +54,6 @@
 		8BE16EF62A0D087900D3FE0A /* OnboardingAlarmTimeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingAlarmTimeView.swift; sourceTree = "<group>"; };
 		8BE16EF72A0D087900D3FE0A /* OnboardingPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPageView.swift; sourceTree = "<group>"; };
 		8BE16EF82A0D087900D3FE0A /* OnboardingNickNameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingNickNameView.swift; sourceTree = "<group>"; };
-		8BE16EF92A0D087900D3FE0A /* OnboardingLastPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingLastPageView.swift; sourceTree = "<group>"; };
 		8BE16EFA2A0D087900D3FE0A /* OnboardingTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingTabView.swift; sourceTree = "<group>"; };
 		8BE16F1A2A0DFD1800D3FE0A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		8BE16F1C2A0DFECC00D3FE0A /* DetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
@@ -103,15 +101,15 @@
 				8BB625802A02739500DB2EA8 /* MiracleNightDemoApp.swift */,
 				8BB6259D2A02962200DB2EA8 /* ContentView.swift */,
 				8BE16F1A2A0DFD1800D3FE0A /* MainView.swift */,
-				8BB6259F2A029FDA00DB2EA8 /* Data.swift */,
-				8BB625902A0273CD00DB2EA8 /* Notification.swift */,
 				8BB8F1C02A039D9900EAADD9 /* TimerView.swift */,
 				8B941E082A0A0CFF00B5E153 /* CompareView.swift */,
 				8BE16F252A0F4CA900D3FE0A /* CheckBeforeImageView.swift */,
 				8BE16F272A0F4CBC00D3FE0A /* SelectMusicView.swift */,
 				8BB8F1C22A04E31400EAADD9 /* DoNotDisturbView.swift */,
 				8B305B3D2A13C2CE00FCC624 /* SettingView.swift */,
+				8BB6259F2A029FDA00DB2EA8 /* Data.swift */,
 				8B305B3B2A13940600FCC624 /* Haptic.swift */,
+				8BB625902A0273CD00DB2EA8 /* Notification.swift */,
 				8BE16F242A0E250E00D3FE0A /* Progress */,
 				8BB8F1BF2A039D6900EAADD9 /* Onboarding */,
 				8BB6259C2A02740E00DB2EA8 /* Camera */,
@@ -145,7 +143,6 @@
 			children = (
 				8BE16EFA2A0D087900D3FE0A /* OnboardingTabView.swift */,
 				8BE16EF72A0D087900D3FE0A /* OnboardingPageView.swift */,
-				8BE16EF92A0D087900D3FE0A /* OnboardingLastPageView.swift */,
 				8BE16EF82A0D087900D3FE0A /* OnboardingNickNameView.swift */,
 				8BE16EF62A0D087900D3FE0A /* OnboardingAlarmTimeView.swift */,
 			);
@@ -255,7 +252,6 @@
 				8BE16EFF2A0D087900D3FE0A /* OnboardingTabView.swift in Sources */,
 				8BB6259B2A02740700DB2EA8 /* CameraViewModel.swift in Sources */,
 				8BED9FA12A1216840013304D /* ProgressBarView.swift in Sources */,
-				8BE16EFE2A0D087900D3FE0A /* OnboardingLastPageView.swift in Sources */,
 				8BE16EFD2A0D087900D3FE0A /* OnboardingNickNameView.swift in Sources */,
 				8BE16F262A0F4CA900D3FE0A /* CheckBeforeImageView.swift in Sources */,
 				8BB625A02A029FDA00DB2EA8 /* Data.swift in Sources */,

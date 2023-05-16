@@ -30,7 +30,7 @@ struct MainView: View {
                     } label: {
                         ButtonView()
                     }
-                    .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
+                    .disabled((data.isTimerOn && !data.isTimeOver) || data.isSavedImage)
                     
                     Button { //DoNotDisturb뷰로 돌아가는 버튼
                         router.push(.D)
@@ -68,7 +68,7 @@ struct SettingButtonView: View {
                     .frame(width: 24, height: 24)
                     .foregroundColor(.white)
                     .padding(.leading)
-                    .opacity(data.isTimerOn && !data.isDone ? 1 : 0)
+                    .opacity(data.isTimerOn && !data.isSavedImage ? 1 : 0)
             }
             
             Spacer()
@@ -93,7 +93,7 @@ struct MessageView: View {
         Text(data.userName + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
 
         
-        if (!data.isDone){
+        if (!data.isSavedImage){
             let msgArr = ["아래 버튼을 눌러 방정리를 시작해보세요!", "오늘 정리할 곳을 정하고", "당신의 방정리를 사진으로 남겨보세요"]
             RotatingMessagesView(msgArr: msgArr)
                 .font(.system(size: 16))
@@ -139,7 +139,7 @@ struct ButtonView: View {
     @EnvironmentObject var router: Router<Path>
     
     var body: some View {
-        if (data.isDone) {
+        if (data.isSavedImage) {
             ZStack {
                 Circle().stroke(lineWidth: 15).frame(width: 170, height: 170).foregroundColor(Color(hex: "6E6E6E"))
                 Image("Moon1").resizable().frame(width: 175, height: 175)
@@ -159,32 +159,6 @@ struct ButtonView: View {
                 Circle().stroke(lineWidth: 15).frame(width: 170, height: 170).foregroundColor(Color(hex: "3F3F3F"))
                 Image("Moon2").resizable().frame(width: 175, height: 175)
                 Image("Cross").resizable().frame(width: 40, height: 40)
-            }
-        }
-    }
-}
-
-//
-//struct SoundButtonView_Preview: PreviewProvider {
-//    static var previews: some View {
-//        SoundButtonView()
-//    }
-//}
-
-
-struct GoBackView: View {
-    @EnvironmentObject var router: Router<Path>
-    
-    var body: some View {
-        HStack {
-            Spacer()
-            Button {
-                router.push(.D)
-            } label: {
-                Image(systemName: "gobackward")
-                    .resizable()
-                    .frame(width: 50, height: 50)
-                    .foregroundColor(.white)
             }
         }
     }

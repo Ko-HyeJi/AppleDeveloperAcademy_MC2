@@ -13,11 +13,6 @@ struct CheckProgressView: View {
     @State var dayCount: Int = 15  // 그리드 생성 개수
     @State var scrollToIndex: Int = 0  // 사용자가 터치한 원으로 스크롤
     
-//    @State var isActivated: Bool = false  // 사용자가 진행하고 있는 챌린지 날짜 안인지 확인(활성화? 원 색상 변경 위해서)
-//    @State var isDone: Bool = false  // 그 날의 챌린지 완료했는지
-//    @State var isGoing: Bool = false  // 사용자가 청소 진행중인지(사진을 비포만 찍었는지)
-    
-    
     @State var activatedCount: Int = 3// 활성화된 날짜 수
     @State var clearedCount: Int = 0
     
@@ -25,6 +20,7 @@ struct CheckProgressView: View {
     
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
+    @State var showDetailView: Bool = false
 
     
     @Environment(\.presentationMode) var presentationMode
@@ -67,7 +63,7 @@ struct CheckProgressView: View {
             
             Divider()
             
-            VerticalScrollView(selectedIndex: $selectedIndex, dayCount: $dayCount, scrollToIndex: $scrollToIndex, activatedCount: $activatedCount, clearedCount: $clearedCount)
+            VerticalScrollView(selectedIndex: $selectedIndex, dayCount: $dayCount, scrollToIndex: $scrollToIndex, activatedCount: $activatedCount, clearedCount: $clearedCount, showDetailView: $showDetailView)
                 
         }
         .background(.black)
@@ -77,6 +73,7 @@ struct CheckProgressView: View {
             activatedCount = calcActivatedCount()
             subheadingText = selectSubheadingText()
         }
+        .fullScreenCover(isPresented: $showDetailView) { DetailView(showDetailView: $showDetailView) }
        
     }
     func calcActivatedCount() -> Int {
@@ -180,10 +177,7 @@ struct VerticalScrollView: View {
     
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
-
-    
-//    @State var beforeImage: String = "image1"
-//    @State var afterImage: String = "image2"
+    @Binding var showDetailView: Bool
     
     var body: some View {
         ScrollView {
@@ -237,21 +231,6 @@ struct VerticalScrollView: View {
                                                     }
                                                 }
                                             }
-                                            
-//                                            if index == clearedCount {
-//
-//                                                if let imageData = viewModel.recentImage?.pngData() {
-//                                                    let beforeImage = data.convertToUIImage(from: imageData)
-//                                                    Image(uiImage: beforeImage!)
-//                                                        .resizable()
-//                                                        .scaledToFill()
-//                                                        .mask(RoundedRectangle(cornerRadius: 40).frame(width: 103, height: 106))
-//
-//
-//                                                } else {
-//                                    //                Text("Did not take Before Image")
-//                                                }
-//                                            }
                                         }
                                     }
                                     .onTapGesture {
@@ -260,7 +239,7 @@ struct VerticalScrollView: View {
                                             scrollToIndex = index
                                         }
                                         if index < clearedCount {
-                                            data.showDetailView = true
+                                            showDetailView = true
                                             data.selectedIndex = index
                                         }
                                     }
@@ -286,11 +265,5 @@ struct VerticalScrollView: View {
             }
         }
         .background(Color(hex: "1C1C1E").ignoresSafeArea())
-    }
-}
-
-struct CheckProgressView_Previews: PreviewProvider {
-    static var previews: some View {
-        CheckProgressView()
     }
 }

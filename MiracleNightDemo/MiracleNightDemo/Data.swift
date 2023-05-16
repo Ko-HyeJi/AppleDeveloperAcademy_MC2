@@ -24,8 +24,21 @@ class DataModel: ObservableObject {
     
     private var audioPlayer: AVAudioPlayer?
     
-    @Published var isMusicOn = false
+    @Published var isMusicOn: Bool = false
     @Published var currentTime: TimeInterval = 0
+    
+    @Published var beforeImage:UIImage?
+    @Published var afterImage:UIImage?
+    
+    @Published var isTimerOn:Bool = false
+    @Published var isTimeOver:Bool = false
+    @Published var isSavedImage:Bool = false
+    
+    @Published var selectedIndex: Int = 0
+    
+    @Published var dataArr: [DailyData] = [] //앱이 처음 실행됐을 때, saveDataToUserDefaults 함수가 호출됐을 때 업데이트
+
+//    @Published var notificationTime: DateComponents?
 
     init() {
         configureAudioSession()
@@ -59,24 +72,6 @@ class DataModel: ObservableObject {
         currentTime = audioPlayer?.currentTime ?? 0
         isMusicOn = false
     }
-    
-    @EnvironmentObject var viewModel: CameraViewModel
-    
-    @Published var notificationTime: DateComponents?
-    
-    @Published var beforeImage:UIImage?
-    @Published var afterImage:UIImage?
-    
-    @Published var isTimerOn:Bool = false //before 사진 찍고 타이머 온
-    @Published var isTimeOver:Bool = false
-    @Published var isDone:Bool = false //after 사진까지 찍었을 떄
-    @Published var isSaved:Bool = false
-    @Published var showDetailView:Bool = false
-    
-    @Published var selectedIndex: Int = 0
-    
-    @Published var dataArr: [DailyData] = [] //앱이 처음 실행됐을 때, saveDataToUserDefaults 함수가 호출됐을 때 업데이트
-    
     
     
     func saveData(_ data: [DailyData]) {
@@ -137,8 +132,6 @@ class DataModel: ObservableObject {
             return ("")
         }
     }
-    
-    
 }
 
 struct DailyData: Codable {

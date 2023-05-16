@@ -56,10 +56,10 @@ struct FrameView: View {
                 Button {
                     router.popToRoot()
                     
-                    if (!data.isSaved) {
+                    if (!data.isSavedImage) {
                         let _ = data.afterImage = viewModel.recentImage
                         let _ = data.saveDataToUserDefaults()
-                        let _ = data.isSaved = true
+                        let _ = data.isSavedImage = true
                     }
                 } label: {
                     ZStack {

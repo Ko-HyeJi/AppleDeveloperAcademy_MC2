@@ -15,7 +15,8 @@ struct OnboardingPageView: View {
     var body: some View {
         ZStack {
             Image("onboardingBG")
-                .edgesIgnoringSafeArea(.all)
+                .resizable()
+                .frame(width: 390, height: 860)
             VStack {
                 VStack(spacing: UIScreen.main.bounds.height * 0.05) {
                     Text(uppertitle)
@@ -33,7 +34,7 @@ struct OnboardingPageView: View {
                 }
                 Text(subtitle)
                     .frame(width: 250)
-                    .font(.body)
+                    .font(.system(size: 17))
                     .lineSpacing(2)
                     .foregroundColor(.white)
                     .multilineTextAlignment(.center)
@@ -45,12 +46,13 @@ struct OnboardingPageView: View {
     }
 }
 
-struct OnboardingPageView_Previews: PreviewProvider {
-    static var previews: some View {
-        OnboardingPageView(
-            uppertitle: "00",
-            lowertitle: "00",
-            subtitle: "24시간 중 단 1%\n 15분동안 정리할 곳을 정해"
-        )
-    }
-}
+
+//struct OnboardingPageView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        OnboardingPageView(
+//            uppertitle: "00",
+//            lowertitle: "00",
+//            subtitle: "24시간 중 단 1%\n 15분동안 정리할 곳을 정해"
+//        )
+//    }
+//}

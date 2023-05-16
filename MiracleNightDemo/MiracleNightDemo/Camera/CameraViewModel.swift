@@ -78,11 +78,6 @@ class CameraViewModel: ObservableObject {
         print("[CameraViewModel]: Camera changed!")
     }
     
-    // +) 스레드 종료(이게 맞나?)
-    func stopRunning() {
-        session.stopRunning()
-    }
-
     init() {
         model = Camera()
         session = model.session

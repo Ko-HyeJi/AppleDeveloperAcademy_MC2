@@ -68,7 +68,7 @@ struct ShutterButtonView: View {
     @EnvironmentObject var router: Router<Path>
     
     var body: some View {
-        if (!data.isTimeOver) { // before 사진 찍어야 할 때
+        if (!data.isTimeOver) { // before
             Button {
                 router.push(.C)
                 viewModel.capturePhoto()
@@ -78,11 +78,10 @@ struct ShutterButtonView: View {
                     .frame(width: 75, height: 75)
             }
 
-        } else { // after 사진 찍어야 할 때
+        } else { // after
             Button {
                 router.push(.E)
                 viewModel.capturePhoto()
-                data.isDone = true
             } label: {
                 Image(systemName: "button.programmable")
                     .resizable()

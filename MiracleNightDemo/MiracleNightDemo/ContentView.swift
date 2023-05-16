@@ -37,7 +37,6 @@ struct ContentView: View {
                 print("오디오 세션 설정에 실패했습니다: \(error)")
             }
         }
-        .fullScreenCover(isPresented: $data.showDetailView) { DetailView() }
         .fullScreenCover(isPresented: $data.isFirstLaunching) { OnboardingTabView() }
         .fullScreenCover(isPresented: $data.isSecondLaunching) { OnboardingNickNameView() }
     }
