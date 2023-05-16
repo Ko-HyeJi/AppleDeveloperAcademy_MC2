@@ -29,7 +29,7 @@ struct CheckBeforeImageView: View {
                         } label: {
                             Image(systemName: "chevron.backward")
                                 .resizable()
-                                .frame(width: 17, height: 22)
+                                .frame(width: 13, height: 15)
                                 .foregroundColor(.white)
                                 .padding(.leading, 30)
                             Text("다시 찍기")

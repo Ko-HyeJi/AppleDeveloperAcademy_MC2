@@ -17,9 +17,11 @@ struct MainView: View {
             
             VStack {
                 Spacer()
+                
                 SettingButtonView()
                 MessageView()
-                Spacer(minLength: 200)
+                
+                Spacer(minLength: 120)
                 
                 Button {
                     router.push(.B)
@@ -28,33 +30,46 @@ struct MainView: View {
                 }
                 .disabled((data.isTimerOn && !data.isTimeOver) || data.isDone)
                 
-                Spacer(minLength: 400)
-            }.frame(height: 668)
+                Spacer(minLength: 300)
+            }
             
             ProgressBarView()
-//                .padding(.bottom, 50)
             
-//            if data.isTimerOn && !data.isDone {
-//                SoundButtonView()
-//            }
-        }
+        }.navigationBarBackButtonHidden(true)
     }
 }
 
 struct SettingButtonView: View {
+    @EnvironmentObject var data: DataModel
+    
     var body: some View {
-        Button {
-            // action
-        } label: {
-            HStack {
-                Spacer()
+        HStack {
+            Button {
+                if (data.isMusicOn) {
+                    data.pauseMusic()
+                } else {
+                    data.playMusic()
+                }
+            } label: {
+                Image(data.isMusicOn ? "Play_w" : "Pause_w")
+                    .resizable()
+                    .frame(width: 24, height: 24)
+                    .foregroundColor(.white)
+                    .padding(.leading)
+                    .opacity(data.isTimerOn && !data.isDone ? 1 : 0)
+            }
+            
+            Spacer()
+            
+            Button {
+                // action
+            } label: {
                 Image(systemName: "gearshape")
                     .resizable()
-                    .frame(width: 20, height: 20)
+                    .frame(width: 24, height: 24)
                     .foregroundColor(.white)
-                    .padding()
+                    .padding(.trailing)
             }
-            .padding(.top, 30)
         }
     }
 }
@@ -140,28 +155,6 @@ struct ButtonView: View {
     }
 }
 
-struct SoundButtonView: View {
-    @EnvironmentObject var data: DataModel
-    
-    var body: some View {
-        VStack {
-            Spacer()
-            Spacer()
-            Button {
-                if (data.isMusicOn) {
-                    data.pauseMusic()
-                } else {
-                    data.playMusic()
-                }
-            } label: {
-                Image(data.isMusicOn ? "Play" : "Pause")
-                    .resizable()
-                    .frame(width: 54, height: 54)
-            }
-            Spacer()
-        }
-    }
-}
 //
 //struct SoundButtonView_Preview: PreviewProvider {
 //    static var previews: some View {

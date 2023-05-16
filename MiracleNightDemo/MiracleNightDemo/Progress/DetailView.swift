@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     @EnvironmentObject var data: DataModel
+    @State var showMessage = false
     
     var body: some View {
         
@@ -16,10 +17,10 @@ struct DetailView: View {
             Color(hex: "282828")
                 .ignoresSafeArea(.all)
             
-            VStack (spacing:20) {
+            VStack {
                 ZStack {
                     Rectangle()
-                        .frame(height: 160)
+                        .frame(height: 167)
                         .foregroundColor(Color(hex: "1C1C1E"))
 
                     VStack {
@@ -34,7 +35,7 @@ struct DetailView: View {
                                 } label: {
                                     Image(systemName: "chevron.backward")
                                         .resizable()
-                                        .frame(width: 17, height: 22)
+                                        .frame(width: 13, height: 15)
                                         .foregroundColor(.white)
                                         .padding(.leading, 30)
                                 }
@@ -75,7 +76,7 @@ struct DetailView: View {
                     }
                     .padding(16)
                 }
-                .frame(width: 390, height: 292)
+                .frame(width: 390, height: 285)
 
                 ZStack {
                     if data.selectedIndex < data.dataArr.count {
@@ -100,9 +101,44 @@ struct DetailView: View {
                     }
                     .padding(16)
                 }
-                .frame(width: 390, height: 292)
+                
+                Button {
+                    showMessage = true
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                        showMessage = false
+                    }
+                } label: {
+                    Image("Tools")
+                        .resizable()
+                        .frame(width: 390, height: 107)
+                }
             }
             .edgesIgnoringSafeArea(.all)
+            
+            PopUpMessageView(showMessage: $showMessage)
         }
+    }
+}
+
+struct PopUpMessageView: View {
+    @Binding var showMessage: Bool
+    
+    var body: some View {
+        VStack {
+            Spacer(minLength: 690)
+            
+            ZStack {
+                RoundedRectangle(cornerRadius: 20)
+                    .frame(width: 225, height: 42)
+                    .foregroundColor(.black)
+                    .opacity(0.6)
+                Text("더 나은 서비스를 위해 개발중👩‍💻")
+                    .font(.system(size: 13))
+                    .foregroundColor(.white)
+            }
+            
+            Spacer(minLength: 110)
+        }
+        .opacity(showMessage ? 1 : 0)
     }
 }

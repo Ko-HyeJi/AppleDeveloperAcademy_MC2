@@ -10,7 +10,6 @@
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>
-		<string></string>
 		<string>audio</string>
 		<string>processing</string>
 	</array>

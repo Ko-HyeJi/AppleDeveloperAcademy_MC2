@@ -55,7 +55,16 @@ struct CountdownView: View {
         VStack{
             ZStack{
                 ProgressTrack()
-                ProgressBar(counter: counter, countTo: data.countTo)
+                if data.counter < data.countTo {
+                    ProgressBar(counter: counter, countTo: data.countTo)
+                }
+                else {
+                    Circle()
+                        .stroke(style: StrokeStyle(lineWidth: 15))
+                        .frame(width: 170, height: 170)
+                        .foregroundColor(Color(hex: "5E5CE6"))
+                }
+                
                 if !data.isTimeOver {
                     Image("Moon3").resizable().frame(width: 175, height: 175)
                     VStack(spacing: -20) {
@@ -81,6 +90,9 @@ struct CountdownView: View {
                     data.isTimeOver = true
                 }
             }
+        }
+        .onDisappear {
+            data.counter = counter
         }
     }
     
