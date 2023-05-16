@@ -26,6 +26,7 @@ struct ContentView: View {
                 case .C: CheckBeforeImageView()
                 case .D: DoNotDisturbView()
                 case .E: CompareView()
+                case .F: SettingView()
                 }
             }
         }
@@ -39,6 +40,11 @@ struct ContentView: View {
                 print("오디오 세션 설정에 실패했습니다: \(error)")
             }
             defaults.set(false, forKey: "isSetNotification")
+            if data.timer == 0 { //처음 접근
+                data.countTo = 300
+            } else { //두번째 이후
+                data.countTo = data.timer
+            }
         }
         .fullScreenCover(isPresented: $data.showDetailView) { DetailView() }
         .fullScreenCover(isPresented: $isFirstLaunching) { OnboardingTabView(isFirstLaunching: $isFirstLaunching) }

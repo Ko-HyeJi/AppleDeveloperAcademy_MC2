@@ -48,7 +48,7 @@ struct OnboardingLastPageView: View {
                         .background(Color(hex: "5E5CE6"))
                         .cornerRadius(14)
                         .padding(.top, 120)
-                }
+                }.opacity(isFirstLaunching ? 1 : 0)
             }
             .padding(.top, 60)
         }

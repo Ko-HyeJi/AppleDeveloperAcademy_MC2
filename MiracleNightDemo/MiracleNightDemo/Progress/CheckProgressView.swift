@@ -21,7 +21,7 @@ struct CheckProgressView: View {
     @State var activatedCount: Int = 3// 활성화된 날짜 수
     @State var clearedCount: Int = 0
     
-    var subheadingText: String = "아직 정리되지 않은 곳이 있어요!"
+    @State var subheadingText: String = "아직 정리되지 않은 곳이 있어요!"
     
     @EnvironmentObject var data: DataModel
     @EnvironmentObject var viewModel: CameraViewModel
@@ -37,10 +37,10 @@ struct CheckProgressView: View {
                     Button(action: {
                         presentationMode.wrappedValue.dismiss()
                     }) {
-                        Image("ExitButton")
+                        Image(systemName: "chevron.backward")
                             .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 30)
+//                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 10, height: 15)
                             .foregroundColor(.white)
                             .padding(.bottom)
                             .padding(.horizontal)
@@ -63,7 +63,7 @@ struct CheckProgressView: View {
                 .foregroundColor(.white)
             
             HorizontalScrollView(dayCount: $dayCount, selectedIndex: $selectedIndex, scrollToIndex: $scrollToIndex, activatedCount: $activatedCount, clearedCount: $clearedCount)
-                .padding(.horizontal, 23)
+                
             
             Divider()
             
@@ -75,6 +75,7 @@ struct CheckProgressView: View {
         .edgesIgnoringSafeArea(.bottom)
         .onAppear {
             activatedCount = calcActivatedCount()
+            subheadingText = selectSubheadingText()
         }
        
     }
@@ -86,6 +87,21 @@ struct CheckProgressView: View {
         } else {
             return 15
         }
+    }
+    
+    func selectSubheadingText() -> String {
+        var countDay = calcCountDay(activatedCount: activatedCount)
+        
+         func calcCountDay(activatedCount: Int) -> Int {
+            if activatedCount == 3 {
+                return activatedCount - data.dataArr.count
+            } else if activatedCount == 5 {
+                return activatedCount - data.dataArr.count - 3
+            } else {
+                return activatedCount - data.dataArr.count - 8
+            }
+        }
+        return "목표 정리 횟수 \(countDay)회 남았어요!"
     }
 
 }
@@ -110,7 +126,7 @@ struct HorizontalScrollView: View {
                         ForEach(0 ..< dayCount) { index in
                             VStack {
                                 Circle()
-                                    .stroke(index < activatedCount ? Color(hex: "5E5CE6"): Color(hex: "595959"), lineWidth: 1)
+                                    .stroke(index < activatedCount ? Color(hex: "5E5CE6"): Color(hex: "595959"), lineWidth: 2)
                                     .frame(width: 36, height: 36)
 //                                    .padding(.horizontal)
                                     .background(Circle().fill(index < activatedCount ? index < clearedCount ? Color(hex: "5E5CE6") : Color(hex: "595959") : Color(.clear)))
@@ -123,7 +139,7 @@ struct HorizontalScrollView: View {
                                     }
                                 }
                                     .overlay{
-                                        (index <= clearedCount ? index == clearedCount ? Image(systemName: "ellipsis") : Image(systemName: "checkmark") : Image(systemName: ""))
+                                        (index < clearedCount ? Image(systemName: "checkmark") : Image(systemName: ""))
                                         .foregroundColor(.white)
                                 }
                                     .padding(.trailing, 16)
@@ -146,6 +162,7 @@ struct HorizontalScrollView: View {
                                         }
                                     }
                     .padding(.vertical)
+                    .padding(.horizontal, 23)
                     }
                 }
             }

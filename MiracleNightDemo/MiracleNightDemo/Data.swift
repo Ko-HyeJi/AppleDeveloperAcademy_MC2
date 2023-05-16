@@ -56,6 +56,7 @@ class DataModel: ObservableObject {
     @Published var name = ""
     @Published var notificationTime: DateComponents?
     @Published var isSetNotification = defaults.bool(forKey: "isSetNotification")
+    @Published var timer = defaults.integer(forKey: "timer")
     
     @Published var beforeImage:UIImage?
     @Published var afterImage:UIImage?
@@ -131,7 +132,7 @@ class DataModel: ObservableObject {
     }
     
     @Published var counter: Int = 0 //타이머 시간 측정 변수
-    @Published var countTo: Int = 10 //타이머 시간 측정 변수
+    @Published var countTo: Int = 300 //타이머 시간 측정 변수
     
     @Published var selectedIndex: Int = 0
     
@@ -193,6 +194,7 @@ enum Path {
     case C
     case D
     case E
+    case F
 }
 
 //class AudioPlayer: ObservableObject {

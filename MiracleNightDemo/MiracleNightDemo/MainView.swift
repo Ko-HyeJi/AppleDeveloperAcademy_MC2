@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     @EnvironmentObject var router: Router<Path>
     @EnvironmentObject var data: DataModel
+//    let feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     
     var body: some View {
         ZStack {
@@ -24,6 +25,7 @@ struct MainView: View {
                 Spacer(minLength: 120)
                 
                 Button {
+                    hapticFeedback(duration: 0.2, interval: 0.05)
                     router.push(.B)
                 } label: {
                     ButtonView()
@@ -41,6 +43,7 @@ struct MainView: View {
 
 struct SettingButtonView: View {
     @EnvironmentObject var data: DataModel
+    @EnvironmentObject var router: Router<Path>
     
     var body: some View {
         HStack {
@@ -62,7 +65,7 @@ struct SettingButtonView: View {
             Spacer()
             
             Button {
-                // action
+                router.push(.F)
             } label: {
                 Image(systemName: "gearshape")
                     .resizable()
@@ -78,7 +81,7 @@ struct MessageView: View {
     @EnvironmentObject var data: DataModel
     
     var body: some View {
-        if (data.username != nil) { //두번째 이후
+        if (data.name == "" && data.username != nil) { //두번째 이후
             Text(data.username! + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
         } else { //처음 앱 사용할 때
             Text(data.name + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()

@@ -94,6 +94,7 @@ struct OnboardingNickNameView: View {
         }
         .onDisappear {
             defaults.set(data.name, forKey: "username")
+            defaults.set(300, forKey: "timer")
         }
     }
 }

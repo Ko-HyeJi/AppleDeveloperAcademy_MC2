@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8B305B3C2A13940600FCC624 /* Haptic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B305B3B2A13940600FCC624 /* Haptic.swift */; };
+		8B305B3E2A13C2CE00FCC624 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B305B3D2A13C2CE00FCC624 /* SettingView.swift */; };
 		8B881A0E2A0BB4E200CE0F75 /* ProgressBarView_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B881A0C2A0BB4E200CE0F75 /* ProgressBarView_2.swift */; };
 		8B881A0F2A0BB4E200CE0F75 /* CheckProgressView_2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B881A0D2A0BB4E200CE0F75 /* CheckProgressView_2.swift */; };
 		8B941E092A0A0CFF00B5E153 /* CompareView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B941E082A0A0CFF00B5E153 /* CompareView.swift */; };
@@ -37,6 +39,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8B305B3B2A13940600FCC624 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
+		8B305B3D2A13C2CE00FCC624 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = Progress/SettingView.swift; sourceTree = "<group>"; };
 		8B881A0C2A0BB4E200CE0F75 /* ProgressBarView_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressBarView_2.swift; sourceTree = "<group>"; };
 		8B881A0D2A0BB4E200CE0F75 /* CheckProgressView_2.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckProgressView_2.swift; sourceTree = "<group>"; };
 		8B941E082A0A0CFF00B5E153 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
@@ -110,6 +114,8 @@
 				8BE16F252A0F4CA900D3FE0A /* CheckBeforeImageView.swift */,
 				8BE16F272A0F4CBC00D3FE0A /* SelectMusicView.swift */,
 				8BB8F1C22A04E31400EAADD9 /* DoNotDisturbView.swift */,
+				8B305B3D2A13C2CE00FCC624 /* SettingView.swift */,
+				8B305B3B2A13940600FCC624 /* Haptic.swift */,
 				8BE16F242A0E250E00D3FE0A /* Progress */,
 				8BB8F1BF2A039D6900EAADD9 /* Onboarding */,
 				8BB6259C2A02740E00DB2EA8 /* Camera */,
@@ -247,6 +253,7 @@
 				8BB6259E2A02962200DB2EA8 /* ContentView.swift in Sources */,
 				8BB6259A2A02740700DB2EA8 /* CameraView.swift in Sources */,
 				8BB625992A02740700DB2EA8 /* Camera.swift in Sources */,
+				8B305B3C2A13940600FCC624 /* Haptic.swift in Sources */,
 				8BD69ABF2A02C3A900E8E300 /* CameraFilterView.swift in Sources */,
 				8BED9FA02A1216840013304D /* CheckProgressView.swift in Sources */,
 				8BE16F1D2A0DFECC00D3FE0A /* DetailView.swift in Sources */,
@@ -261,6 +268,7 @@
 				8BB625A02A029FDA00DB2EA8 /* Data.swift in Sources */,
 				8B881A0F2A0BB4E200CE0F75 /* CheckProgressView_2.swift in Sources */,
 				8BE16EFC2A0D087900D3FE0A /* OnboardingPageView.swift in Sources */,
+				8B305B3E2A13C2CE00FCC624 /* SettingView.swift in Sources */,
 				8BB625812A02739500DB2EA8 /* MiracleNightDemoApp.swift in Sources */,
 				8B941E092A0A0CFF00B5E153 /* CompareView.swift in Sources */,
 				8BE16EFB2A0D087900D3FE0A /* OnboardingAlarmTimeView.swift in Sources */,

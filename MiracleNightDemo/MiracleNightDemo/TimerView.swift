@@ -88,6 +88,7 @@ struct CountdownView: View {
                 self.counter += 1
                 if (counter == data.countTo) {
                     data.isTimeOver = true
+                    hapticFeedback(duration: 3, interval: 0.03)
                 }
             }
         }
