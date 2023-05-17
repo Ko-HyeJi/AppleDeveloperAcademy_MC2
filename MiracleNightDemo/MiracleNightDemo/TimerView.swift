@@ -37,8 +37,10 @@ struct CountdownView: View {
             }
         }
         .onReceive(data.timer) { time in
-            if (data.currentSec == data.timerSec) {
+            if (data.currentSec >= data.timerSec) {
                 data.isTimeOver = true
+            }
+            if (data.currentSec == data.timerSec) {
                 hapticFeedback(duration: 3, interval: 0.03)
             }
             data.currentSec += 1

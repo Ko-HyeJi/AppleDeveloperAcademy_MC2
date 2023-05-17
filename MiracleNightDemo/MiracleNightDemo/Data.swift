@@ -17,7 +17,7 @@ class DataModel: ObservableObject {
     @AppStorage("_isSecondLaunching") var isSecondLaunching: Bool = true
     
     @AppStorage("userName") var userName: String = ""
-    @AppStorage("timer") var timerSec: Int = 10
+    @AppStorage("timer") var timerSec: Int = 300
     @Published var currentSec: Int = 0
     
     @Published var timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()

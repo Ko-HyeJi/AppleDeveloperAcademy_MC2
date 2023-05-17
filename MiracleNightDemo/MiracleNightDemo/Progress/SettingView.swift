@@ -106,9 +106,7 @@ struct SetNameView: View {
                         .opacity(isEditing ? 0 : 1)
                         
                         HStack {
-//                                    Spacer()
-                            
-                            TextField("\(name)", text:$name)  // 여기 data.name이어야 할 것 같아용!!
+                            TextField("\(name)", text:$name)
                                 .multilineTextAlignment(.trailing)
                                 .frame(alignment: .trailing)
                                 .fontWeight(.bold)
