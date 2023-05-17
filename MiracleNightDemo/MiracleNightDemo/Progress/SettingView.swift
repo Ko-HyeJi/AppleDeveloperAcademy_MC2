@@ -114,7 +114,7 @@ struct SetNameView: View {
                     Image("ExitButton")
                         .resizable()
                         .frame(width: 20, height: 20)
-                        .padding(.trailing)
+                        .padding(.trailing, 50)
                 }
             }
         }
