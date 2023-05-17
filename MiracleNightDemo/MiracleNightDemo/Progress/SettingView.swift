@@ -11,7 +11,6 @@ struct SettingView: View {
     @State var name: String = ""
     @State var timerMin: Int = 0
     
-    @State var isEditing: Bool = false
     @State var isClicked: Bool = false
     @State var showOnboarding: Bool = false
     
@@ -45,7 +44,7 @@ struct SettingView: View {
                 }
                 .padding(.bottom, 32)
             
-                SetNameView(name: $name, isEditing: $isEditing)
+                SetNameView(name: $name)
                 
                 SetTimerView(timerMin: $timerMin, isClicked: $isClicked)
                 
@@ -81,47 +80,44 @@ struct SettingView_Previews: PreviewProvider {
 
 struct SetNameView: View {
     @Binding var name: String
-    @Binding var isEditing: Bool
     
     var body: some View {
-        RoundedRectangle(cornerRadius: 16)
-            .frame(height: 68)
-            .foregroundColor(Color(hex: "3d3d3d"))
-            .padding(.bottom, 4)
-            .overlay {
-                HStack {
-                    Text("이름")
-                        .foregroundColor(.white)
-                        .fontWeight(.semibold)
-                    
-                    Spacer()
-                    
-                    ZStack(alignment: .trailing) {
-                        Text("\(name)")  // data.name
+        ZStack {
+            RoundedRectangle(cornerRadius: 16)
+                .frame(height: 68)
+                .foregroundColor(Color(hex: "3d3d3d"))
+                .padding(.bottom, 4)
+                .overlay {
+                    HStack {
+                        Text("이름")
                             .foregroundColor(.white)
-                            .fontWeight(.bold)
-                            .onTapGesture {
-                                isEditing.toggle()
-                            }
-                        .opacity(isEditing ? 0 : 1)
+                            .fontWeight(.semibold)
                         
-                        HStack {
-                            TextField("\(name)", text:$name)
-                                .multilineTextAlignment(.trailing)
-                                .frame(alignment: .trailing)
-                                .fontWeight(.bold)
-                                .foregroundColor(.white)
-                                .opacity(isEditing ? 1 : 0)
-                                .onTapGesture {
-                                    isEditing.toggle()
-                            }
-                        }
+                        Spacer()
                     }
-                    
+                    .padding(.vertical, 10)
+                    .padding(.horizontal, 15)
                 }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 15)
+            
+            HStack {
+                Spacer(minLength: 200)
+                TextField("\(name)", text: $name)
+                    .frame(width: 150)
+                    .multilineTextAlignment(.trailing)
+                    .bold()
+                    .font(.system(size: 22))
+                    .foregroundColor(.white)
+                Spacer()
+                Button {
+                    name = ""
+                } label: {
+                    Image("ExitButton")
+                        .resizable()
+                        .frame(width: 20, height: 20)
+                        .padding(.trailing)
+                }
             }
+        }
     }
 }
 
