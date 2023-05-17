@@ -56,11 +56,11 @@ struct FrameView: View {
             HStack {
                 Button {
                     router.popToRoot()
-                    
                     if (!data.isSavedImage) {
-                        let _ = data.afterImage = viewModel.recentImage
-                        let _ = data.saveDataToUserDefaults()
-                        let _ = data.isSavedImage = true
+                        data.afterImage = viewModel.recentImage
+                        data.saveDataToUserDefaults()
+                        data.isSavedImage = true
+                        UIApplication.shared.isIdleTimerDisabled = false
                     }
                 } label: {
                     ZStack {

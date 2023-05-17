@@ -79,6 +79,7 @@ struct CheckBeforeImageView: View {
                     Button {
                         router.push(.D)
                         data.isTimerOn = true
+                        UIApplication.shared.isIdleTimerDisabled = true
                         data.currentSec = 0
                     } label: {
                         ZStack {

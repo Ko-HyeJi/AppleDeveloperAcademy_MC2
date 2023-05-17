@@ -91,26 +91,25 @@ struct MessageView: View {
     
     var body: some View {
         if (!data.isTimerOn){
-            Text(data.userName + "!").font(.system(size: 22)).foregroundColor(.white).bold()
-            
+            Text("좋은 저녁이에요 " + data.userName + "!").font(.system(size: 28)).foregroundColor(.white).bold()
             let msgArr = ["아래 버튼을 눌러 밤정리를 시작해보세요!", "밤정리 \(calcCurrentGoal())회 목표를 달성해보세요!", "처음에는 가볍게 5분동안 밤정리"]
             RotatingMessagesView(msgArr: msgArr)
-                .font(.system(size: 16))
+                .font(.system(size: 20))
                 .foregroundColor(.white)
                 .padding()
         } else if (!data.isSavedImage) {
-            Text("Do not disturb").font(.system(size: 22)).foregroundColor(.white).bold()
+            Text("Do not disturb").font(.system(size: 28)).foregroundColor(.white).bold()
             let msgArr = ["지금은 정리 중..."]
             RotatingMessagesView(msgArr: msgArr)
-                .font(.system(size: 16))
+                .font(.system(size: 20))
                 .foregroundColor(.white)
                 .padding()
         }
         else {
-            Text("오늘의 밤정리는 여기까지").font(.system(size: 22)).foregroundColor(.white).bold()
+            Text("오늘의 밤정리는 여기까지").font(.system(size: 28)).foregroundColor(.white).bold()
             let msgArr = ["내일 6PM에 다시 만나요!"]
             RotatingMessagesView(msgArr: msgArr)
-                .font(.system(size: 16))
+                .font(.system(size: 20))
                 .foregroundColor(.white)
                 .padding()
         }

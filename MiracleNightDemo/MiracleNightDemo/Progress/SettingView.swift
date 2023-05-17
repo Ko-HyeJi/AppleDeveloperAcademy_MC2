@@ -84,7 +84,7 @@ struct SetNameView: View {
     var body: some View {
         ZStack {
             RoundedRectangle(cornerRadius: 16)
-                .frame(height: 68)
+                .frame(width: 370, height: 68)
                 .foregroundColor(Color(hex: "3d3d3d"))
                 .padding(.bottom, 4)
                 .overlay {
@@ -127,7 +127,7 @@ struct SetTimerView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
-            .frame(height: 68)
+            .frame(width: 370, height: 68)
             .foregroundColor(Color(hex: "3d3d3d"))
             .padding(.bottom, 4)
             .overlay {
@@ -188,7 +188,7 @@ struct CallOnboardingView: View {
     
     var body: some View {
         RoundedRectangle(cornerRadius: 16)
-            .frame(height: 68)
+            .frame(width: 370, height: 68)
             .foregroundColor(Color(hex: "3d3d3d"))
             .padding(.bottom, 4)
             .overlay {
