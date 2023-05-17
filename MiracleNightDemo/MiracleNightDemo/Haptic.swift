@@ -12,8 +12,8 @@ func hapticFeedback(duration: Double, interval: Double) {
     
     feedbackGenerator.prepare()
 
-    let duration = duration  // 진동을 유지할 시간 (초)
-    let interval = interval  // 진동을 반복 재생할 간격 (초)
+    let duration = duration
+    let interval = interval
 
     var timer: Timer?
     var elapsedTime = 0.0

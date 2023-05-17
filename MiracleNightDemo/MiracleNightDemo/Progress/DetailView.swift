@@ -61,6 +61,7 @@ struct DetailView: View {
                         if let beforeImage = data.convertToUIImage(from: selectedData.before) {
                             Image(uiImage: beforeImage)
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 390, height: 292)
                         }
                     }
@@ -86,6 +87,7 @@ struct DetailView: View {
                         if let afterImage = data.convertToUIImage(from: selectedData.after) {
                             Image(uiImage: afterImage)
                                 .resizable()
+                                .scaledToFill()
                                 .frame(width: 390, height: 292)
                         }
                     }

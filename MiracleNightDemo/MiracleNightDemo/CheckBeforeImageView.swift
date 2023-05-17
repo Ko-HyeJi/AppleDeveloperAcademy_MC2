@@ -47,6 +47,7 @@ struct CheckBeforeImageView: View {
                         let beforeImage = data.convertToUIImage(from: imageData)
                         Image(uiImage: beforeImage!)
                             .resizable()
+                            .scaledToFill()
                             .frame(width: 390, height: 285)
                             .padding()
                     } else {

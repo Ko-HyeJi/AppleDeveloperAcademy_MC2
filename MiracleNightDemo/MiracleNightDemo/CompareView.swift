@@ -93,6 +93,7 @@ struct ImageView: View {
                 if let image = data.convertToUIImage(from: imageData!) {
                     Image(uiImage: image)
                         .resizable()
+                        .scaledToFill()
                         .frame(width: 390, height: 292)
                 }
                 VStack {
