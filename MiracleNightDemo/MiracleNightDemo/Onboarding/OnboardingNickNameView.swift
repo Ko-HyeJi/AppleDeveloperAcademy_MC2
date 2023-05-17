@@ -9,6 +9,7 @@ import SwiftUI
 
 struct OnboardingNickNameView: View {
     @EnvironmentObject var data: DataModel
+    @State var name: String = ""
 
     var body: some View {
 
@@ -23,14 +24,14 @@ struct OnboardingNickNameView: View {
                         .padding(.top, 100)
 
                     HStack {
-                        TextField("", text : $data.userName)
+                        TextField("", text : $name)
                                 .frame(height: 45)
                                 .foregroundColor(.white)
                                 .font(.system(size: 17))
                                 .padding(.leading)
                         
                         Button {
-                            data.userName = ""
+                            name = ""
                         } label: {
                             Image("ExitButton")
                                 .resizable()
@@ -43,17 +44,21 @@ struct OnboardingNickNameView: View {
                     
                     Spacer()
 
-                    FinishButtonView()
+                    FinishButtonView(name: $name)
                         .padding(.bottom, 60)
                 }
             }
             .ignoresSafeArea(.container)
+            .onDisappear {
+                data.userName = name
+            }
         }
     }
 }
 
 struct FinishButtonView: View {
     @EnvironmentObject var data: DataModel
+    @Binding var name: String
     
     var body: some View {
         Button {
@@ -63,8 +68,8 @@ struct FinishButtonView: View {
                 .fontWeight(.bold)
                 .foregroundColor(Color(hex: "FFFFFF"))
                 .frame(width: 358, height: 56)
-                .background(data.userName.isEmpty ? Color(hex: "9C9C9C") : Color(hex: "5E5CE6"))
+                .background(name.isEmpty ? Color(hex: "9C9C9C") : Color(hex: "5E5CE6"))
                 .cornerRadius(14)
-        }.disabled(data.userName.isEmpty)
+        }.disabled(name.isEmpty)
     }
 }

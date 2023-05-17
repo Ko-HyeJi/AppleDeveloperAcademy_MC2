@@ -39,7 +39,7 @@
 		8B305B3B2A13940600FCC624 /* Haptic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Haptic.swift; sourceTree = "<group>"; };
 		8B305B3D2A13C2CE00FCC624 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SettingView.swift; path = Progress/SettingView.swift; sourceTree = "<group>"; };
 		8B941E082A0A0CFF00B5E153 /* CompareView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompareView.swift; sourceTree = "<group>"; };
-		8BB6257D2A02739500DB2EA8 /* MiracleNightDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MiracleNightDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8BB6257D2A02739500DB2EA8 /* 밤정리.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "밤정리.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8BB625802A02739500DB2EA8 /* MiracleNightDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MiracleNightDemoApp.swift; sourceTree = "<group>"; };
 		8BB625872A02739600DB2EA8 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		8BB625902A0273CD00DB2EA8 /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
@@ -89,7 +89,7 @@
 		8BB6257E2A02739500DB2EA8 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8BB6257D2A02739500DB2EA8 /* MiracleNightDemo.app */,
+				8BB6257D2A02739500DB2EA8 /* 밤정리.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -170,9 +170,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		8BB6257C2A02739500DB2EA8 /* MiracleNightDemo */ = {
+		8BB6257C2A02739500DB2EA8 /* 밤정리 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8BB6258B2A02739600DB2EA8 /* Build configuration list for PBXNativeTarget "MiracleNightDemo" */;
+			buildConfigurationList = 8BB6258B2A02739600DB2EA8 /* Build configuration list for PBXNativeTarget "밤정리" */;
 			buildPhases = (
 				8BB625792A02739500DB2EA8 /* Sources */,
 				8BB6257A2A02739500DB2EA8 /* Frameworks */,
@@ -182,9 +182,9 @@
 			);
 			dependencies = (
 			);
-			name = MiracleNightDemo;
+			name = "밤정리";
 			productName = MiracleNightDemo;
-			productReference = 8BB6257D2A02739500DB2EA8 /* MiracleNightDemo.app */;
+			productReference = 8BB6257D2A02739500DB2EA8 /* 밤정리.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -202,7 +202,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 8BB625782A02739500DB2EA8 /* Build configuration list for PBXProject "MiracleNightDemo" */;
+			buildConfigurationList = 8BB625782A02739500DB2EA8 /* Build configuration list for PBXProject "밤정리" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -215,7 +215,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				8BB6257C2A02739500DB2EA8 /* MiracleNightDemo */,
+				8BB6257C2A02739500DB2EA8 /* 밤정리 */,
 			);
 		};
 /* End PBXProject section */
@@ -452,7 +452,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		8BB625782A02739500DB2EA8 /* Build configuration list for PBXProject "MiracleNightDemo" */ = {
+		8BB625782A02739500DB2EA8 /* Build configuration list for PBXProject "밤정리" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8BB625892A02739600DB2EA8 /* Debug */,
@@ -461,7 +461,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8BB6258B2A02739600DB2EA8 /* Build configuration list for PBXNativeTarget "MiracleNightDemo" */ = {
+		8BB6258B2A02739600DB2EA8 /* Build configuration list for PBXNativeTarget "밤정리" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				8BB6258C2A02739600DB2EA8 /* Debug */,

@@ -13,8 +13,10 @@ import AVFoundation
 let defaults = UserDefaults.standard
 
 class DataModel: ObservableObject {
-    @AppStorage("_isFirstLaunching") var isFirstLaunching: Bool = true
-    @AppStorage("_isSecondLaunching") var isSecondLaunching: Bool = true
+//    @AppStorage("_isFirstLaunching") var isFirstLaunching: Bool = true
+//    @AppStorage("_isSecondLaunching") var isSecondLaunching: Bool = true
+    @Published var isFirstLaunching: Bool = true
+    @Published var isSecondLaunching: Bool = true
     
     @AppStorage("userName") var userName: String = ""
     @AppStorage("timer") var timerSec: Int = 300
