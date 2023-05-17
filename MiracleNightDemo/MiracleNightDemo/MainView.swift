@@ -90,16 +90,24 @@ struct MessageView: View {
     @EnvironmentObject var data: DataModel
     
     var body: some View {
-        Text(data.userName + "님 환영합니다!").font(.system(size: 22)).foregroundColor(.white).bold()
-
-        
-        if (!data.isSavedImage){
-            let msgArr = ["아래 버튼을 눌러 방정리를 시작해보세요!", "오늘 정리할 곳을 정하고", "당신의 방정리를 사진으로 남겨보세요"]
+        if (!data.isTimerOn){
+            Text(data.userName + "!").font(.system(size: 22)).foregroundColor(.white).bold()
+            
+            let msgArr = ["아래 버튼을 눌러 밤정리를 시작해보세요!", "밤정리 \(calcCurrentGoal())회 목표를 달성해보세요!", "처음에는 가볍게 5분동안 밤정리"]
             RotatingMessagesView(msgArr: msgArr)
                 .font(.system(size: 16))
                 .foregroundColor(.white)
                 .padding()
-        } else {
+        } else if (!data.isSavedImage) {
+            Text("Do not disturb").font(.system(size: 22)).foregroundColor(.white).bold()
+            let msgArr = ["지금은 정리 중..."]
+            RotatingMessagesView(msgArr: msgArr)
+                .font(.system(size: 16))
+                .foregroundColor(.white)
+                .padding()
+        }
+        else {
+            Text("오늘의 밤정리는 여기까지").font(.system(size: 22)).foregroundColor(.white).bold()
             let msgArr = ["내일 6PM에 다시 만나요!"]
             RotatingMessagesView(msgArr: msgArr)
                 .font(.system(size: 16))
@@ -107,10 +115,19 @@ struct MessageView: View {
                 .padding()
         }
     }
+    
+    func calcCurrentGoal() -> Int {
+        if data.dataArr.count < 3 {
+            return 3
+        } else if data.dataArr.count < 8 {
+            return 5
+        } else {
+            return 7
+        }
+    }
 }
 
 struct RotatingMessagesView: View {
-    @EnvironmentObject var data: DataModel
     @State var currentMsgIdx = 0
     @State var timer: Timer?
     var msgArr: [String] = []

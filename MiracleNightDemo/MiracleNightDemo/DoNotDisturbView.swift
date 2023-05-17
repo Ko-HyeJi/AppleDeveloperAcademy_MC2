@@ -50,7 +50,7 @@ struct DoNotDisturbView: View {
                         }
                         .padding(.top, 50)
                         
-                        Text(data.isTimeOver ? "이제 밤정리 후 사진을 찍을 수 있어요 📸" : "지금은 밤정리 중 🌙")
+                        Text(data.isTimeOver ? "이제 밤정리 후 사진을 찍을 수 있어요 📸" : "밤정리 권장시간 5분이 되면 알려줄게요⏰")
                             .font(.system(size: 16))
                             .foregroundColor(.white)
                     }
