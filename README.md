@@ -1,3 +1,5 @@
+![앱소개](https://github.com/Ko-HyeJi/AppleDevAcad_MC2/assets/88470545/66df78bc-07ab-45f3-a1d1-c4975111abc5)
+
 # 밤정리
 >인트로 페이지에 들어가는 내용입니다
 ---
