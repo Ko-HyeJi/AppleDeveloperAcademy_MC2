@@ -31,7 +31,7 @@ struct SettingView: View {
                             Image(systemName: "chevron.backward")
                                 .resizable()
                                 .frame(width: 13, height: 15)
-                                .padding(.leading)
+                                .padding(.leading, 30)
                             .foregroundColor(.white)
                         }
                         
@@ -69,12 +69,6 @@ struct SettingView: View {
             }
             data.timerSec = timerMin * 60
         }
-    }
-}
-
-struct SettingView_Previews: PreviewProvider {
-    static var previews: some View {
-        SettingView()
     }
 }
 
@@ -225,6 +219,6 @@ struct SpeechBubbleView: View {
                     .padding(.top, 10)
             }
             .opacity(isClicked ? 1 : 0)
-            .position(x: 150, y: 235)
+            .position(x: 180, y: 235)
     }
 }
