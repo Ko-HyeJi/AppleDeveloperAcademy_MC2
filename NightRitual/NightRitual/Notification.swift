@@ -1,10 +1,3 @@
-//
-//  Notification.swift
-//  MainView
-//
-//  Created by 고혜지 on 2023/05/03.
-//
-
 import UserNotifications
 
 func RequestNotificationPermission() {

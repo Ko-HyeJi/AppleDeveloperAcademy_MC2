@@ -1,10 +1,3 @@
-//
-//  TimerView.swift
-//  MiracleNightDemo
-//
-//  Created by 고혜지 on 2023/05/04.
-//
-
 import SwiftUI
 
 struct CountdownView: View {

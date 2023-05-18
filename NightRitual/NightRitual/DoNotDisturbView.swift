@@ -1,10 +1,3 @@
-//
-//  DoNotDisturbView.swift
-//  MiracleNightDemo
-//
-//  Created by 고혜지 on 2023/05/05.
-//
-
 import SwiftUI
 import AVFoundation
 

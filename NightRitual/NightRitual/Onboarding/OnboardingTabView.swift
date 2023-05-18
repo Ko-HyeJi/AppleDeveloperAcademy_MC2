@@ -1,10 +1,3 @@
-//
-//  OnboardingTabView.swift
-//  MC2_Onboarding
-//
-//  Created by 유빈 on 2023/05/08.
-//
-
 import SwiftUI
 
 struct OnboardingTabView: View {

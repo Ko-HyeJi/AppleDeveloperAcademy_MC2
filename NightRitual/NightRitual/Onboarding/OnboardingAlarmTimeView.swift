@@ -1,10 +1,3 @@
-//
-//  OnboardingAlarmTimeView.swift
-//  MC2_Onboarding
-//
-//  Created by 유빈 on 2023/05/11.
-//
-
 //import SwiftUI
 //
 //struct OnboardingAlarmTimeView: View {

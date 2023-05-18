@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  CheckProgress
-//
-//  Created by 장수민 on 2023/05/09.
-//
-
 import SwiftUI
 
 struct ProgressBarView: View {

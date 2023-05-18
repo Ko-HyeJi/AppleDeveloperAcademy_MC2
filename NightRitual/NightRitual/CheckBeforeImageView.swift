@@ -1,10 +1,3 @@
-//
-//  CheckBeforeImageView.swift
-//  MiracleNightDemo
-//
-//  Created by 고혜지 on 2023/05/13.
-//
-
 import SwiftUI
 import AVFoundation
 

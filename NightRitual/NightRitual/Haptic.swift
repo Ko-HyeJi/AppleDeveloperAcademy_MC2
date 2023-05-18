@@ -1,10 +1,3 @@
-//
-//  Haptic.swift
-//  MiracleNightDemo
-//
-//  Created by 고혜지 on 2023/05/16.
-//
-
 import SwiftUI
 
 func hapticFeedback(duration: Double, interval: Double) {

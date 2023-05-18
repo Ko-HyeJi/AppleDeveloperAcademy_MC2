@@ -1,14 +1,7 @@
-//
-//  MiracleNightDemoApp.swift
-//  MiracleNightDemo
-//
-//  Created by 고혜지 on 2023/05/03.
-//
-
 import SwiftUI
 
 @main
-struct MiracleNightDemoApp: App {
+struct NightRitualApp: App {
     let data = DataModel()
     let viewModel = CameraViewModel()
     

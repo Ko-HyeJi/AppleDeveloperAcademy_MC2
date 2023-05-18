@@ -1,10 +1,3 @@
-//
-//  SlideMaskView.swift
-//  제발돼라...
-//
-//  Created by 김규리 on 2023/05/11.
-//
-
 import SwiftUI
 
 struct DetailView: View {

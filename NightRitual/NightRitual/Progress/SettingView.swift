@@ -1,10 +1,3 @@
-//
-//  SettingView.swift
-//  MiracleNightDemo
-//
-//  Created by 장수민 on 2023/05/16.
-//
-
 import SwiftUI
 
 struct SettingView: View {
