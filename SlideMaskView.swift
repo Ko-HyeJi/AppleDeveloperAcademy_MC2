@@ -89,6 +89,7 @@ struct SlideMaskView: View {
                     //                                    maskOffset = .zero
                     //                                }
                     //                        )
+                    //이미지 위의 제스쳐 반응은 필요없으므로 삭제
                     
                     Image("After")
                         .resizable()
@@ -118,7 +119,7 @@ struct SlideMaskView: View {
                                 .onEnded { value in
                                     maskOffset = .zero
                                 }
-                        )
+                        )//제스쳐 반응 오류, 움직임 구현 관련한 코드 수정 필요
                 }}
             .padding(.bottom, 200)
             .onAppear {
