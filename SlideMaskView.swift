@@ -128,7 +128,6 @@ struct SlideMaskView: View {
     }
 }
 
-
 struct SlideMaskView_Previews: PreviewProvider {
     static var previews: some View {
         SlideMaskView()
