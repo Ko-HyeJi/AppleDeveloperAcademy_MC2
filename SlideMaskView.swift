@@ -4,7 +4,7 @@
 //
 //  Created by 김규리 on 2023/05/11.
 //
-
+// 주석추가~
 import SwiftUI
 
 extension Color {
